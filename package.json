@@ -22,9 +22,9 @@
     "prebuild:lib": "rimraf dist",
     "build:lib": "nest build -p tsconfig.lib.json",
     "copy:lib": "cp package.json .npmignore dist",
-    "publish-package": "npm run build:lib && npm run copy:lib && npm publish dist --access public",
-    "publish-package:beta": "npm run publish-package -- --tag beta --access public",
-    "publish-package:dry-run": "npm run publish-package -- --dry-run"
+    "deploy": "npm run build:lib && npm run copy:lib && npm publish dist --access public",
+    "deploy:beta": "npm run deploy -- --tag beta --access public",
+    "deploy:dry-run": "npm run deploy -- --dry-run"
   },
   "dependencies": {
     "@nestjs/axios": "^0.0.1",
