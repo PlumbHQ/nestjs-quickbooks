@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { QuickBooksAuthService } from '../../auth/services/auth.service';
 import { BaseService } from '../../common/base.service';
-import { QuickBooksStore } from '../../store';
 import {
   CreateQuickBooksCustomersDto,
   FullUpdateQuickBooksCustomersDto,
@@ -12,41 +10,14 @@ import {
   QuickBooksCustomersResponseModel,
   SparseUpdateQuickBooksCustomersDto,
 } from '..';
-import { HttpService } from '@nestjs/axios';
 
 @Injectable()
-export class QuickBooksCustomersService {
-  constructor(
-    private readonly authService: QuickBooksAuthService,
-    private readonly http: HttpService,
-    private readonly store: QuickBooksStore,
-  ) {}
-
-  public async withDefaultCompany(): Promise<QuickBooksCompanyCustomersService> {
-    return this.forCompany(await this.store.getDefaultCompany());
-  }
-
-  public forCompany(realm: string): QuickBooksCompanyCustomersService {
-    return new QuickBooksCompanyCustomersService(
-      realm,
-      this.authService,
-      this.http,
-    );
-  }
-}
-
-export class QuickBooksCompanyCustomersService extends BaseService<
+export class QuickBooksCustomersService extends BaseService<
   QuickBooksCustomers,
   QuickBooksCustomersQuery,
   QuickBooksCustomersQueryResponseModel
 > {
-  constructor(
-    realm: string,
-    authService: QuickBooksAuthService,
-    http: HttpService,
-  ) {
-    super(realm, 'customer', authService, http);
-  }
+  public resource = 'customer';
 
   public create(
     dto: CreateQuickBooksCustomersDto,
@@ -74,8 +45,7 @@ export class QuickBooksCompanyCustomersService extends BaseService<
       FullUpdateQuickBooksCustomersDto?,
     ]
   ): Observable<QuickBooksCustomersResponseModel> {
-    const [id, token, dto] =
-      QuickBooksCompanyCustomersService.getUpdateArguments(args);
+    const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,
       Id: id,
@@ -99,8 +69,7 @@ export class QuickBooksCompanyCustomersService extends BaseService<
       SparseUpdateQuickBooksCustomersDto?,
     ]
   ): Observable<QuickBooksCustomersResponseModel> {
-    const [id, token, dto] =
-      QuickBooksCompanyCustomersService.getUpdateArguments(args);
+    const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,
       Id: id,
@@ -109,7 +78,7 @@ export class QuickBooksCompanyCustomersService extends BaseService<
     });
   }
 
-  private static getUpdateArguments<DTO>(
+  private getUpdateArguments<DTO>(
     args: [string | QuickBooksCustomers, string | DTO, DTO?],
   ): [string, string, DTO] {
     const [idOrCustomer, tokenOrDto, dto] = args;

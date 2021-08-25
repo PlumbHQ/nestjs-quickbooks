@@ -7,7 +7,7 @@ export class CustomersController {
 
   @Get()
   public async getAll() {
-    return (await this.customersService.withDefaultCompany())
+    return this.customersService
       .query({})
       .toPromise()
       .then((x) => x.QueryResponse.Customer);

@@ -4,7 +4,6 @@ import {
   QuickBooksResponseModel,
 } from '../../common/models';
 import { QuickBooksBills } from './bills.model';
-import { QuickBooksInvoicesDeleteResponseModel } from '../../invoices';
 
 export interface QuickBooksBillsResponseModel extends QuickBooksResponseModel {
   Bill: QuickBooksBills;
@@ -16,6 +15,6 @@ export interface QuickBooksBillsQueryResponseModel
 }
 
 export interface QuickBooksBillsDeleteResponseModel
-  extends QuickBooksInvoicesDeleteResponseModel {
+  extends QuickBooksResponseModel {
   Bill: QuickBooksDeleteResponseModel;
 }

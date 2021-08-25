@@ -1,9 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { HttpService } from '@nestjs/axios';
 import { Observable } from 'rxjs';
-import { QuickBooksAuthService } from '../../auth/services/auth.service';
 import { BaseService } from '../../common/base.service';
-import { QuickBooksStore } from '../../store';
 import {
   QuickBooksBillsDeleteResponseModel,
   QuickBooksBillsQueryResponseModel,
@@ -17,38 +14,12 @@ import {
 } from '../dto/bills.dto';
 
 @Injectable()
-export class QuickBooksBillsService {
-  constructor(
-    private readonly authService: QuickBooksAuthService,
-    private readonly http: HttpService,
-    private readonly store: QuickBooksStore,
-  ) {}
-
-  public async withDefaultCompany(): Promise<QuickBooksCompanyBillsService> {
-    return this.forCompany(await this.store.getDefaultCompany());
-  }
-
-  public forCompany(realm: string): QuickBooksCompanyBillsService {
-    return new QuickBooksCompanyBillsService(
-      realm,
-      this.authService,
-      this.http,
-    );
-  }
-}
-
-export class QuickBooksCompanyBillsService extends BaseService<
+export class QuickBooksBillsService extends BaseService<
   QuickBooksBillsResponseModel,
   QuickBooksBillsQueryModel,
   QuickBooksBillsQueryResponseModel
 > {
-  constructor(
-    realm: string,
-    authService: QuickBooksAuthService,
-    http: HttpService,
-  ) {
-    super(realm, 'bill', authService, http);
-  }
+  public resource = 'bill';
 
   public create(
     dto: CreateQuickBooksBillsDto,
@@ -76,8 +47,7 @@ export class QuickBooksCompanyBillsService extends BaseService<
       FullUpdateQuickBooksBillsDto?,
     ]
   ): Observable<QuickBooksBillsResponseModel> {
-    const [id, token, dto] =
-      QuickBooksCompanyBillsService.getUpdateArguments(args);
+    const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,
       Id: id,
@@ -95,8 +65,7 @@ export class QuickBooksCompanyBillsService extends BaseService<
   public delete(
     ...args: [string | QuickBooksBills, string?]
   ): Observable<QuickBooksBillsDeleteResponseModel> {
-    const [id, token] =
-      QuickBooksCompanyBillsService.getOperationArguments(args);
+    const [id, token] = this.getOperationArguments(args);
     return this.post(
       {
         Id: id,
@@ -109,7 +78,7 @@ export class QuickBooksCompanyBillsService extends BaseService<
     );
   }
 
-  private static getUpdateArguments<DTO>(
+  private getUpdateArguments<DTO>(
     args: [string | QuickBooksBills, string | DTO, DTO?],
   ): [string, string, DTO] {
     const [idOrBill, tokenOrDto, dto] = args;
@@ -121,7 +90,7 @@ export class QuickBooksCompanyBillsService extends BaseService<
     return [bill.Id, bill.SyncToken, tokenOrDto as DTO];
   }
 
-  private static getOperationArguments(
+  private getOperationArguments(
     args: [string | QuickBooksBills, string?],
   ): [string, string] {
     const [idOrBill, token] = args;

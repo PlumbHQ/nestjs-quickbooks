@@ -11,11 +11,7 @@ export class AppController {
 
   @Get()
   async getHello(@Res() res: Response): Promise<any> {
-    console.log('getHello');
-
-    const result = await (
-      await this.qbCompanyService.withDefaultCompany()
-    )
+    const result = await this.qbCompanyService
       .read()
       .toPromise()
       .then((x) => {
@@ -26,10 +22,8 @@ export class AppController {
           return res.redirect('/auth');
         }
 
-        console.log(err);
+        throw err;
       });
-
-    console.log('res', result);
 
     return res.send(result);
   }

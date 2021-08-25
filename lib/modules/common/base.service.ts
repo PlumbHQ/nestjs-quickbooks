@@ -1,23 +1,29 @@
 import { Injectable } from '@nestjs/common';
 import { QuickBooksAuthService } from '../auth/services/auth.service';
-import * as querystring from 'querystring';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 import { WhereOptions } from './models';
 import { QueryUtils } from '../../utils/query.utils';
 import { HttpService } from '@nestjs/axios';
+import { QuickBooksStore } from '../store';
+import * as querystring from 'querystring';
 
 @Injectable()
-export class BaseService<Response, Query, QueryResponse> {
+export abstract class BaseService<Response, Query, QueryResponse> {
+  public resource: string;
+
   private readonly sandboxUrl = 'https://sandbox-quickbooks.api.intuit.com';
   private readonly liveUrl = 'https://quickbooks.api.intuit.com';
 
   constructor(
-    protected readonly realm: string,
-    private readonly resource: string,
     private readonly authService: QuickBooksAuthService,
+    private readonly tokenStore: QuickBooksStore,
     private readonly http: HttpService,
   ) {}
+
+  protected realm(): Observable<string> {
+    return from(this.tokenStore.getDefaultCompany());
+  }
 
   protected get apiUrl(): string {
     return this.authService.mode === 'production'
@@ -28,10 +34,16 @@ export class BaseService<Response, Query, QueryResponse> {
   public query(condition: WhereOptions<Query>): Observable<QueryResponse> {
     return this.getHttpHeaders()
       .pipe(
-        mergeMap((headers) =>
-          this.http.get<QueryResponse>(this.queryUrl(condition), {
-            headers,
-          }),
+        mergeMap((authHeaders) =>
+          this.queryUrl(condition).pipe(
+            mergeMap((url) =>
+              this.http.get<QueryResponse>(url, {
+                headers: {
+                  ...authHeaders,
+                },
+              }),
+            ),
+          ),
         ),
       )
       .pipe(map((x) => x.data));
@@ -45,12 +57,16 @@ export class BaseService<Response, Query, QueryResponse> {
     return this.getHttpHeaders()
       .pipe(
         mergeMap((authHeaders) =>
-          this.http.get<R>(this.url(path, queryParams), {
-            headers: {
-              ...authHeaders,
-              ...headers,
-            },
-          }),
+          this.url(path, queryParams).pipe(
+            mergeMap((url) =>
+              this.http.get<R>(url, {
+                headers: {
+                  ...authHeaders,
+                  ...headers,
+                },
+              }),
+            ),
+          ),
         ),
       )
       .pipe(map((x) => x.data));
@@ -65,41 +81,68 @@ export class BaseService<Response, Query, QueryResponse> {
     return this.getHttpHeaders()
       .pipe(
         mergeMap((authHeaders) =>
-          this.http.post<R>(this.url(path, queryParams), body, {
-            headers: {
-              ...authHeaders,
-              ...headers,
-            },
-          }),
+          this.url(path, queryParams).pipe(
+            mergeMap((url) =>
+              this.http.post<R>(url, body, {
+                headers: {
+                  ...authHeaders,
+                  ...headers,
+                },
+              }),
+            ),
+          ),
         ),
       )
       .pipe(map((x) => x.data));
   }
 
-  protected queryUrl(condition: WhereOptions<any>): string {
-    return `${this.apiUrl}/v3/company/${
-      this.realm
-    }/query?${QueryUtils.generateQuery(this.resource, condition)}`;
+  protected queryUrl(condition: WhereOptions<any>): Observable<string> {
+    return this.realm().pipe(
+      map(
+        (realm) =>
+          `${this.apiUrl}/v3/company/${realm}/query?${QueryUtils.generateQuery(
+            this.resource,
+            condition,
+          )}`,
+      ),
+    );
   }
 
-  protected url(path: string, queryParams?: Record<string, any>): string {
+  protected url(
+    path: string,
+    queryParams?: Record<string, any>,
+  ): Observable<string> {
     const query = queryParams
       ? `?${querystring.stringify(
           queryParams as querystring.ParsedUrlQueryInput,
         )}`
       : '';
-    if (!path) {
-      return `${this.apiUrl}/v3/company/${this.realm}/${this.resource}${query}`;
-    }
-    return `${this.apiUrl}/v3/company/${this.realm}/${this.resource}/${path}${query}`;
+
+    return this.realm().pipe(
+      map((realm) => {
+        let url: string;
+
+        if (!path) {
+          url = `${this.apiUrl}/v3/company/${realm}/${this.resource}${query}`;
+        } else {
+          url = `${this.apiUrl}/v3/company/${realm}/${this.resource}/${path}${query}`;
+        }
+
+        return url;
+      }),
+    );
   }
 
   private getHttpHeaders(): Observable<any> {
-    return this.authService.getToken(this.realm).pipe(
-      map((token) => ({
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/json',
-      })),
+    return this.realm().pipe(
+      mergeMap((realm) =>
+        this.authService.getToken(realm).pipe(
+          map((token) => ({
+            Authorization: `Bearer ${token}`,
+            Accept: 'application/json',
+          })),
+        ),
+      ),
     );
   }
 }

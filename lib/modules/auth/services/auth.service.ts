@@ -95,6 +95,7 @@ export class QuickBooksAuthService {
     realm: string,
     token: TokensModel,
   ): Observable<string> {
+    console.log('REFRESHING');
     return from(this.client.refreshUsingToken(token.refresh_token)).pipe(
       map(() => {
         const newToken = this.client.getToken().getToken();

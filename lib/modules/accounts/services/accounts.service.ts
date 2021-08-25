@@ -1,7 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { HttpService } from '@nestjs/axios';
-import { QuickBooksAuthService } from '../../auth/services/auth.service';
-import { QuickBooksStore } from '../../store';
 import { BaseService } from '../../common/base.service';
 import {
   QuickBooksAccountsDeleteResponseModel,
@@ -18,38 +15,12 @@ import { Observable } from 'rxjs';
 import { QuickBooksAccounts } from '../models/accounts.model';
 
 @Injectable()
-export class QuickBooksAccountsService {
-  constructor(
-    private readonly authService: QuickBooksAuthService,
-    private readonly http: HttpService,
-    private readonly store: QuickBooksStore,
-  ) {}
-
-  public async withDefaultCompany(): Promise<QuickBooksCompanyAccountsService> {
-    return this.forCompany(await this.store.getDefaultCompany());
-  }
-
-  public forCompany(realm: string): QuickBooksCompanyAccountsService {
-    return new QuickBooksCompanyAccountsService(
-      realm,
-      this.authService,
-      this.http,
-    );
-  }
-}
-
-export class QuickBooksCompanyAccountsService extends BaseService<
+export class QuickBooksAccountsService extends BaseService<
   QuickBooksAccountsResponseModel,
   QuickBooksAccountsQueryModel,
   QuickBooksAccountsQueryResponseModel
 > {
-  constructor(
-    realm: string,
-    authService: QuickBooksAuthService,
-    http: HttpService,
-  ) {
-    super(realm, 'account', authService, http);
-  }
+  public resource = 'account';
 
   public create(
     dto: CreateQuickBooksAccountsDto,
@@ -77,8 +48,7 @@ export class QuickBooksCompanyAccountsService extends BaseService<
       FullUpdateQuickBooksAccountsDto?,
     ]
   ): Observable<QuickBooksAccountsResponseModel> {
-    const [id, token, dto] =
-      QuickBooksCompanyAccountsService.getUpdateArguments(args);
+    const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,
       Id: id,
@@ -102,8 +72,7 @@ export class QuickBooksCompanyAccountsService extends BaseService<
       SparseUpdateQuickBooksAccountsDto?,
     ]
   ): Observable<QuickBooksAccountsResponseModel> {
-    const [id, token, dto] =
-      QuickBooksCompanyAccountsService.getUpdateArguments(args);
+    const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,
       Id: id,
@@ -122,8 +91,7 @@ export class QuickBooksCompanyAccountsService extends BaseService<
   public delete(
     ...args: [string | QuickBooksAccounts, string?]
   ): Observable<QuickBooksAccountsDeleteResponseModel> {
-    const [id, token] =
-      QuickBooksCompanyAccountsService.getOperationArguments(args);
+    const [id, token] = this.getOperationArguments(args);
     return this.post(
       {
         Id: id,
@@ -136,7 +104,7 @@ export class QuickBooksCompanyAccountsService extends BaseService<
     );
   }
 
-  private static getUpdateArguments<DTO>(
+  private getUpdateArguments<DTO>(
     args: [string | QuickBooksAccounts, string | DTO, DTO?],
   ): [string, string, DTO] {
     const [idOrAccount, tokenOrDto, dto] = args;
@@ -148,7 +116,7 @@ export class QuickBooksCompanyAccountsService extends BaseService<
     return [account.Id, account.SyncToken, tokenOrDto as DTO];
   }
 
-  private static getOperationArguments(
+  private getOperationArguments(
     args: [string | QuickBooksAccounts, string?],
   ): [string, string] {
     const [idOrAccount, token] = args;

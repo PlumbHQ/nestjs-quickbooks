@@ -19,7 +19,12 @@ import { ItemsController } from './items/items.controller';
       },
     }),
   ],
-  controllers: [AppController, CustomersController, AuthController, ItemsController],
+  controllers: [
+    AppController,
+    CustomersController,
+    AuthController,
+    ItemsController,
+  ],
   providers: [AppService],
 })
 export class AppModule {}

@@ -10,6 +10,12 @@ import { HttpModule } from '@nestjs/axios';
 import { QuickBooksAccountsModule } from './accounts';
 import { QuickBooksCompanyInfoModule } from './company-info';
 import { QuickBooksItemsModule } from './items';
+import { QuickBooksPurchasesModule } from './purchases/purchases.module';
+import { QuickBooksBillsModule } from './bills';
+import { QuickBooksPurchaseOrdersModule } from './purchase-orders';
+import { QuickBooksSalesReceiptsModule } from './sales-receipts';
+import { QuickBooksVendorCreditsModule } from './vendor-credits';
+import { QuickBooksVendorsModule } from './vendors';
 
 export interface QuickBooksOptions extends Pick<ModuleMetadata, 'imports'> {
   config?: Partial<QuickBooksConfigModel>;
@@ -28,11 +34,17 @@ export class QuickBooksModule {
     }
 
     const subModules = [
-      QuickBooksAuthModule,
       QuickBooksAccountsModule,
+      QuickBooksAuthModule,
+      QuickBooksBillsModule,
       QuickBooksCompanyInfoModule,
       QuickBooksCustomersModule,
       QuickBooksItemsModule,
+      QuickBooksPurchaseOrdersModule,
+      QuickBooksPurchasesModule,
+      QuickBooksSalesReceiptsModule,
+      QuickBooksVendorCreditsModule,
+      QuickBooksVendorsModule,
     ];
 
     return {

@@ -7,9 +7,9 @@ export class ItemsController {
 
   @Get()
   public async getAll() {
-    // return this.itemsService
-    //   .query({})
-    //   .toPromise()
-    //   .then((x) => x.QueryResponse.Item);
+    return this.itemsService
+      .query({})
+      .toPromise()
+      .then((x) => x.QueryResponse.Item);
   }
 }

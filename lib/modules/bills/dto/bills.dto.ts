@@ -8,6 +8,10 @@ import {
   QuickBooksRefDto,
   QuickBooksTxnTaxDetailDto,
 } from '../../common/dto';
+import {
+  QuickBooksAccountBasedExpenseLine,
+  QuickBooksItemBasedExpenseLine,
+} from 'lib/modules/common/dto/line-items.dto';
 
 export interface QuickBooksBaseBillLinesDto {
   Amount: number;
@@ -49,7 +53,7 @@ export type CreateQuickBooksBillLines = (
   | CreateQuickBooksBillsItemBasedExpenseLineDto
   | CreateQuickBooksBillsAccountBasedExpenseLineDto
 ) &
-  QuickBooksBaseBillLinesDto;
+  (QuickBooksAccountBasedExpenseLine | QuickBooksItemBasedExpenseLine);
 
 export interface UpdateQuickBooksBillsItemBasedExpenseLineDto
   extends CreateQuickBooksBillsItemBasedExpenseLineDto {

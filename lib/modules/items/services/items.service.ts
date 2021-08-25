@@ -1,9 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { HttpService } from '@nestjs/axios';
 import { Observable } from 'rxjs';
-import { QuickBooksAuthService } from '../../auth/services/auth.service';
 import { BaseService } from '../../common/base.service';
-import { QuickBooksStore } from '../../store';
 import {
   CreateQuickBooksItemsDto,
   FullUpdateQuickBooksItemsDto,
@@ -15,38 +12,12 @@ import {
 } from '..';
 
 @Injectable()
-export class QuickBooksItemsService {
-  constructor(
-    private readonly authService: QuickBooksAuthService,
-    private readonly http: HttpService,
-    private readonly store: QuickBooksStore,
-  ) {}
-
-  public async withDefaultCompany(): Promise<QuickBooksCompanyItemsService> {
-    return this.forCompany(await this.store.getDefaultCompany());
-  }
-
-  public forCompany(realm: string): QuickBooksCompanyItemsService {
-    return new QuickBooksCompanyItemsService(
-      realm,
-      this.authService,
-      this.http,
-    );
-  }
-}
-
-export class QuickBooksCompanyItemsService extends BaseService<
+export class QuickBooksItemsService extends BaseService<
   QuickBooksItemsResponseModel,
   QuickBooksItemsQueryModel,
   QuickBooksItemsQueryResponseModel
 > {
-  constructor(
-    realm: string,
-    authService: QuickBooksAuthService,
-    http: HttpService,
-  ) {
-    super(realm, 'item', authService, http);
-  }
+  public resource = 'item';
 
   public create(
     dto: CreateQuickBooksItemsDto,
@@ -74,8 +45,7 @@ export class QuickBooksCompanyItemsService extends BaseService<
       FullUpdateQuickBooksItemsDto?,
     ]
   ): Observable<QuickBooksItemsResponseModel> {
-    const [id, token, dto] =
-      QuickBooksCompanyItemsService.getUpdateArguments(args);
+    const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,
       Id: id,
@@ -99,8 +69,7 @@ export class QuickBooksCompanyItemsService extends BaseService<
       SparseUpdateQuickBooksItemsDto?,
     ]
   ): Observable<QuickBooksItemsResponseModel> {
-    const [id, token, dto] =
-      QuickBooksCompanyItemsService.getUpdateArguments(args);
+    const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,
       Id: id,
@@ -109,7 +78,7 @@ export class QuickBooksCompanyItemsService extends BaseService<
     });
   }
 
-  private static getUpdateArguments<DTO>(
+  private getUpdateArguments<DTO>(
     args: [string | QuickBooksItems, string | DTO, DTO?],
   ): [string, string, DTO] {
     const [idOrItem, tokenOrDto, dto] = args;

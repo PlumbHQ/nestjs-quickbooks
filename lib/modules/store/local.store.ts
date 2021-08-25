@@ -7,7 +7,7 @@ export class LocalStore extends QuickBooksStore {
   private companies: string[] = [];
   private tokens: { [realm: string]: TokensModel } = {};
 
-  public unregisterCompany(realm: string): void {
+  public async unregisterCompany(realm: string): Promise<void> {
     const index = this.companies.findIndex((x) => x === realm);
 
     if (index >= 0) {
@@ -38,7 +38,7 @@ export class LocalStore extends QuickBooksStore {
     this.tokens[realm] = token;
   }
 
-  public unsetToken(realm: string): void {
+  public async unsetToken(realm: string): Promise<void> {
     delete this.tokens[realm];
   }
 }
