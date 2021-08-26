@@ -91,6 +91,9 @@
   "np": {
     "yarn": false,
     "contents": "./lib",
-    "tests": false
+    "yolo": true
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
