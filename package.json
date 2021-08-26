@@ -1,7 +1,7 @@
 {
   "name": "@plumbhq/nestjs-quickbooks",
   "private": false,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "NestJS Quickbooks Integration",
   "keywords": [
     "nestjs",
