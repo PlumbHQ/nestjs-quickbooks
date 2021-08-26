@@ -1,9 +1,11 @@
 import { Controller, Get } from '@nestjs/common';
-import { QuickBooksItemsService } from 'lib/modules/items';
+import { NestJsNestJsQuickBooksItemsService } from 'lib/modules/items';
 
 @Controller('items')
 export class ItemsController {
-  constructor(private readonly itemsService: QuickBooksItemsService) {}
+  constructor(
+    private readonly itemsService: NestJsNestJsQuickBooksItemsService,
+  ) {}
 
   @Get()
   public async getAll() {

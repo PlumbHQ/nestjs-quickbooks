@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { HttpModule } from '@nestjs/axios';
-import { QuickBooksAuthModule } from '../auth/auth.module';
-import { QuickBooksVendorsService } from './services/vendors.service';
+import { NestJsQuickBooksAuthModule } from '../auth/auth.module';
+import { NestJsQuickBooksVendorsService } from './services/vendors.service';
 
 @Module({
-  imports: [QuickBooksAuthModule, HttpModule],
-  providers: [QuickBooksVendorsService],
-  exports: [QuickBooksVendorsService],
+  imports: [NestJsQuickBooksAuthModule, HttpModule],
+  providers: [NestJsQuickBooksVendorsService],
+  exports: [NestJsQuickBooksVendorsService],
 })
-export class QuickBooksVendorsModule {}
+export class NestJsQuickBooksVendorsModule {}

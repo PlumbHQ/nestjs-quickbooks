@@ -1,20 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { from, Observable, of } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
-import { QuickBooksConfigService } from '../../config/services/quickbooks-config.service';
-import { QuickBooksStore } from '../../store';
-import { QuickbooksModes } from '../../config';
 import { TokensModel } from '..';
-import { QuickBooksAuthorisationError } from 'lib/utils/errors/quick-books-authorisation.error';
+import { NestJsQuickBooksConfigService } from '../../config/services/quickbooks-config.service';
+import { NestJsQuickBooksStore } from '../../store';
+import { NestJsQuickbooksModes } from '../../config';
+import { NestJsQuickBooksAuthorisationError } from 'lib/utils/errors/quick-books-authorisation.error';
 import * as OAuthClient from 'intuit-oauth';
 
 @Injectable()
-export class QuickBooksAuthService {
+export class NestJsQuickBooksAuthService {
   private readonly client;
 
   constructor(
-    private readonly configService: QuickBooksConfigService,
-    private readonly tokenStore: QuickBooksStore,
+    private readonly configService: NestJsQuickBooksConfigService,
+    private readonly tokenStore: NestJsQuickBooksStore,
   ) {
     this.client = new OAuthClient({
       clientId: this.configService.global.clientId,
@@ -24,7 +24,7 @@ export class QuickBooksAuthService {
     });
   }
 
-  public get mode(): QuickbooksModes {
+  public get mode(): NestJsQuickbooksModes {
     return this.configService.global.mode;
   }
 
@@ -65,7 +65,7 @@ export class QuickBooksAuthService {
       .pipe(
         map((value) => {
           if (!value) {
-            throw new QuickBooksAuthorisationError();
+            throw new NestJsQuickBooksAuthorisationError();
           }
 
           return value;

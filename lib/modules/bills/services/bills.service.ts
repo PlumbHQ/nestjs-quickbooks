@@ -14,7 +14,7 @@ import {
 } from '../dto/bills.dto';
 
 @Injectable()
-export class QuickBooksBillsService extends BaseService<
+export class NestJsQuickBooksBillsService extends BaseService<
   QuickBooksBillsResponseModel,
   QuickBooksBillsQueryModel,
   QuickBooksBillsQueryResponseModel

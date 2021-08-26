@@ -1,10 +1,10 @@
 import { Controller, Get, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { QuickBooksAuthService } from 'lib/modules/auth/services/auth.service';
+import { NestJsQuickBooksAuthService } from 'lib/modules/auth/services/auth.service';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly qbAuthService: QuickBooksAuthService) {}
+  constructor(private readonly qbAuthService: NestJsQuickBooksAuthService) {}
 
   @Get()
   public authorize(@Res() res: Response): void {

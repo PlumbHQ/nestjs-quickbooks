@@ -1,10 +1,10 @@
 import { CACHE_MANAGER, Inject, Injectable } from '@nestjs/common';
 import { Cache } from 'cache-manager';
 import { TokensModel } from 'lib';
-import { QuickBooksStore } from 'lib/modules/store';
+import { NestJsQuickBooksStore } from 'lib/modules/store';
 
 @Injectable()
-export class QbStoreService implements QuickBooksStore {
+export class QbStoreService implements NestJsQuickBooksStore {
   constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache) {}
 
   public async setToken(token: TokensModel): Promise<void> {

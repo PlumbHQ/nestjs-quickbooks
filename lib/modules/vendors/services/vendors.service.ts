@@ -11,7 +11,7 @@ import {
 } from '..';
 
 @Injectable()
-export class QuickBooksVendorsService extends BaseService<
+export class NestJsQuickBooksVendorsService extends BaseService<
   QuickBooksVendorsResponseModel,
   QuickBooksVendorsQueryModel,
   QuickBooksVendorsQueryResponseModel

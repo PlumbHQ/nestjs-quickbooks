@@ -10,7 +10,7 @@ import {
 import { QuickBooksVendorCredits } from '../models/vendor-credits.model';
 
 @Injectable()
-export class VendorCreditsService extends BaseService<
+export class NestJsQuickBooksVendorCreditsService extends BaseService<
   QuickBooksVendorCredits,
   QuickBooksVendorCreditsQuery,
   QuickBooksVendorCreditsQueryResponseModel

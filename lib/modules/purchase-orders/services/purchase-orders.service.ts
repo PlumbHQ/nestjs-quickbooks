@@ -10,7 +10,7 @@ import {
 import { QuickBooksPurchaseOrders } from '../models/purchase-orders.model';
 
 @Injectable()
-export class PurchaseOrdersService extends BaseService<
+export class NestJsQuickBooksPurchaseOrdersService extends BaseService<
   QuickBooksPurchaseOrders,
   QuickBooksPurchaseOrdersQuery,
   QuickBooksPurchaseOrdersQueryResponseModel

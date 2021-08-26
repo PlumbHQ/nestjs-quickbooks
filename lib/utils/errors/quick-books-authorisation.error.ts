@@ -1,3 +1,3 @@
-export class QuickBooksAuthorisationError extends Error {
+export class NestJsQuickBooksAuthorisationError extends Error {
   message = 'QuickBooks Not Authorised';
 }

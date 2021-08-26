@@ -1,12 +1,12 @@
 import { Controller, Get, Res } from '@nestjs/common';
-import { QuickBooksCompanyInfoService } from 'lib/modules/company-info';
-import { QuickBooksAuthorisationError } from 'lib/utils/errors/quick-books-authorisation.error';
+import { NestJsQuickBooksCompanyInfoService } from 'lib/modules/company-info';
+import { NestJsQuickBooksAuthorisationError } from 'lib/utils/errors/quick-books-authorisation.error';
 import { Response } from 'express';
 
 @Controller()
 export class AppController {
   constructor(
-    private readonly qbCompanyService: QuickBooksCompanyInfoService,
+    private readonly qbCompanyService: NestJsQuickBooksCompanyInfoService,
   ) {}
 
   @Get()
@@ -18,7 +18,7 @@ export class AppController {
         return x.CompanyInfo;
       })
       .catch((err) => {
-        if (err instanceof QuickBooksAuthorisationError) {
+        if (err instanceof NestJsQuickBooksAuthorisationError) {
           return res.redirect('/auth');
         }
 

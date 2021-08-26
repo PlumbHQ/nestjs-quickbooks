@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { QuickBooksAuthService } from '../auth/services/auth.service';
+import { NestJsQuickBooksAuthService } from '../auth/services/auth.service';
 import { from, Observable } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 import { WhereOptions } from './models';
 import { QueryUtils } from '../../utils/query.utils';
 import { HttpService } from '@nestjs/axios';
-import { QuickBooksStore } from '../store';
+import { NestJsQuickBooksStore } from '../store';
 import * as querystring from 'querystring';
 
 @Injectable()
@@ -16,8 +16,8 @@ export abstract class BaseService<Response, Query, QueryResponse> {
   private readonly liveUrl = 'https://quickbooks.api.intuit.com';
 
   constructor(
-    private readonly authService: QuickBooksAuthService,
-    private readonly tokenStore: QuickBooksStore,
+    private readonly authService: NestJsQuickBooksAuthService,
+    private readonly tokenStore: NestJsQuickBooksStore,
     private readonly http: HttpService,
   ) {}
 

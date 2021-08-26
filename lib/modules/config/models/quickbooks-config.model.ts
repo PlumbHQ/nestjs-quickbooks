@@ -1,4 +1,4 @@
-export enum QuickBooksScopes {
+export enum NestJsQuickBooksScopes {
   Accounting = 'com.intuit.quickbooks.accounting',
   Payment = 'com.intuit.quickbooks.payment',
   Payroll = 'com.intuit.quickbooks.payroll',
@@ -12,26 +12,26 @@ export enum QuickBooksScopes {
   IntuitName = 'intuit_name',
 }
 
-export type QuickbooksModes = 'production' | 'sandbox';
+export type NestJsQuickbooksModes = 'production' | 'sandbox';
 
-export interface QuickBooksConfigModel {
+export interface NestJsQuickBooksConfigModel {
   clientId: string;
   clientSecret: string;
-  scopes: QuickBooksScopes[];
-  mode: QuickbooksModes;
+  scopes: NestJsQuickBooksScopes[];
+  mode: NestJsQuickbooksModes;
   serverUrl: string;
   authRedirectUrl: string;
 }
 
-export class QuickBooksConfigModel {
+export class NestJsQuickBooksConfigModel {
   public clientId: string;
   public clientSecret: string;
-  public scopes: QuickBooksScopes[];
-  public mode: QuickbooksModes;
+  public scopes: NestJsQuickBooksScopes[];
+  public mode: NestJsQuickbooksModes;
   public serverUrl: string;
   public authRedirectUrl: string;
 
-  constructor(config: Partial<QuickBooksConfigModel>) {
+  constructor(config: Partial<NestJsQuickBooksConfigModel>) {
     Object.assign(this, config);
   }
 }

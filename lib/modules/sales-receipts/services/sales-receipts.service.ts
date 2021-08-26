@@ -10,7 +10,7 @@ import {
 import { QuickBooksSalesReceipts } from '../models/sales-receipt.model';
 
 @Injectable()
-export class SalesReceiptsService extends BaseService<
+export class NestJsQuickBooksSalesReceiptsService extends BaseService<
   QuickBooksSalesReceipts,
   QuickBooksSalesReceiptsQuery,
   QuickBooksSalesReceiptsQueryResponseModel

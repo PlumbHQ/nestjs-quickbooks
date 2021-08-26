@@ -12,7 +12,7 @@ import {
 } from '..';
 
 @Injectable()
-export class QuickBooksCustomersService extends BaseService<
+export class NestJsQuickBooksCustomersService extends BaseService<
   QuickBooksCustomers,
   QuickBooksCustomersQuery,
   QuickBooksCustomersQueryResponseModel

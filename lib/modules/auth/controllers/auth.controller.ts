@@ -1,8 +1,8 @@
-import { QuickBooksAuthService } from '../services/auth.service';
+import { NestJsQuickBooksAuthService } from '../services/auth.service';
 import { Request, Response } from 'express';
 
 export class QuickBooksAuthController {
-  constructor(private readonly authService: QuickBooksAuthService) {}
+  constructor(private readonly authService: NestJsQuickBooksAuthService) {}
 
   public authorize(res: Response): void {
     res.redirect(this.authService.getAuthorizeUri());

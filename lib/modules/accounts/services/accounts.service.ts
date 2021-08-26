@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
 import { QuickBooksAccounts } from '../models/accounts.model';
 
 @Injectable()
-export class QuickBooksAccountsService extends BaseService<
+export class NestJsQuickBooksAccountsService extends BaseService<
   QuickBooksAccountsResponseModel,
   QuickBooksAccountsQueryModel,
   QuickBooksAccountsQueryResponseModel

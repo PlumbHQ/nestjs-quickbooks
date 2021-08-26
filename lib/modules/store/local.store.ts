@@ -1,9 +1,9 @@
-import { QuickBooksStore } from './store.service';
+import { NestJsQuickBooksStore } from './store.service';
 import { Injectable } from '@nestjs/common';
 import { TokensModel } from '../auth/models/tokens.model';
 
 @Injectable()
-export class LocalStore extends QuickBooksStore {
+export class LocalStore extends NestJsQuickBooksStore {
   token: TokensModel;
 
   public async getToken(): Promise<TokensModel> {
