@@ -1,0 +1,15 @@
+version: '3'
+
+networks:
+  backend:
+    driver: bridge
+
+services:
+  redis:
+    image: redis
+    volumes:
+      - ./.data/redis:/data
+    networks:
+      - backend
+    ports:
+      - 6379:6379

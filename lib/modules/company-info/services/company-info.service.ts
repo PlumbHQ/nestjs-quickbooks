@@ -19,7 +19,7 @@ export class QuickBooksCompanyInfoService extends BaseService<
   public resource = 'companyinfo';
 
   public read(): Observable<QuickBooksCompanyInfoResponseModel> {
-    return this.realm().pipe(mergeMap((x) => this.get(x)));
+    return this.getRealm().pipe(mergeMap((x) => this.get(x)));
   }
 
   public fullUpdate(

@@ -5,10 +5,14 @@ import { AppService } from './app.service';
 import { CustomersController } from './customers/customers.controller';
 import { AuthController } from './auth/auth.controller';
 import { ItemsController } from './items/items.controller';
+import { QuickBooksStore } from 'lib/modules/store';
+import { CacheModule } from './cache/cache.module';
+import { QbStoreService } from './cache/qb-store/qb-store.service';
 
 @Module({
   imports: [
     QuickBooksModule.forRoot({
+      imports: [CacheModule],
       config: {
         mode: 'sandbox',
         clientId: 'ABSICzheIzGOKwl8YOoGSMBvY73fSmxX6Hu6U7s9GYM49HDrun',
@@ -17,7 +21,12 @@ import { ItemsController } from './items/items.controller';
         authRedirectUrl: 'http://localhost:3000/auth/callback',
         scopes: [QuickBooksScopes.Accounting],
       },
+      store: {
+        provide: QuickBooksStore,
+        useClass: QbStoreService,
+      },
     }),
+    CacheModule,
   ],
   controllers: [
     AppController,

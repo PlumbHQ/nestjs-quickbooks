@@ -30,6 +30,8 @@
     "prebuild:lib": "rimraf dist",
     "build:lib": "nest build -p tsconfig.lib.json",
     "copy:lib": "cp package.json .npmignore dist",
+    "docker": "npm run docker:down && docker-compose -f docker-compose.yaml up -d --force-recreate",
+    "docker:down": "docker-compose -f docker-compose.yaml down --remove-orphans",
     "deploy": "npm run build:lib && npm run copy:lib && npm publish dist --access public",
     "deploy:beta": "npm run deploy -- --tag beta --access public",
     "deploy:dry-run": "npm run deploy -- --dry-run"
@@ -55,6 +57,8 @@
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^4.28.2",
     "@typescript-eslint/parser": "^4.28.2",
+    "cache-manager": "^3.4.4",
+    "cache-manager-redis-store": "^2.0.0",
     "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",

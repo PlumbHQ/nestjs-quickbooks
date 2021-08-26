@@ -21,8 +21,8 @@ export abstract class BaseService<Response, Query, QueryResponse> {
     private readonly http: HttpService,
   ) {}
 
-  protected realm(): Observable<string> {
-    return from(this.tokenStore.getDefaultCompany());
+  protected getRealm(): Observable<string> {
+    return from(this.tokenStore.getToken().then((token) => token?.realmId));
   }
 
   protected get apiUrl(): string {
@@ -97,7 +97,7 @@ export abstract class BaseService<Response, Query, QueryResponse> {
   }
 
   protected queryUrl(condition: WhereOptions<any>): Observable<string> {
-    return this.realm().pipe(
+    return this.getRealm().pipe(
       map(
         (realm) =>
           `${this.apiUrl}/v3/company/${realm}/query?${QueryUtils.generateQuery(
@@ -118,7 +118,7 @@ export abstract class BaseService<Response, Query, QueryResponse> {
         )}`
       : '';
 
-    return this.realm().pipe(
+    return this.getRealm().pipe(
       map((realm) => {
         let url: string;
 
@@ -134,15 +134,11 @@ export abstract class BaseService<Response, Query, QueryResponse> {
   }
 
   private getHttpHeaders(): Observable<any> {
-    return this.realm().pipe(
-      mergeMap((realm) =>
-        this.authService.getToken(realm).pipe(
-          map((token) => ({
-            Authorization: `Bearer ${token}`,
-            Accept: 'application/json',
-          })),
-        ),
-      ),
+    return this.authService.getToken().pipe(
+      map((token) => ({
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+      })),
     );
   }
 }

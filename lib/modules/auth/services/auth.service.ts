@@ -1,20 +1,18 @@
 import { Injectable } from '@nestjs/common';
-import * as OAuthClient from 'intuit-oauth';
 import { from, Observable, of } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 import { QuickBooksConfigService } from '../../config/services/quickbooks-config.service';
 import { QuickBooksStore } from '../../store';
 import { QuickbooksModes } from '../../config';
 import { TokensModel } from '..';
-import { HttpService } from '@nestjs/axios';
 import { QuickBooksAuthorisationError } from 'lib/utils/errors/quick-books-authorisation.error';
+import * as OAuthClient from 'intuit-oauth';
 
 @Injectable()
 export class QuickBooksAuthService {
   private readonly client;
 
   constructor(
-    private readonly httpClient: HttpService,
     private readonly configService: QuickBooksConfigService,
     private readonly tokenStore: QuickBooksStore,
   ) {
@@ -30,15 +28,9 @@ export class QuickBooksAuthService {
     return this.configService.global.mode;
   }
 
-  public async disconnect(realm?: string): Promise<void> {
-    if (!realm) {
-      realm = await this.tokenStore.getDefaultCompany();
-    }
-
-    const token = await this.tokenStore.getToken(realm);
-    return this.client.revoke().then((authResponse) => {
-      this.tokenStore.unregisterCompany(token.realmId);
-      this.tokenStore.unsetToken(token.realmId);
+  public async disconnect(): Promise<void> {
+    return this.client.revoke().then(async (authResponse) => {
+      await this.tokenStore.unsetToken();
     });
   }
 
@@ -52,12 +44,11 @@ export class QuickBooksAuthService {
   public async authorizeCode(url: string): Promise<void> {
     await this.client.createToken(url);
     const token = this.client.getToken().getToken();
-    await this.tokenStore.registerCompany(token.realmId);
-    await this.tokenStore.setToken(token.realmId, token);
+    await this.tokenStore.setToken(token);
   }
 
-  public getToken(realm: string): Observable<string> {
-    return from(this.tokenStore.getToken(realm))
+  public getToken(): Observable<string> {
+    return from(this.tokenStore.getToken())
       .pipe(
         mergeMap((token) => {
           if (!token) {
@@ -68,7 +59,7 @@ export class QuickBooksAuthService {
             return of(token.access_token);
           }
 
-          return this.refreshAccessToken(realm, token);
+          return this.refreshAccessToken(token);
         }),
       )
       .pipe(
@@ -91,15 +82,11 @@ export class QuickBooksAuthService {
     return this.client.isAccessTokenValid();
   }
 
-  private refreshAccessToken(
-    realm: string,
-    token: TokensModel,
-  ): Observable<string> {
-    console.log('REFRESHING');
+  private refreshAccessToken(token: TokensModel): Observable<string> {
     return from(this.client.refreshUsingToken(token.refresh_token)).pipe(
       map(() => {
         const newToken = this.client.getToken().getToken();
-        this.tokenStore.setToken(realm, newToken);
+        this.tokenStore.setToken(newToken);
         return newToken.access_token;
       }),
     );
