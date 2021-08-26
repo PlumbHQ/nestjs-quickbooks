@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Observable } from 'rxjs';
-import { BaseService } from '../../common/base.service';
+import { NestJsQuickBooksBaseService } from '../../common/base.service';
 import {
   QuickBooksBillsDeleteResponseModel,
   QuickBooksBillsQueryResponseModel,
@@ -14,7 +13,7 @@ import {
 } from '../dto/bills.dto';
 
 @Injectable()
-export class NestJsQuickBooksBillsService extends BaseService<
+export class NestJsQuickBooksBillsService extends NestJsQuickBooksBaseService<
   QuickBooksBillsResponseModel,
   QuickBooksBillsQueryModel,
   QuickBooksBillsQueryResponseModel
@@ -23,11 +22,11 @@ export class NestJsQuickBooksBillsService extends BaseService<
 
   public create(
     dto: CreateQuickBooksBillsDto,
-  ): Observable<QuickBooksBillsResponseModel> {
+  ): Promise<QuickBooksBillsResponseModel> {
     return this.post(dto);
   }
 
-  public readById(id: string): Observable<QuickBooksBillsResponseModel> {
+  public readById(id: string): Promise<QuickBooksBillsResponseModel> {
     return this.get(id);
   }
 
@@ -35,18 +34,18 @@ export class NestJsQuickBooksBillsService extends BaseService<
     id: string,
     token: string,
     dto: FullUpdateQuickBooksBillsDto,
-  ): Observable<QuickBooksBillsResponseModel>;
+  ): Promise<QuickBooksBillsResponseModel>;
   public fullUpdate(
     bill: QuickBooksBills,
     dto: FullUpdateQuickBooksBillsDto,
-  ): Observable<QuickBooksBillsResponseModel>;
+  ): Promise<QuickBooksBillsResponseModel>;
   public fullUpdate(
     ...args: [
       string | QuickBooksBills,
       string | FullUpdateQuickBooksBillsDto,
       FullUpdateQuickBooksBillsDto?,
     ]
-  ): Observable<QuickBooksBillsResponseModel> {
+  ): Promise<QuickBooksBillsResponseModel> {
     const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,
@@ -58,13 +57,13 @@ export class NestJsQuickBooksBillsService extends BaseService<
   public delete(
     id: string,
     token: string,
-  ): Observable<QuickBooksBillsDeleteResponseModel>;
+  ): Promise<QuickBooksBillsDeleteResponseModel>;
   public delete(
     bill: QuickBooksBills,
-  ): Observable<QuickBooksBillsDeleteResponseModel>;
+  ): Promise<QuickBooksBillsDeleteResponseModel>;
   public delete(
     ...args: [string | QuickBooksBills, string?]
-  ): Observable<QuickBooksBillsDeleteResponseModel> {
+  ): Promise<QuickBooksBillsDeleteResponseModel> {
     const [id, token] = this.getOperationArguments(args);
     return this.post(
       {

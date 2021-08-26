@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Observable } from 'rxjs';
-import { BaseService } from '../../common/base.service';
+import { NestJsQuickBooksBaseService } from '../../common/base.service';
 import {
   CreateQuickBooksVendorsDto,
   FullUpdateQuickBooksVendorsDto,
@@ -11,7 +10,7 @@ import {
 } from '..';
 
 @Injectable()
-export class NestJsQuickBooksVendorsService extends BaseService<
+export class NestJsQuickBooksVendorsService extends NestJsQuickBooksBaseService<
   QuickBooksVendorsResponseModel,
   QuickBooksVendorsQueryModel,
   QuickBooksVendorsQueryResponseModel
@@ -20,11 +19,11 @@ export class NestJsQuickBooksVendorsService extends BaseService<
 
   public create(
     dto: CreateQuickBooksVendorsDto,
-  ): Observable<QuickBooksVendorsResponseModel> {
+  ): Promise<QuickBooksVendorsResponseModel> {
     return this.post(dto);
   }
 
-  public readById(id: string): Observable<QuickBooksVendorsResponseModel> {
+  public readById(id: string): Promise<QuickBooksVendorsResponseModel> {
     return this.get(id);
   }
 
@@ -32,18 +31,18 @@ export class NestJsQuickBooksVendorsService extends BaseService<
     id: string,
     token: string,
     dto: FullUpdateQuickBooksVendorsDto,
-  ): Observable<QuickBooksVendorsResponseModel>;
+  ): Promise<QuickBooksVendorsResponseModel>;
   public fullUpdate(
     vendor: QuickBooksVendors,
     dto: FullUpdateQuickBooksVendorsDto,
-  ): Observable<QuickBooksVendorsResponseModel>;
+  ): Promise<QuickBooksVendorsResponseModel>;
   public fullUpdate(
     ...args: [
       string | QuickBooksVendors,
       string | FullUpdateQuickBooksVendorsDto,
       FullUpdateQuickBooksVendorsDto?,
     ]
-  ): Observable<QuickBooksVendorsResponseModel> {
+  ): Promise<QuickBooksVendorsResponseModel> {
     const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,

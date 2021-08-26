@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { BaseService } from '../../common/base.service';
+import { NestJsQuickBooksBaseService } from '../../common/base.service';
 import {
   QuickBooksAccountsDeleteResponseModel,
   QuickBooksAccountsQueryResponseModel,
@@ -11,11 +11,10 @@ import {
   FullUpdateQuickBooksAccountsDto,
   SparseUpdateQuickBooksAccountsDto,
 } from '../dto/accounts.dto';
-import { Observable } from 'rxjs';
 import { QuickBooksAccounts } from '../models/accounts.model';
 
 @Injectable()
-export class NestJsQuickBooksAccountsService extends BaseService<
+export class NestJsQuickBooksAccountsService extends NestJsQuickBooksBaseService<
   QuickBooksAccountsResponseModel,
   QuickBooksAccountsQueryModel,
   QuickBooksAccountsQueryResponseModel
@@ -24,11 +23,11 @@ export class NestJsQuickBooksAccountsService extends BaseService<
 
   public create(
     dto: CreateQuickBooksAccountsDto,
-  ): Observable<QuickBooksAccountsResponseModel> {
+  ): Promise<QuickBooksAccountsResponseModel> {
     return this.post(dto);
   }
 
-  public readById(id: string): Observable<QuickBooksAccountsResponseModel> {
+  public readById(id: string): Promise<QuickBooksAccountsResponseModel> {
     return this.get(id);
   }
 
@@ -36,18 +35,18 @@ export class NestJsQuickBooksAccountsService extends BaseService<
     id: string,
     token: string,
     dto: FullUpdateQuickBooksAccountsDto,
-  ): Observable<QuickBooksAccountsResponseModel>;
+  ): Promise<QuickBooksAccountsResponseModel>;
   public fullUpdate(
     account: QuickBooksAccounts,
     dto: FullUpdateQuickBooksAccountsDto,
-  ): Observable<QuickBooksAccountsResponseModel>;
+  ): Promise<QuickBooksAccountsResponseModel>;
   public fullUpdate(
     ...args: [
       string | QuickBooksAccounts,
       string | FullUpdateQuickBooksAccountsDto,
       FullUpdateQuickBooksAccountsDto?,
     ]
-  ): Observable<QuickBooksAccountsResponseModel> {
+  ): Promise<QuickBooksAccountsResponseModel> {
     const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,
@@ -60,18 +59,18 @@ export class NestJsQuickBooksAccountsService extends BaseService<
     id: string,
     token: string,
     dto: SparseUpdateQuickBooksAccountsDto,
-  ): Observable<QuickBooksAccountsResponseModel>;
+  ): Promise<QuickBooksAccountsResponseModel>;
   public sparseUpdate(
     account: QuickBooksAccounts,
     dto: SparseUpdateQuickBooksAccountsDto,
-  ): Observable<QuickBooksAccountsResponseModel>;
+  ): Promise<QuickBooksAccountsResponseModel>;
   public sparseUpdate(
     ...args: [
       string | QuickBooksAccounts,
       string | SparseUpdateQuickBooksAccountsDto,
       SparseUpdateQuickBooksAccountsDto?,
     ]
-  ): Observable<QuickBooksAccountsResponseModel> {
+  ): Promise<QuickBooksAccountsResponseModel> {
     const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,
@@ -84,13 +83,13 @@ export class NestJsQuickBooksAccountsService extends BaseService<
   public delete(
     id: string,
     token: string,
-  ): Observable<QuickBooksAccountsDeleteResponseModel>;
+  ): Promise<QuickBooksAccountsDeleteResponseModel>;
   public delete(
     bill: QuickBooksAccounts,
-  ): Observable<QuickBooksAccountsDeleteResponseModel>;
+  ): Promise<QuickBooksAccountsDeleteResponseModel>;
   public delete(
     ...args: [string | QuickBooksAccounts, string?]
-  ): Observable<QuickBooksAccountsDeleteResponseModel> {
+  ): Promise<QuickBooksAccountsDeleteResponseModel> {
     const [id, token] = this.getOperationArguments(args);
     return this.post(
       {

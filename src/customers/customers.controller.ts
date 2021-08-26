@@ -11,7 +11,6 @@ export class CustomersController {
   public async getAll() {
     return this.customersService
       .query({})
-      .toPromise()
       .then((x) => x.QueryResponse.Customer);
   }
 }

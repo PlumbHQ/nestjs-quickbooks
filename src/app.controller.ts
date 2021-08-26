@@ -13,7 +13,6 @@ export class AppController {
   async getHello(@Res() res: Response): Promise<any> {
     const result = await this.qbCompanyService
       .read()
-      .toPromise()
       .then((x) => {
         return x.CompanyInfo;
       })

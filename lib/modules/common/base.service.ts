@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { NestJsQuickBooksAuthService } from '../auth/services/auth.service';
-import { from, Observable } from 'rxjs';
+import { firstValueFrom, from, Observable } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 import { WhereOptions } from './models';
 import { QueryUtils } from '../../utils/query.utils';
@@ -9,7 +9,11 @@ import { NestJsQuickBooksStore } from '../store';
 import * as querystring from 'querystring';
 
 @Injectable()
-export abstract class BaseService<Response, Query, QueryResponse> {
+export abstract class NestJsQuickBooksBaseService<
+  Response,
+  Query,
+  QueryResponse,
+> {
   public resource: string;
 
   private readonly sandboxUrl = 'https://sandbox-quickbooks.api.intuit.com';
@@ -31,45 +35,49 @@ export abstract class BaseService<Response, Query, QueryResponse> {
       : this.sandboxUrl;
   }
 
-  public query(condition: WhereOptions<Query>): Observable<QueryResponse> {
-    return this.getHttpHeaders()
-      .pipe(
-        mergeMap((authHeaders) =>
-          this.queryUrl(condition).pipe(
-            mergeMap((url) =>
-              this.http.get<QueryResponse>(url, {
-                headers: {
-                  ...authHeaders,
-                },
-              }),
+  public query(condition: WhereOptions<Query>): Promise<QueryResponse> {
+    return firstValueFrom(
+      this.getHttpHeaders()
+        .pipe(
+          mergeMap((authHeaders) =>
+            this.queryUrl(condition).pipe(
+              mergeMap((url) =>
+                this.http.get<QueryResponse>(url, {
+                  headers: {
+                    ...authHeaders,
+                  },
+                }),
+              ),
             ),
           ),
-        ),
-      )
-      .pipe(map((x) => x.data));
+        )
+        .pipe(map((x) => x.data)),
+    );
   }
 
   protected get<R = Response>(
     path?: string,
     queryParams?: Record<string, any>,
     headers?: Record<string, any>,
-  ): Observable<R> {
-    return this.getHttpHeaders()
-      .pipe(
-        mergeMap((authHeaders) =>
-          this.url(path, queryParams).pipe(
-            mergeMap((url) =>
-              this.http.get<R>(url, {
-                headers: {
-                  ...authHeaders,
-                  ...headers,
-                },
-              }),
+  ): Promise<R> {
+    return firstValueFrom(
+      this.getHttpHeaders()
+        .pipe(
+          mergeMap((authHeaders) =>
+            this.url(path, queryParams).pipe(
+              mergeMap((url) =>
+                this.http.get<R>(url, {
+                  headers: {
+                    ...authHeaders,
+                    ...headers,
+                  },
+                }),
+              ),
             ),
           ),
-        ),
-      )
-      .pipe(map((x) => x.data));
+        )
+        .pipe(map((x) => x.data)),
+    );
   }
 
   protected post<R = Response>(
@@ -77,23 +85,25 @@ export abstract class BaseService<Response, Query, QueryResponse> {
     path?: string,
     queryParams?: Record<string, any>,
     headers?: Record<string, any>,
-  ): Observable<R> {
-    return this.getHttpHeaders()
-      .pipe(
-        mergeMap((authHeaders) =>
-          this.url(path, queryParams).pipe(
-            mergeMap((url) =>
-              this.http.post<R>(url, body, {
-                headers: {
-                  ...authHeaders,
-                  ...headers,
-                },
-              }),
+  ): Promise<R> {
+    return firstValueFrom(
+      this.getHttpHeaders()
+        .pipe(
+          mergeMap((authHeaders) =>
+            this.url(path, queryParams).pipe(
+              mergeMap((url) =>
+                this.http.post<R>(url, body, {
+                  headers: {
+                    ...authHeaders,
+                    ...headers,
+                  },
+                }),
+              ),
             ),
           ),
-        ),
-      )
-      .pipe(map((x) => x.data));
+        )
+        .pipe(map((x) => x.data)),
+    );
   }
 
   protected queryUrl(condition: WhereOptions<any>): Observable<string> {

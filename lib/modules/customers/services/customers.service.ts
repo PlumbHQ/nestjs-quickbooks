@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Observable } from 'rxjs';
-import { BaseService } from '../../common/base.service';
+import { NestJsQuickBooksBaseService } from '../../common/base.service';
 import {
   CreateQuickBooksCustomerDto,
   FullUpdateQuickBooksCustomerDto,
@@ -12,7 +11,7 @@ import {
 } from '..';
 
 @Injectable()
-export class NestJsQuickBooksCustomerService extends BaseService<
+export class NestJsQuickBooksCustomerService extends NestJsQuickBooksBaseService<
   QuickBooksCustomer,
   QuickBooksCustomerQueryDto,
   QuickBooksCustomerQueryDtoResponseModel
@@ -21,11 +20,11 @@ export class NestJsQuickBooksCustomerService extends BaseService<
 
   public create(
     dto: CreateQuickBooksCustomerDto,
-  ): Observable<QuickBooksCustomerResponseModel> {
+  ): Promise<QuickBooksCustomerResponseModel> {
     return this.post(dto);
   }
 
-  public readById(id: string): Observable<QuickBooksCustomerResponseModel> {
+  public readById(id: string): Promise<QuickBooksCustomerResponseModel> {
     return this.get(id);
   }
 
@@ -33,18 +32,18 @@ export class NestJsQuickBooksCustomerService extends BaseService<
     id: string,
     token: string,
     dto: FullUpdateQuickBooksCustomerDto,
-  ): Observable<QuickBooksCustomerResponseModel>;
+  ): Promise<QuickBooksCustomerResponseModel>;
   public fullUpdate(
     customer: QuickBooksCustomer,
     dto: FullUpdateQuickBooksCustomerDto,
-  ): Observable<QuickBooksCustomerResponseModel>;
+  ): Promise<QuickBooksCustomerResponseModel>;
   public fullUpdate(
     ...args: [
       string | QuickBooksCustomer,
       string | FullUpdateQuickBooksCustomerDto,
       FullUpdateQuickBooksCustomerDto?,
     ]
-  ): Observable<QuickBooksCustomerResponseModel> {
+  ): Promise<QuickBooksCustomerResponseModel> {
     const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,
@@ -57,18 +56,18 @@ export class NestJsQuickBooksCustomerService extends BaseService<
     id: string,
     token: string,
     dto: SparseUpdateQuickBooksCustomerDto,
-  ): Observable<QuickBooksCustomerResponseModel>;
+  ): Promise<QuickBooksCustomerResponseModel>;
   public sparseUpdate(
     customer: QuickBooksCustomer,
     dto: SparseUpdateQuickBooksCustomerDto,
-  ): Observable<QuickBooksCustomerResponseModel>;
+  ): Promise<QuickBooksCustomerResponseModel>;
   public sparseUpdate(
     ...args: [
       string | QuickBooksCustomer,
       string | SparseUpdateQuickBooksCustomerDto,
       SparseUpdateQuickBooksCustomerDto?,
     ]
-  ): Observable<QuickBooksCustomerResponseModel> {
+  ): Promise<QuickBooksCustomerResponseModel> {
     const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,
