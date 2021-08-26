@@ -8,7 +8,7 @@ import { HttpModule } from '@nestjs/axios';
 import { NestJsQuickBooksAccountsModule } from './accounts';
 import { NestJsQuickBooksAuthModule } from './auth/auth.module';
 import { NestJsQuickBooksCompanyInfoModule } from './company-info';
-import { NestJsQuickBooksCustomersModule } from './customers';
+import { NestJsQuickBooksCustomerModule } from './customers';
 import { NestJsQuickBooksItemsModule } from './items';
 import { NestJsQuickBooksPurchasesModule } from './purchases/purchases.module';
 import { NestJsQuickBooksBillsModule } from './bills';
@@ -91,7 +91,7 @@ export class NestJsQuickBooksModule {
       NestJsQuickBooksBillsModule,
       NestJsQuickBooksCompanyInfoModule,
       NestJsQuickBooksCompanyInfoModule,
-      NestJsQuickBooksCustomersModule,
+      NestJsQuickBooksCustomerModule,
       NestJsQuickBooksItemsModule,
       NestJsQuickBooksPurchaseOrdersModule,
       NestJsQuickBooksPurchasesModule,

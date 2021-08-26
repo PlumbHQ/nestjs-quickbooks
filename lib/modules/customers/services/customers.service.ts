@@ -2,49 +2,49 @@ import { Injectable } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { BaseService } from '../../common/base.service';
 import {
-  CreateQuickBooksCustomersDto,
-  FullUpdateQuickBooksCustomersDto,
-  QuickBooksCustomers,
-  QuickBooksCustomersQuery,
-  QuickBooksCustomersQueryResponseModel,
-  QuickBooksCustomersResponseModel,
-  SparseUpdateQuickBooksCustomersDto,
+  CreateQuickBooksCustomerDto,
+  FullUpdateQuickBooksCustomerDto,
+  QuickBooksCustomer,
+  QuickBooksCustomerQueryDto,
+  QuickBooksCustomerQueryDtoResponseModel,
+  QuickBooksCustomerResponseModel,
+  SparseUpdateQuickBooksCustomerDto,
 } from '..';
 
 @Injectable()
-export class NestJsQuickBooksCustomersService extends BaseService<
-  QuickBooksCustomers,
-  QuickBooksCustomersQuery,
-  QuickBooksCustomersQueryResponseModel
+export class NestJsQuickBooksCustomerService extends BaseService<
+  QuickBooksCustomer,
+  QuickBooksCustomerQueryDto,
+  QuickBooksCustomerQueryDtoResponseModel
 > {
   public resource = 'customer';
 
   public create(
-    dto: CreateQuickBooksCustomersDto,
-  ): Observable<QuickBooksCustomersResponseModel> {
+    dto: CreateQuickBooksCustomerDto,
+  ): Observable<QuickBooksCustomerResponseModel> {
     return this.post(dto);
   }
 
-  public readById(id: string): Observable<QuickBooksCustomersResponseModel> {
+  public readById(id: string): Observable<QuickBooksCustomerResponseModel> {
     return this.get(id);
   }
 
   public fullUpdate(
     id: string,
     token: string,
-    dto: FullUpdateQuickBooksCustomersDto,
-  ): Observable<QuickBooksCustomersResponseModel>;
+    dto: FullUpdateQuickBooksCustomerDto,
+  ): Observable<QuickBooksCustomerResponseModel>;
   public fullUpdate(
-    customer: QuickBooksCustomers,
-    dto: FullUpdateQuickBooksCustomersDto,
-  ): Observable<QuickBooksCustomersResponseModel>;
+    customer: QuickBooksCustomer,
+    dto: FullUpdateQuickBooksCustomerDto,
+  ): Observable<QuickBooksCustomerResponseModel>;
   public fullUpdate(
     ...args: [
-      string | QuickBooksCustomers,
-      string | FullUpdateQuickBooksCustomersDto,
-      FullUpdateQuickBooksCustomersDto?,
+      string | QuickBooksCustomer,
+      string | FullUpdateQuickBooksCustomerDto,
+      FullUpdateQuickBooksCustomerDto?,
     ]
-  ): Observable<QuickBooksCustomersResponseModel> {
+  ): Observable<QuickBooksCustomerResponseModel> {
     const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,
@@ -56,19 +56,19 @@ export class NestJsQuickBooksCustomersService extends BaseService<
   public sparseUpdate(
     id: string,
     token: string,
-    dto: SparseUpdateQuickBooksCustomersDto,
-  ): Observable<QuickBooksCustomersResponseModel>;
+    dto: SparseUpdateQuickBooksCustomerDto,
+  ): Observable<QuickBooksCustomerResponseModel>;
   public sparseUpdate(
-    customer: QuickBooksCustomers,
-    dto: SparseUpdateQuickBooksCustomersDto,
-  ): Observable<QuickBooksCustomersResponseModel>;
+    customer: QuickBooksCustomer,
+    dto: SparseUpdateQuickBooksCustomerDto,
+  ): Observable<QuickBooksCustomerResponseModel>;
   public sparseUpdate(
     ...args: [
-      string | QuickBooksCustomers,
-      string | SparseUpdateQuickBooksCustomersDto,
-      SparseUpdateQuickBooksCustomersDto?,
+      string | QuickBooksCustomer,
+      string | SparseUpdateQuickBooksCustomerDto,
+      SparseUpdateQuickBooksCustomerDto?,
     ]
-  ): Observable<QuickBooksCustomersResponseModel> {
+  ): Observable<QuickBooksCustomerResponseModel> {
     const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,
@@ -79,14 +79,14 @@ export class NestJsQuickBooksCustomersService extends BaseService<
   }
 
   private getUpdateArguments<DTO>(
-    args: [string | QuickBooksCustomers, string | DTO, DTO?],
+    args: [string | QuickBooksCustomer, string | DTO, DTO?],
   ): [string, string, DTO] {
     const [idOrCustomer, tokenOrDto, dto] = args;
     if (dto) {
       return [idOrCustomer as string, tokenOrDto as string, dto];
     }
 
-    const customer = idOrCustomer as QuickBooksCustomers;
+    const customer = idOrCustomer as QuickBooksCustomer;
     return [customer.Id, customer.SyncToken, tokenOrDto as DTO];
   }
 }

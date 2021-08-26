@@ -12,7 +12,7 @@ import {
   QuickBooksTaxExemptionReasonsEnum,
 } from '../../common/enums';
 
-export interface QuickBooksCustomers extends QuickBooksModel {
+export interface QuickBooksCustomer extends QuickBooksModel {
   DisplayName: string;
   Title: string;
   GivenName: string;

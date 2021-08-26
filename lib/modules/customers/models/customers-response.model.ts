@@ -1,17 +1,17 @@
-import { QuickBooksCustomers } from './customers.model';
+import { QuickBooksCustomer } from './customers.model';
 import {
   QuickBooksQueryResponseModel,
   QuickBooksResponseModel,
 } from '../../common/models';
 
-export interface QuickBooksCustomersResponseModel
+export interface QuickBooksCustomerResponseModel
   extends QuickBooksResponseModel {
-  Customer: QuickBooksCustomers;
+  Customer: QuickBooksCustomer;
 }
 
-export interface QuickBooksCustomersQueryResponseModel
+export interface QuickBooksCustomerQueryDtoResponseModel
   extends QuickBooksResponseModel {
   QueryResponse: QuickBooksQueryResponseModel & {
-    Customer: QuickBooksCustomers[];
+    Customer: QuickBooksCustomer[];
   };
 }
