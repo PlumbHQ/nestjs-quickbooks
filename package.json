@@ -32,9 +32,7 @@
     "copy:lib": "cp package.json .npmignore dist",
     "docker": "npm run docker:down && docker-compose -f docker-compose.yaml up -d --force-recreate",
     "docker:down": "docker-compose -f docker-compose.yaml down --remove-orphans",
-    "deploy": "npm run build:lib && npm run copy:lib && npm publish dist --access public",
-    "deploy:beta": "npm run deploy -- --tag beta --access public",
-    "deploy:dry-run": "npm run deploy -- --dry-run"
+    "deploy": "npm run build:lib && npm run copy:lib && np patch"
   },
   "dependencies": {
     "@nestjs/axios": "^0.0.1",
