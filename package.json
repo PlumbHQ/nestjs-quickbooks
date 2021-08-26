@@ -90,6 +90,7 @@
   },
   "np": {
     "yarn": false,
-    "contents": "./lib"
+    "contents": "./lib",
+    "tests": false
   }
 }
