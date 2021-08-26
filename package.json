@@ -88,11 +88,6 @@
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
   },
-  "np": {
-    "yarn": false,
-    "contents": "./lib",
-    "yolo": true
-  },
   "publishConfig": {
     "access": "public"
   }
