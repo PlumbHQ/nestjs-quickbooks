@@ -1,4 +1,7 @@
+import { QuickBooksEntity } from './quickbooks.model';
+
 export interface QuickBooksResponseModel {
+  [key: string]: QuickBooksQueryResponseData | QuickBooksEntity | string;
   time: string;
 }
 
@@ -9,7 +12,7 @@ export interface QuickBooksDeleteResponseModel {
 }
 
 export interface QuickBooksQueryResponseData {
-  [key: string]: number | string;
+  [key: string]: number | string | QuickBooksEntity[];
   startPosition: number;
   maxResults: number;
 }
