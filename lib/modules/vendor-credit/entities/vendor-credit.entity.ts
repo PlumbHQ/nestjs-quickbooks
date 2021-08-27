@@ -1,11 +1,11 @@
 import {
-  QuickBooksBaseEntity,
   QuickBooksRefDto,
   QuickBooksItemBasedExpenseLineDto,
   QuickBooksAccountBasedExpenseLineDto,
   QuickBooksLinkedTxnDto,
   QuickBooksGlobalTaxCalculationsEnum,
 } from 'lib';
+import { QuickBooksBaseEntity } from '../../common/models';
 
 export interface QuickBooksVendorCreditEntity extends QuickBooksBaseEntity {
   VendorRef: QuickBooksRefDto;

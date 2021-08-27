@@ -1,5 +1,4 @@
 import {
-  QuickBooksBaseEntity,
   QuickBooksPhysicalAddressModel,
   QuickBooksEmailModel,
   QuickBooksWebsiteModel,
@@ -7,6 +6,7 @@ import {
   QuickBooksPhoneNumberModel,
   QuickBooksDateTimeModel,
 } from 'lib';
+import { QuickBooksBaseEntity } from '../../common/models';
 
 export interface QuickBooksCompanyInfoEntity extends QuickBooksBaseEntity {
   CompanyName: string;

@@ -1,5 +1,4 @@
 import {
-  QuickBooksBaseEntity,
   QuickBooksSalesItemLineDto,
   QuickBooksRefDto,
   QuickBooksEmailDto,
@@ -9,6 +8,7 @@ import {
   QuickBooksEmailStatusesEnum,
   QuickBooksTxnTaxDetailDto,
 } from 'lib';
+import { QuickBooksBaseEntity } from '../../common/models';
 
 export interface QuickBooksSalesReceiptEntity extends QuickBooksBaseEntity {
   Line: QuickBooksSalesItemLineDto[];
