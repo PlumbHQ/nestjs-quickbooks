@@ -1,7 +1,7 @@
 import {
+  QuickBooksBaseEntity,
   QuickBooksDateModel,
   QuickBooksEmailModel,
-  QuickBooksBaseEntity,
   QuickBooksPhoneNumberModel,
   QuickBooksPhysicalAddressModel,
   QuickBooksRefModel,

@@ -1,6 +1,7 @@
 export * from './custom-field.dto';
 export * from './date.dto';
 export * from './email.dto';
+export * from './line-items.dto';
 export * from './linked-txn.dto';
 export * from './markup-info.dto';
 export * from './memo-ref.dto';
