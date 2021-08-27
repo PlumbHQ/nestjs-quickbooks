@@ -1,4 +1,6 @@
 export interface QuickBooksResponseModel {
+  [key: string]: Record<string, any> | string;
+  QueryResponse?: Record<string, any>;
   time: string;
 }
 
