@@ -12,6 +12,6 @@ export interface QuickBooksEntity {
 }
 
 export interface QuickBooksQueryDto {
-  Id: string;
-  MetaData: QuickBooksMetadata;
+  Id?: string;
+  MetaData?: QuickBooksMetadata;
 }
