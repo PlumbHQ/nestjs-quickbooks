@@ -1,7 +1,7 @@
 import {
   QuickBooksDateModel,
   QuickBooksEmailModel,
-  QuickBooksEntity,
+  QuickBooksBaseEntity,
   QuickBooksPhoneNumberModel,
   QuickBooksPhysicalAddressModel,
   QuickBooksRefModel,
@@ -12,7 +12,7 @@ import {
   QuickBooksTaxExemptionReasonsEnum,
 } from '../../common/enums';
 
-export interface QuickBooksCustomerEntity extends QuickBooksEntity {
+export interface QuickBooksCustomerEntity extends QuickBooksBaseEntity {
   DisplayName: string;
   Title: string;
   GivenName: string;

@@ -3,7 +3,7 @@ import {
   QuickBooksEmailStatusesEnum,
   QuickBooksGlobalTaxCalculationsEnum,
   QuickBooksLinkedTxnDto,
-  QuickBooksEntity,
+  QuickBooksBaseEntity,
   QuickBooksPhysicalAddressDto,
   QuickBooksRefDto,
 } from 'lib/modules/common';
@@ -13,7 +13,7 @@ import {
 } from 'lib/modules/common/dto/line-items.dto';
 import { QuickBooksPOStatusEnum } from 'lib/modules/common/enums/po-status.enum';
 
-export interface QuickBooksPurchaseOrderEntity extends QuickBooksEntity {
+export interface QuickBooksPurchaseOrderEntity extends QuickBooksBaseEntity {
   APAccountRef: QuickBooksRefDto;
   VendorRef: QuickBooksRefDto;
   Line: QuickBooksItemBasedExpenseLine[] | QuickBooksAccountBasedExpenseLine[];

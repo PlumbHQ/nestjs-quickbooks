@@ -1,6 +1,6 @@
 import {
   QuickBooksLinkedTxnModel,
-  QuickBooksEntity,
+  QuickBooksBaseEntity,
   QuickBooksRefModel,
   QuickBooksTxnTaxDetailModel,
 } from '../../common/models';
@@ -10,7 +10,7 @@ import {
   QuickBooksItemBasedExpenseLine,
 } from 'lib/modules/common/dto/line-items.dto';
 
-export interface QuickBooksBillEntity extends QuickBooksEntity {
+export interface QuickBooksBillEntity extends QuickBooksBaseEntity {
   VendorRef: QuickBooksRefModel;
   Line: QuickBooksItemBasedExpenseLine[] | QuickBooksAccountBasedExpenseLine[];
   CurrencyRef?: QuickBooksRefModel;

@@ -1,11 +1,11 @@
 import { QuickBooksCompanyInfoEntity } from 'lib';
-import { QuickBooksEntity } from './quickbooks.model';
+import { QuickBooksBaseEntity } from './quickbooks.model';
 
 export interface QuickBooksResponseModel {
   [key: string]:
     | QuickBooksCompanyInfoEntity
     | QuickBooksDeleteResponseModel
-    | QuickBooksEntity
+    | QuickBooksBaseEntity
     | QuickBooksQueryResponseData
     | string;
   time: string;
@@ -18,7 +18,7 @@ export interface QuickBooksDeleteResponseModel {
 }
 
 export interface QuickBooksQueryResponseData {
-  [key: string]: number | string | QuickBooksEntity[];
+  [key: string]: number | string | QuickBooksBaseEntity[];
   startPosition: number;
   maxResults: number;
 }
