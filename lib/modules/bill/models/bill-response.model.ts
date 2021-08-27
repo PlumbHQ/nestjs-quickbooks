@@ -1,6 +1,6 @@
 import {
   QuickBooksDeleteResponseModel,
-  QuickBooksQueryResponseModel,
+  QuickBooksQueryResponseData,
   QuickBooksResponseModel,
 } from '../../common/models';
 import { QuickBooksBillEntity } from '../entities/bill.entity';
@@ -11,7 +11,7 @@ export interface QuickBooksBillResponseModel extends QuickBooksResponseModel {
 
 export interface QuickBooksBillQueryResponseModel
   extends QuickBooksResponseModel {
-  QueryResponse: QuickBooksQueryResponseModel & {
+  QueryResponse: QuickBooksQueryResponseData & {
     Bill: QuickBooksBillEntity[];
   };
 }

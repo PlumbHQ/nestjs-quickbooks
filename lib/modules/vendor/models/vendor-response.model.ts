@@ -1,5 +1,5 @@
 import {
-  QuickBooksQueryResponseModel,
+  QuickBooksQueryResponseData,
   QuickBooksResponseModel,
 } from '../../common/models';
 import { QuickBooksVendorEntity } from '../entities/vendor.entity';
@@ -10,7 +10,7 @@ export interface QuickBooksVendorResponseModel extends QuickBooksResponseModel {
 
 export interface QuickBooksVendorQueryResponseModel
   extends QuickBooksResponseModel {
-  QueryResponse: QuickBooksQueryResponseModel & {
+  QueryResponse: QuickBooksQueryResponseData & {
     Vendor: QuickBooksVendorEntity[];
   };
 }

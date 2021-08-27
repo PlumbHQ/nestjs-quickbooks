@@ -1,6 +1,4 @@
 export interface QuickBooksResponseModel {
-  [key: string]: Record<string, any> | string;
-  QueryResponse?: Record<string, any>;
   time: string;
 }
 
@@ -10,7 +8,12 @@ export interface QuickBooksDeleteResponseModel {
   Id: string;
 }
 
-export interface QuickBooksQueryResponseModel {
+export interface QuickBooksQueryResponseData {
+  [key: string]: number | string;
   startPosition: number;
   maxResults: number;
+}
+
+export interface QuickBooksQueryResponseModel extends QuickBooksResponseModel {
+  QueryResponse: QuickBooksQueryResponseData;
 }

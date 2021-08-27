@@ -1,5 +1,6 @@
 import { QuickBooksCustomerEntity } from '../entities/customers.entity';
 import {
+  QuickBooksQueryResponseData,
   QuickBooksQueryResponseModel,
   QuickBooksResponseModel,
 } from '../../common/models';
@@ -10,8 +11,8 @@ export interface QuickBooksCustomerResponseModel
 }
 
 export interface QuickBooksCustomerQueryResponseModel
-  extends QuickBooksResponseModel {
-  QueryResponse: QuickBooksQueryResponseModel & {
+  extends QuickBooksQueryResponseModel {
+  QueryResponse: QuickBooksQueryResponseData & {
     Customer: QuickBooksCustomerEntity[];
   };
 }

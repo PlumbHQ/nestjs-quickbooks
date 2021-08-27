@@ -1,6 +1,6 @@
 import {
   QuickBooksDeleteResponseModel,
-  QuickBooksQueryResponseModel,
+  QuickBooksQueryResponseData,
   QuickBooksResponseModel,
 } from '../../common/models';
 import { QuickBooksPurchaseOrderEntity } from '../entities/purchase-order.entity';
@@ -12,7 +12,7 @@ export interface QuickBooksPurchaseOrderResponseModel
 
 export interface QuickBooksPurchaseOrderQueryResponseModel
   extends QuickBooksResponseModel {
-  QueryResponse: QuickBooksQueryResponseModel & {
+  QueryResponse: QuickBooksQueryResponseData & {
     PurchaseOrder: QuickBooksPurchaseOrderEntity[];
   };
 }

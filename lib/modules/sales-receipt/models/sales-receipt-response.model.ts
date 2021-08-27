@@ -1,6 +1,6 @@
 import {
   QuickBooksDeleteResponseModel,
-  QuickBooksQueryResponseModel,
+  QuickBooksQueryResponseData,
   QuickBooksResponseModel,
 } from '../../common/models';
 import { QuickBooksSalesReceiptEntity } from '../entities/sales-receipt.entity';
@@ -12,7 +12,7 @@ export interface QuickBooksSalesReceiptResponseModel
 
 export interface QuickBooksSalesReceiptQueryResponseModel
   extends QuickBooksResponseModel {
-  QueryResponse: QuickBooksQueryResponseModel & {
+  QueryResponse: QuickBooksQueryResponseData & {
     SalesReceipt: QuickBooksSalesReceiptEntity[];
   };
 }

@@ -1,6 +1,6 @@
 import {
   QuickBooksDeleteResponseModel,
-  QuickBooksQueryResponseModel,
+  QuickBooksQueryResponseData,
   QuickBooksResponseModel,
 } from '../../common/models';
 import { QuickBooksVendorCreditEntity } from '../entities/vendor-credit.entity';
@@ -12,7 +12,7 @@ export interface QuickBooksVendorCreditResponseModel
 
 export interface QuickBooksVendorCreditQueryResponseModel
   extends QuickBooksResponseModel {
-  QueryResponse: QuickBooksQueryResponseModel & {
+  QueryResponse: QuickBooksQueryResponseData & {
     VendorCredit: QuickBooksVendorCreditEntity[];
   };
 }
