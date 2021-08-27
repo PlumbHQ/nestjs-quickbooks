@@ -1,5 +1,6 @@
 import { QuickBooksQueryDto } from '../../common/models';
 
-export interface QuickBooksPurchaseQueryDto extends QuickBooksQueryDto {
-  DocNumber: string;
+export interface QuickBooksPurchaseQueryDto
+  extends Partial<QuickBooksQueryDto> {
+  DocNumber?: string;
 }

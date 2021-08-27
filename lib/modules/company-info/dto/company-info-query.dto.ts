@@ -1,3 +1,3 @@
 import { QuickBooksQueryDto } from '../../common/models';
 
-export type QuickBooksCompanyInfoQueryDto = QuickBooksQueryDto;
+export type QuickBooksCompanyInfoQueryDto = Partial<QuickBooksQueryDto>;
