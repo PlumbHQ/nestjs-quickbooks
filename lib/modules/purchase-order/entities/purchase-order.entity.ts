@@ -1,39 +1,41 @@
 import {
-  QuickBooksEmailDto,
-  QuickBooksEmailStatusesEnum,
-  QuickBooksGlobalTaxCalculationsEnum,
-  QuickBooksLinkedTxnDto,
   QuickBooksBaseEntity,
-  QuickBooksPhysicalAddressDto,
-  QuickBooksRefDto,
-} from 'lib/modules/common';
+  QuickBooksEmailModel,
+  QuickBooksLinkedTxnModel,
+  QuickBooksPhysicalAddressModel,
+  QuickBooksRefModel,
+} from '../../common/models';
 import {
   QuickBooksAccountBasedExpenseLine,
   QuickBooksItemBasedExpenseLine,
 } from 'lib/modules/common/dto/line-items.dto';
 import { QuickBooksPOStatusEnum } from 'lib/modules/common/enums/po-status.enum';
+import {
+  QuickBooksGlobalTaxCalculationsEnum,
+  QuickBooksEmailStatusesEnum,
+} from 'lib';
 
 export interface QuickBooksPurchaseOrderEntity extends QuickBooksBaseEntity {
-  APAccountRef: QuickBooksRefDto;
-  VendorRef: QuickBooksRefDto;
+  APAccountRef: QuickBooksRefModel;
+  VendorRef: QuickBooksRefModel;
   Line: QuickBooksItemBasedExpenseLine[] | QuickBooksAccountBasedExpenseLine[];
-  CurrencyRef: QuickBooksRefDto;
+  CurrencyRef: QuickBooksRefModel;
   TxnDate: string;
-  POEmail: QuickBooksEmailDto;
-  ClassRef: QuickBooksRefDto;
-  SalesTermRef: QuickBooksRefDto;
-  LinkedTxn: QuickBooksLinkedTxnDto[];
+  POEmail: QuickBooksEmailModel;
+  ClassRef: QuickBooksRefModel;
+  SalesTermRef: QuickBooksRefModel;
+  LinkedTxn: QuickBooksLinkedTxnModel[];
   GlobalTaxCalculation: QuickBooksGlobalTaxCalculationsEnum;
   Memo: string;
   POStatus: QuickBooksPOStatusEnum;
   DueDate: string;
   DocNumber: string;
   PrivateNote: string;
-  ShipMethodRef: QuickBooksRefDto;
-  ShipTo: QuickBooksRefDto;
+  ShipMethodRef: QuickBooksRefModel;
+  ShipTo: QuickBooksRefModel;
   ExchangeRate: number;
-  ShipAddr: QuickBooksPhysicalAddressDto;
-  VendorAddr: QuickBooksPhysicalAddressDto;
+  ShipAddr: QuickBooksPhysicalAddressModel;
+  VendorAddr: QuickBooksPhysicalAddressModel;
   TotalAmt: number;
   EmailStatus: QuickBooksEmailStatusesEnum;
 }
