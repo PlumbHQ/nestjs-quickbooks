@@ -1,4 +1,4 @@
-import { QuickBooksCustomerEntity } from '../entities/customers.entity';
+import { QuickBooksCustomerEntity } from '../entities/customer.entity';
 import {
   QuickBooksQueryResponseData,
   QuickBooksQueryResponseModel,
