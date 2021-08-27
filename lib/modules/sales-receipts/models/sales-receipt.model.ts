@@ -2,7 +2,7 @@ import {
   QuickBooksEmailDto,
   QuickBooksEmailStatusesEnum,
   QuickBooksGlobalTaxCalculationsEnum,
-  QuickBooksModel,
+  QuickBooksEntity,
   QuickBooksPhysicalAddressDto,
   QuickBooksRefDto,
   QuickBooksTxnTaxDetailDto,
@@ -10,7 +10,7 @@ import {
 import { QuickBooksSalesItemLine } from 'lib/modules/common/dto/line-items.dto';
 import { QuickBooksPrintStatusEnum } from 'lib/modules/common/enums/print-status.enum';
 
-export interface QuickBooksSalesReceipts extends QuickBooksModel {
+export interface QuickBooksSalesReceipts extends QuickBooksEntity {
   Line: QuickBooksSalesItemLine[];
   CustomerRef: QuickBooksRefDto;
   CurrencyRef: QuickBooksRefDto;

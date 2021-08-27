@@ -1,4 +1,4 @@
-import { QuickBooksModel, QuickBooksRefModel } from '../../common/models';
+import { QuickBooksEntity, QuickBooksRefModel } from '../../common/models';
 
 export enum QuickBookItemTypes {
   Inventory = 'Inventory',
@@ -6,7 +6,7 @@ export enum QuickBookItemTypes {
   NonInventory = 'NonInventory',
 }
 
-export interface QuickBooksItems extends QuickBooksModel {
+export interface QuickBooksItems extends QuickBooksEntity {
   ItemCategoryType: 'Product' | 'Service';
   Name: string;
   InvStartDate: string;

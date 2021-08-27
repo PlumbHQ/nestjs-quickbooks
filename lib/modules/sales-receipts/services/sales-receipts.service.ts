@@ -3,8 +3,8 @@ import { NestJsQuickBooksBaseService } from 'lib/modules/common/base.service';
 import { QuickBooksSalesReceiptsDto } from '../dto/sales-receipts.dto';
 import { QuickBooksSalesReceiptsQuery } from '../models/sales-receipts-query.model';
 import {
-  QuickBooksSalesReceiptsQueryResponseModel,
-  QuickBooksSalesReceiptsResponseModel,
+  QuickBooksSalesReceiptsQueryResponseDto,
+  QuickBooksSalesReceiptsResponseDto,
 } from '../models/sales-receipts-response.model';
 import { QuickBooksSalesReceipts } from '../models/sales-receipt.model';
 
@@ -12,17 +12,17 @@ import { QuickBooksSalesReceipts } from '../models/sales-receipt.model';
 export class NestJsQuickBooksSalesReceiptsService extends NestJsQuickBooksBaseService<
   QuickBooksSalesReceipts,
   QuickBooksSalesReceiptsQuery,
-  QuickBooksSalesReceiptsQueryResponseModel
+  QuickBooksSalesReceiptsQueryResponseDto
 > {
   public resource = 'salesReceipt';
 
   public create(
     dto: QuickBooksSalesReceiptsDto,
-  ): Promise<QuickBooksSalesReceiptsResponseModel> {
+  ): Promise<QuickBooksSalesReceiptsResponseDto> {
     return this.post(dto);
   }
 
-  public readById(id: string): Promise<QuickBooksSalesReceiptsResponseModel> {
+  public readById(id: string): Promise<QuickBooksSalesReceiptsResponseDto> {
     return this.get(id);
   }
 
@@ -30,18 +30,18 @@ export class NestJsQuickBooksSalesReceiptsService extends NestJsQuickBooksBaseSe
     id: string,
     token: string,
     dto: QuickBooksSalesReceiptsDto,
-  ): Promise<QuickBooksSalesReceiptsResponseModel>;
+  ): Promise<QuickBooksSalesReceiptsResponseDto>;
   public fullUpdate(
     salesReceipt: QuickBooksSalesReceipts,
     dto: QuickBooksSalesReceiptsDto,
-  ): Promise<QuickBooksSalesReceiptsResponseModel>;
+  ): Promise<QuickBooksSalesReceiptsResponseDto>;
   public fullUpdate(
     ...args: [
       string | QuickBooksSalesReceipts,
       string | QuickBooksSalesReceiptsDto,
       QuickBooksSalesReceiptsDto?,
     ]
-  ): Promise<QuickBooksSalesReceiptsResponseModel> {
+  ): Promise<QuickBooksSalesReceiptsResponseDto> {
     const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,
@@ -54,18 +54,18 @@ export class NestJsQuickBooksSalesReceiptsService extends NestJsQuickBooksBaseSe
     id: string,
     token: string,
     dto: QuickBooksSalesReceiptsDto,
-  ): Promise<QuickBooksSalesReceiptsResponseModel>;
+  ): Promise<QuickBooksSalesReceiptsResponseDto>;
   public sparseUpdate(
     salesReceipt: QuickBooksSalesReceipts,
     dto: QuickBooksSalesReceiptsDto,
-  ): Promise<QuickBooksSalesReceiptsResponseModel>;
+  ): Promise<QuickBooksSalesReceiptsResponseDto>;
   public sparseUpdate(
     ...args: [
       string | QuickBooksSalesReceipts,
       string | QuickBooksSalesReceiptsDto,
       QuickBooksSalesReceiptsDto?,
     ]
-  ): Promise<QuickBooksSalesReceiptsResponseModel> {
+  ): Promise<QuickBooksSalesReceiptsResponseDto> {
     const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,

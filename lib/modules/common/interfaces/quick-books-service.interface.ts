@@ -41,7 +41,7 @@ export interface IUpdateableQuickBooksService< {
     id: string,
     syncToken: string,
     dto: FullUpdateQuickBooksCustomerDto,
-  ): Promise<QuickBooksCustomerResponseModel>;
+  ): Promise<QuickBooksCustomerResponseDto>;
 
   /**
    * Sparse Update Method
@@ -53,5 +53,5 @@ export interface IUpdateableQuickBooksService< {
     id: string,
     token: string,
     dto: SparseUpdateQuickBooksCustomerDto,
-  ): Promise<QuickBooksCustomerResponseModel>;
+  ): Promise<QuickBooksCustomerResponseDto>;
 }

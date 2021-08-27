@@ -3,8 +3,8 @@ import { NestJsQuickBooksBaseService } from 'lib/modules/common/base.service';
 import { QuickBooksPurchaseOrdersDto } from '../dto/purchase-orders.dto';
 import { QuickBooksPurchaseOrdersQuery } from '../models/purchase-orders-query.model';
 import {
-  QuickBooksPurchaseOrdersQueryResponseModel,
-  QuickBooksPurchaseOrdersResponseModel,
+  QuickBooksPurchaseOrdersQueryResponseDto,
+  QuickBooksPurchaseOrdersResponseDto,
 } from '../models/purchase-orders-response.model';
 import { QuickBooksPurchaseOrders } from '../models/purchase-orders.model';
 
@@ -12,17 +12,17 @@ import { QuickBooksPurchaseOrders } from '../models/purchase-orders.model';
 export class NestJsQuickBooksPurchaseOrdersService extends NestJsQuickBooksBaseService<
   QuickBooksPurchaseOrders,
   QuickBooksPurchaseOrdersQuery,
-  QuickBooksPurchaseOrdersQueryResponseModel
+  QuickBooksPurchaseOrdersQueryResponseDto
 > {
   public resource = 'purchaseOrder';
 
   public create(
     dto: QuickBooksPurchaseOrdersDto,
-  ): Promise<QuickBooksPurchaseOrdersResponseModel> {
+  ): Promise<QuickBooksPurchaseOrdersResponseDto> {
     return this.post(dto);
   }
 
-  public readById(id: string): Promise<QuickBooksPurchaseOrdersResponseModel> {
+  public readById(id: string): Promise<QuickBooksPurchaseOrdersResponseDto> {
     return this.get(id);
   }
 
@@ -30,18 +30,18 @@ export class NestJsQuickBooksPurchaseOrdersService extends NestJsQuickBooksBaseS
     id: string,
     token: string,
     dto: QuickBooksPurchaseOrdersDto,
-  ): Promise<QuickBooksPurchaseOrdersResponseModel>;
+  ): Promise<QuickBooksPurchaseOrdersResponseDto>;
   public fullUpdate(
     purchaseOrder: QuickBooksPurchaseOrders,
     dto: QuickBooksPurchaseOrdersDto,
-  ): Promise<QuickBooksPurchaseOrdersResponseModel>;
+  ): Promise<QuickBooksPurchaseOrdersResponseDto>;
   public fullUpdate(
     ...args: [
       string | QuickBooksPurchaseOrders,
       string | QuickBooksPurchaseOrdersDto,
       QuickBooksPurchaseOrdersDto?,
     ]
-  ): Promise<QuickBooksPurchaseOrdersResponseModel> {
+  ): Promise<QuickBooksPurchaseOrdersResponseDto> {
     const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,
@@ -54,18 +54,18 @@ export class NestJsQuickBooksPurchaseOrdersService extends NestJsQuickBooksBaseS
     id: string,
     token: string,
     dto: QuickBooksPurchaseOrdersDto,
-  ): Promise<QuickBooksPurchaseOrdersResponseModel>;
+  ): Promise<QuickBooksPurchaseOrdersResponseDto>;
   public sparseUpdate(
     purchaseOrder: QuickBooksPurchaseOrders,
     dto: QuickBooksPurchaseOrdersDto,
-  ): Promise<QuickBooksPurchaseOrdersResponseModel>;
+  ): Promise<QuickBooksPurchaseOrdersResponseDto>;
   public sparseUpdate(
     ...args: [
       string | QuickBooksPurchaseOrders,
       string | QuickBooksPurchaseOrdersDto,
       QuickBooksPurchaseOrdersDto?,
     ]
-  ): Promise<QuickBooksPurchaseOrdersResponseModel> {
+  ): Promise<QuickBooksPurchaseOrdersResponseDto> {
     const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,

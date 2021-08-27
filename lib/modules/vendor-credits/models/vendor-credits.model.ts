@@ -1,7 +1,7 @@
 import {
   QuickBooksGlobalTaxCalculationsEnum,
   QuickBooksLinkedTxnDto,
-  QuickBooksModel,
+  QuickBooksEntity,
   QuickBooksRefDto,
 } from 'lib/modules/common';
 import {
@@ -9,7 +9,7 @@ import {
   QuickBooksItemBasedExpenseLine,
 } from 'lib/modules/common/dto/line-items.dto';
 
-export interface QuickBooksVendorCredits extends QuickBooksModel {
+export interface QuickBooksVendorCredits extends QuickBooksEntity {
   VendorRef: QuickBooksRefDto;
   Line: QuickBooksItemBasedExpenseLine[] | QuickBooksAccountBasedExpenseLine[];
   CurrencyRef: QuickBooksRefDto;

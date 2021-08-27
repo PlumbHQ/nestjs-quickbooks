@@ -5,26 +5,26 @@ import {
   FullUpdateQuickBooksItemsDto,
   QuickBooksItems,
   QuickBooksItemsQueryModel,
-  QuickBooksItemsQueryResponseModel,
-  QuickBooksItemsResponseModel,
+  QuickBooksItemsQueryResponseDto,
+  QuickBooksItemsResponseDto,
   SparseUpdateQuickBooksItemsDto,
 } from '..';
 
 @Injectable()
 export class NestJsNestJsQuickBooksItemsService extends NestJsQuickBooksBaseService<
-  QuickBooksItemsResponseModel,
+  QuickBooksItemsResponseDto,
   QuickBooksItemsQueryModel,
-  QuickBooksItemsQueryResponseModel
+  QuickBooksItemsQueryResponseDto
 > {
   public resource = 'item';
 
   public create(
     dto: CreateQuickBooksItemsDto,
-  ): Promise<QuickBooksItemsResponseModel> {
+  ): Promise<QuickBooksItemsResponseDto> {
     return this.post(dto);
   }
 
-  public readById(id: string): Promise<QuickBooksItemsResponseModel> {
+  public readById(id: string): Promise<QuickBooksItemsResponseDto> {
     return this.get(id);
   }
 
@@ -32,18 +32,18 @@ export class NestJsNestJsQuickBooksItemsService extends NestJsQuickBooksBaseServ
     id: string,
     token: string,
     dto: FullUpdateQuickBooksItemsDto,
-  ): Promise<QuickBooksItemsResponseModel>;
+  ): Promise<QuickBooksItemsResponseDto>;
   public fullUpdate(
     customer: QuickBooksItems,
     dto: FullUpdateQuickBooksItemsDto,
-  ): Promise<QuickBooksItemsResponseModel>;
+  ): Promise<QuickBooksItemsResponseDto>;
   public fullUpdate(
     ...args: [
       string | QuickBooksItems,
       string | FullUpdateQuickBooksItemsDto,
       FullUpdateQuickBooksItemsDto?,
     ]
-  ): Promise<QuickBooksItemsResponseModel> {
+  ): Promise<QuickBooksItemsResponseDto> {
     const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,
@@ -56,18 +56,18 @@ export class NestJsNestJsQuickBooksItemsService extends NestJsQuickBooksBaseServ
     id: string,
     token: string,
     dto: SparseUpdateQuickBooksItemsDto,
-  ): Promise<QuickBooksItemsResponseModel>;
+  ): Promise<QuickBooksItemsResponseDto>;
   public sparseUpdate(
     item: QuickBooksItems,
     dto: SparseUpdateQuickBooksItemsDto,
-  ): Promise<QuickBooksItemsResponseModel>;
+  ): Promise<QuickBooksItemsResponseDto>;
   public sparseUpdate(
     ...args: [
       string | QuickBooksItems,
       string | SparseUpdateQuickBooksItemsDto,
       SparseUpdateQuickBooksItemsDto?,
     ]
-  ): Promise<QuickBooksItemsResponseModel> {
+  ): Promise<QuickBooksItemsResponseDto> {
     const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,

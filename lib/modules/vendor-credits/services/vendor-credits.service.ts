@@ -3,8 +3,8 @@ import { NestJsQuickBooksBaseService } from 'lib/modules/common/base.service';
 import { QuickBooksVendorCreditsDto } from '../dto/vendor-credits.dto';
 import { QuickBooksVendorCreditsQuery } from '../models/vendor-credits-query.model';
 import {
-  QuickBooksVendorCreditsQueryResponseModel,
-  QuickBooksVendorCreditsResponseModel,
+  QuickBooksVendorCreditsQueryResponseDto,
+  QuickBooksVendorCreditsResponseDto,
 } from '../models/vendor-credits-response.model';
 import { QuickBooksVendorCredits } from '../models/vendor-credits.model';
 
@@ -12,17 +12,17 @@ import { QuickBooksVendorCredits } from '../models/vendor-credits.model';
 export class NestJsQuickBooksVendorCreditsService extends NestJsQuickBooksBaseService<
   QuickBooksVendorCredits,
   QuickBooksVendorCreditsQuery,
-  QuickBooksVendorCreditsQueryResponseModel
+  QuickBooksVendorCreditsQueryResponseDto
 > {
   public resource = 'vendorCredit';
 
   public create(
     dto: QuickBooksVendorCreditsDto,
-  ): Promise<QuickBooksVendorCreditsResponseModel> {
+  ): Promise<QuickBooksVendorCreditsResponseDto> {
     return this.post(dto);
   }
 
-  public readById(id: string): Promise<QuickBooksVendorCreditsResponseModel> {
+  public readById(id: string): Promise<QuickBooksVendorCreditsResponseDto> {
     return this.get(id);
   }
 
@@ -30,18 +30,18 @@ export class NestJsQuickBooksVendorCreditsService extends NestJsQuickBooksBaseSe
     id: string,
     token: string,
     dto: QuickBooksVendorCreditsDto,
-  ): Promise<QuickBooksVendorCreditsResponseModel>;
+  ): Promise<QuickBooksVendorCreditsResponseDto>;
   public fullUpdate(
     vendorCredit: QuickBooksVendorCredits,
     dto: QuickBooksVendorCreditsDto,
-  ): Promise<QuickBooksVendorCreditsResponseModel>;
+  ): Promise<QuickBooksVendorCreditsResponseDto>;
   public fullUpdate(
     ...args: [
       string | QuickBooksVendorCredits,
       string | QuickBooksVendorCreditsDto,
       QuickBooksVendorCreditsDto?,
     ]
-  ): Promise<QuickBooksVendorCreditsResponseModel> {
+  ): Promise<QuickBooksVendorCreditsResponseDto> {
     const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,
@@ -54,18 +54,18 @@ export class NestJsQuickBooksVendorCreditsService extends NestJsQuickBooksBaseSe
     id: string,
     token: string,
     dto: QuickBooksVendorCreditsDto,
-  ): Promise<QuickBooksVendorCreditsResponseModel>;
+  ): Promise<QuickBooksVendorCreditsResponseDto>;
   public sparseUpdate(
     vendorCredit: QuickBooksVendorCredits,
     dto: QuickBooksVendorCreditsDto,
-  ): Promise<QuickBooksVendorCreditsResponseModel>;
+  ): Promise<QuickBooksVendorCreditsResponseDto>;
   public sparseUpdate(
     ...args: [
       string | QuickBooksVendorCredits,
       string | QuickBooksVendorCreditsDto,
       QuickBooksVendorCreditsDto?,
     ]
-  ): Promise<QuickBooksVendorCreditsResponseModel> {
+  ): Promise<QuickBooksVendorCreditsResponseDto> {
     const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,

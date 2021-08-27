@@ -1,20 +1,19 @@
 import {
-  QuickBooksDeleteResponseModel,
-  QuickBooksQueryResponseModel,
-  QuickBooksResponseModel,
+  QuickBooksDeleteResponseDto,
+  QuickBooksQueryResponseDto,
+  QuickBooksResponseDto,
 } from '../../common/models';
 import { QuickBooksBills } from './bills.model';
 
-export interface QuickBooksBillsResponseModel extends QuickBooksResponseModel {
+export interface QuickBooksBillsResponseDto extends QuickBooksResponseDto {
   Bill: QuickBooksBills;
 }
 
-export interface QuickBooksBillsQueryResponseModel
-  extends QuickBooksResponseModel {
-  QueryResponse: QuickBooksQueryResponseModel & { Bill: QuickBooksBills[] };
+export interface QuickBooksBillsQueryResponseDto extends QuickBooksResponseDto {
+  QueryResponse: QuickBooksQueryResponseDto & { Bill: QuickBooksBills[] };
 }
 
-export interface QuickBooksBillsDeleteResponseModel
-  extends QuickBooksResponseModel {
-  Bill: QuickBooksDeleteResponseModel;
+export interface QuickBooksBillsDeleteResponseDto
+  extends QuickBooksResponseDto {
+  Bill: QuickBooksDeleteResponseDto;
 }

@@ -1,14 +1,14 @@
-export interface QuickBooksResponseModel {
+export interface QuickBooksResponseDto {
   time: string;
 }
 
-export interface QuickBooksDeleteResponseModel {
+export interface QuickBooksDeleteResponseDto {
   status: string;
   domain: string;
   Id: string;
 }
 
-export interface QuickBooksQueryResponseModel {
+export interface QuickBooksQueryResponseDto {
   startPosition: number;
   maxResults: number;
 }

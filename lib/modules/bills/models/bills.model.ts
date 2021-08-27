@@ -1,7 +1,7 @@
 import {
   QuickBooksLinkedTxnModel,
   QuickBooksMarkupInfoModel,
-  QuickBooksModel,
+  QuickBooksEntity,
   QuickBooksRefModel,
   QuickBooksTxnTaxDetailModel,
 } from '../../common/models';
@@ -54,7 +54,7 @@ export type QuickBooksBillLinesModel =
   | QuickBooksBillsItemBasedExpenseLineModel
   | QuickBooksBillsAccountBasedExpenseLineModel;
 
-export interface QuickBooksBills extends QuickBooksModel {
+export interface QuickBooksBills extends QuickBooksEntity {
   VendorRef: QuickBooksRefModel;
   Line: QuickBooksBillLinesModel[];
   CurrencyRef?: QuickBooksRefModel;

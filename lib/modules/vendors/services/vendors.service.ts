@@ -5,25 +5,25 @@ import {
   FullUpdateQuickBooksVendorsDto,
   QuickBooksVendors,
   QuickBooksVendorsQueryModel,
-  QuickBooksVendorsQueryResponseModel,
-  QuickBooksVendorsResponseModel,
+  QuickBooksVendorsQueryResponseDto,
+  QuickBooksVendorsResponseDto,
 } from '..';
 
 @Injectable()
 export class NestJsQuickBooksVendorsService extends NestJsQuickBooksBaseService<
-  QuickBooksVendorsResponseModel,
+  QuickBooksVendorsResponseDto,
   QuickBooksVendorsQueryModel,
-  QuickBooksVendorsQueryResponseModel
+  QuickBooksVendorsQueryResponseDto
 > {
   public resource = 'vendor';
 
   public create(
     dto: CreateQuickBooksVendorsDto,
-  ): Promise<QuickBooksVendorsResponseModel> {
+  ): Promise<QuickBooksVendorsResponseDto> {
     return this.post(dto);
   }
 
-  public readById(id: string): Promise<QuickBooksVendorsResponseModel> {
+  public readById(id: string): Promise<QuickBooksVendorsResponseDto> {
     return this.get(id);
   }
 
@@ -31,18 +31,18 @@ export class NestJsQuickBooksVendorsService extends NestJsQuickBooksBaseService<
     id: string,
     token: string,
     dto: FullUpdateQuickBooksVendorsDto,
-  ): Promise<QuickBooksVendorsResponseModel>;
+  ): Promise<QuickBooksVendorsResponseDto>;
   public fullUpdate(
     vendor: QuickBooksVendors,
     dto: FullUpdateQuickBooksVendorsDto,
-  ): Promise<QuickBooksVendorsResponseModel>;
+  ): Promise<QuickBooksVendorsResponseDto>;
   public fullUpdate(
     ...args: [
       string | QuickBooksVendors,
       string | FullUpdateQuickBooksVendorsDto,
       FullUpdateQuickBooksVendorsDto?,
     ]
-  ): Promise<QuickBooksVendorsResponseModel> {
+  ): Promise<QuickBooksVendorsResponseDto> {
     const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,

@@ -1,10 +1,10 @@
 import {
   QuickBooksAccountTypesEnum,
-  QuickBooksModel,
+  QuickBooksEntity,
   QuickBooksRefModel,
 } from '../../common';
 
-export interface QuickBooksAccounts extends QuickBooksModel {
+export interface QuickBooksAccounts extends QuickBooksEntity {
   Name: string;
   AcctNum?: string;
   CurrencyRef?: QuickBooksRefModel;

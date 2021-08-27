@@ -1,14 +1,14 @@
 import {
   QuickBooksDateTimeModel,
   QuickBooksEmailModel,
-  QuickBooksModel,
+  QuickBooksEntity,
   QuickBooksPhoneNumberModel,
   QuickBooksPhysicalAddressModel,
   QuickBooksWebsiteModel,
 } from '../../common/models';
 import { QuickBooksMonthsEnum } from '../../common/enums';
 
-export interface QuickBooksCompanyInfo extends QuickBooksModel {
+export interface QuickBooksCompanyInfo extends QuickBooksEntity {
   CompanyName: string;
   PhysicalAddress: QuickBooksPhysicalAddressModel;
   LegalAddr: QuickBooksPhysicalAddressModel;

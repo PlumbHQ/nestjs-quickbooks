@@ -3,10 +3,10 @@ import { NestJsQuickBooksBaseService } from '../../common/base.service';
 import {
   CreateQuickBooksCustomerDto,
   FullUpdateQuickBooksCustomerDto,
-  QuickBooksCustomer,
+  QuickBooksCustomerEntity,
   QuickBooksCustomerQueryDto,
-  QuickBooksCustomerQueryResponseModel,
-  QuickBooksCustomerResponseModel,
+  QuickBooksCustomerQueryResponseDto,
+  QuickBooksCustomerResponseDto,
   SparseUpdateQuickBooksCustomerDto,
 } from '..';
 import {
@@ -19,31 +19,31 @@ import {
 @Injectable()
 export class NestJsQuickBooksCustomerService
   extends NestJsQuickBooksBaseService<
-    QuickBooksCustomer,
+    QuickBooksCustomerEntity,
     QuickBooksCustomerQueryDto,
-    QuickBooksCustomerQueryResponseModel
+    QuickBooksCustomerQueryResponseDto
   >
   implements
     IQuereableQuickBooksService<
       QuickBooksCustomerQueryDto,
-      QuickBooksCustomerQueryResponseModel
+      QuickBooksCustomerQueryResponseDto
     >,
-    IReadableQuickBooksService<QuickBooksCustomerResponseModel>,
+    IReadableQuickBooksService<QuickBooksCustomerResponseDto>,
     ICreatableQuickBooksService<
       CreateQuickBooksCustomerDto,
-      QuickBooksCustomerResponseModel
+      QuickBooksCustomerResponseDto
     >,
     IUpdateableQuickBooksService
 {
   public resource = 'customer';
 
-  public readById(id: string): Promise<QuickBooksCustomerResponseModel> {
+  public readById(id: string): Promise<QuickBooksCustomerResponseDto> {
     return this.get(id);
   }
 
   public create(
     dto: CreateQuickBooksCustomerDto,
-  ): Promise<QuickBooksCustomerResponseModel> {
+  ): Promise<QuickBooksCustomerResponseDto> {
     return this.post(dto);
   }
 
@@ -51,7 +51,7 @@ export class NestJsQuickBooksCustomerService
     id: string,
     token: string,
     dto: FullUpdateQuickBooksCustomerDto,
-  ): Promise<QuickBooksCustomerResponseModel> {
+  ): Promise<QuickBooksCustomerResponseDto> {
     return this.post({
       ...dto,
       Id: id,
@@ -63,7 +63,7 @@ export class NestJsQuickBooksCustomerService
     id: string,
     token: string,
     dto: SparseUpdateQuickBooksCustomerDto,
-  ): Promise<QuickBooksCustomerResponseModel> {
+  ): Promise<QuickBooksCustomerResponseDto> {
     return this.post({
       ...dto,
       Id: id,

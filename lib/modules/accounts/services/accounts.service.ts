@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { NestJsQuickBooksBaseService } from '../../common/base.service';
 import {
-  QuickBooksAccountsDeleteResponseModel,
-  QuickBooksAccountsQueryResponseModel,
-  QuickBooksAccountsResponseModel,
+  QuickBooksAccountsDeleteResponseDto,
+  QuickBooksAccountsQueryResponseDto,
+  QuickBooksAccountsResponseDto,
 } from '../models/accounts-response.model';
 import { QuickBooksAccountsQueryModel } from '../models/accounts-query.model';
 import {
@@ -16,9 +16,9 @@ import { IUpdateableQuickBooksService } from 'lib/modules/common/interfaces/quic
 @Injectable()
 export class NestJsQuickBooksAccountsService
   extends NestJsQuickBooksBaseService<
-    QuickBooksAccountsResponseModel,
+    QuickBooksAccountsResponseDto,
     QuickBooksAccountsQueryModel,
-    QuickBooksAccountsQueryResponseModel
+    QuickBooksAccountsQueryResponseDto
   >
   implements IUpdateableQuickBooksService
 {
@@ -26,11 +26,11 @@ export class NestJsQuickBooksAccountsService
 
   public create(
     dto: CreateQuickBooksAccountsDto,
-  ): Promise<QuickBooksAccountsResponseModel> {
+  ): Promise<QuickBooksAccountsResponseDto> {
     return this.post(dto);
   }
 
-  public readById(id: string): Promise<QuickBooksAccountsResponseModel> {
+  public readById(id: string): Promise<QuickBooksAccountsResponseDto> {
     return this.get(id);
   }
 
@@ -38,7 +38,7 @@ export class NestJsQuickBooksAccountsService
     id: string,
     token: string,
     dto: FullUpdateQuickBooksAccountsDto,
-  ): Promise<QuickBooksAccountsResponseModel> {
+  ): Promise<QuickBooksAccountsResponseDto> {
     return this.post({
       ...dto,
       Id: id,
@@ -50,7 +50,7 @@ export class NestJsQuickBooksAccountsService
     id: string,
     token: string,
     dto: SparseUpdateQuickBooksAccountsDto,
-  ): Promise<QuickBooksAccountsResponseModel> {
+  ): Promise<QuickBooksAccountsResponseDto> {
     return this.post({
       ...dto,
       Id: id,
@@ -62,7 +62,7 @@ export class NestJsQuickBooksAccountsService
   public delete(
     id: string,
     token: string,
-  ): Promise<QuickBooksAccountsDeleteResponseModel> {
+  ): Promise<QuickBooksAccountsDeleteResponseDto> {
     return this.post(
       {
         Id: id,

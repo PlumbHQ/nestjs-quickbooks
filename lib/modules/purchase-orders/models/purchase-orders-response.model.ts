@@ -1,17 +1,17 @@
 import {
-  QuickBooksQueryResponseModel,
-  QuickBooksResponseModel,
+  QuickBooksQueryResponseDto,
+  QuickBooksResponseDto,
 } from '../../common/models';
 import { QuickBooksPurchaseOrders } from './purchase-orders.model';
 
-export interface QuickBooksPurchaseOrdersResponseModel
-  extends QuickBooksResponseModel {
+export interface QuickBooksPurchaseOrdersResponseDto
+  extends QuickBooksResponseDto {
   PurchaseOrder: QuickBooksPurchaseOrders;
 }
 
-export interface QuickBooksPurchaseOrdersQueryResponseModel
-  extends QuickBooksResponseModel {
-  QueryResponse: QuickBooksQueryResponseModel & {
+export interface QuickBooksPurchaseOrdersQueryResponseDto
+  extends QuickBooksResponseDto {
+  QueryResponse: QuickBooksQueryResponseDto & {
     PurchaseOrder: QuickBooksPurchaseOrders[];
   };
 }

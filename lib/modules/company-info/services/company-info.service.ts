@@ -5,20 +5,20 @@ import {
   FullUpdateQuickBooksCompanyInfoDto,
   QuickBooksCompanyInfo,
   QuickBooksCompanyInfoQueryModel,
-  QuickBooksCompanyInfoQueryResponseModel,
-  QuickBooksCompanyInfoResponseModel,
+  QuickBooksCompanyInfoQueryResponseDto,
+  QuickBooksCompanyInfoResponseDto,
   SparseUpdateQuickBooksCompanyInfoDto,
 } from '..';
 
 @Injectable()
 export class NestJsQuickBooksCompanyInfoService extends NestJsQuickBooksBaseService<
-  QuickBooksCompanyInfoResponseModel,
+  QuickBooksCompanyInfoResponseDto,
   QuickBooksCompanyInfoQueryModel,
-  QuickBooksCompanyInfoQueryResponseModel
+  QuickBooksCompanyInfoQueryResponseDto
 > {
   public resource = 'companyinfo';
 
-  public read(): Promise<QuickBooksCompanyInfoResponseModel> {
+  public read(): Promise<QuickBooksCompanyInfoResponseDto> {
     return firstValueFrom(this.getRealm().pipe(mergeMap((x) => this.get(x))));
   }
 
@@ -26,18 +26,18 @@ export class NestJsQuickBooksCompanyInfoService extends NestJsQuickBooksBaseServ
     id: string,
     token: string,
     dto: FullUpdateQuickBooksCompanyInfoDto,
-  ): Promise<QuickBooksCompanyInfoResponseModel>;
+  ): Promise<QuickBooksCompanyInfoResponseDto>;
   public fullUpdate(
     company: QuickBooksCompanyInfo,
     dto: FullUpdateQuickBooksCompanyInfoDto,
-  ): Promise<QuickBooksCompanyInfoResponseModel>;
+  ): Promise<QuickBooksCompanyInfoResponseDto>;
   public fullUpdate(
     ...args: [
       string | QuickBooksCompanyInfo,
       string | FullUpdateQuickBooksCompanyInfoDto,
       FullUpdateQuickBooksCompanyInfoDto?,
     ]
-  ): Promise<QuickBooksCompanyInfoResponseModel> {
+  ): Promise<QuickBooksCompanyInfoResponseDto> {
     const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,
@@ -50,18 +50,18 @@ export class NestJsQuickBooksCompanyInfoService extends NestJsQuickBooksBaseServ
     id: string,
     token: string,
     dto: SparseUpdateQuickBooksCompanyInfoDto,
-  ): Promise<QuickBooksCompanyInfoResponseModel>;
+  ): Promise<QuickBooksCompanyInfoResponseDto>;
   public sparseUpdate(
     company: QuickBooksCompanyInfo,
     dto: SparseUpdateQuickBooksCompanyInfoDto,
-  ): Promise<QuickBooksCompanyInfoResponseModel>;
+  ): Promise<QuickBooksCompanyInfoResponseDto>;
   public sparseUpdate(
     ...args: [
       string | QuickBooksCompanyInfo,
       string | SparseUpdateQuickBooksCompanyInfoDto,
       SparseUpdateQuickBooksCompanyInfoDto?,
     ]
-  ): Promise<QuickBooksCompanyInfoResponseModel> {
+  ): Promise<QuickBooksCompanyInfoResponseDto> {
     const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,

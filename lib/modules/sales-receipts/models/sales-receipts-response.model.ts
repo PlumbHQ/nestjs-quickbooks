@@ -1,17 +1,17 @@
 import {
-  QuickBooksQueryResponseModel,
-  QuickBooksResponseModel,
+  QuickBooksQueryResponseDto,
+  QuickBooksResponseDto,
 } from '../../common/models';
 import { QuickBooksSalesReceipts } from './sales-receipt.model';
 
-export interface QuickBooksSalesReceiptsResponseModel
-  extends QuickBooksResponseModel {
+export interface QuickBooksSalesReceiptsResponseDto
+  extends QuickBooksResponseDto {
   SalesReceipt: QuickBooksSalesReceipts;
 }
 
-export interface QuickBooksSalesReceiptsQueryResponseModel
-  extends QuickBooksResponseModel {
-  QueryResponse: QuickBooksQueryResponseModel & {
+export interface QuickBooksSalesReceiptsQueryResponseDto
+  extends QuickBooksResponseDto {
+  QueryResponse: QuickBooksQueryResponseDto & {
     SalesReceipt: QuickBooksSalesReceipts[];
   };
 }

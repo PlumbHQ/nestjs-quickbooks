@@ -1,15 +1,14 @@
 import {
-  QuickBooksQueryResponseModel,
-  QuickBooksResponseModel,
+  QuickBooksQueryResponseDto,
+  QuickBooksResponseDto,
 } from '../../common/models';
 import { QuickBooksVendors } from './vendors.model';
 
-export interface QuickBooksVendorsResponseModel
-  extends QuickBooksResponseModel {
+export interface QuickBooksVendorsResponseDto extends QuickBooksResponseDto {
   Vendor: QuickBooksVendors;
 }
 
-export interface QuickBooksVendorsQueryResponseModel
-  extends QuickBooksResponseModel {
-  QueryResponse: QuickBooksQueryResponseModel & { Vendor: QuickBooksVendors[] };
+export interface QuickBooksVendorsQueryResponseDto
+  extends QuickBooksResponseDto {
+  QueryResponse: QuickBooksQueryResponseDto & { Vendor: QuickBooksVendors[] };
 }

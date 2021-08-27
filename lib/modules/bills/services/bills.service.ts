@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { NestJsQuickBooksBaseService } from '../../common/base.service';
 import {
-  QuickBooksBillsDeleteResponseModel,
-  QuickBooksBillsQueryResponseModel,
-  QuickBooksBillsResponseModel,
+  QuickBooksBillsDeleteResponseDto,
+  QuickBooksBillsQueryResponseDto,
+  QuickBooksBillsResponseDto,
 } from '../models/bills-response.model';
 import { QuickBooksBillsQueryModel } from '../models/bills-query.model';
 import { QuickBooksBills } from '../models/bills.model';
@@ -16,9 +16,9 @@ import { IUpdateableQuickBooksService } from 'lib/modules/common/interfaces/quic
 @Injectable()
 export class NestJsQuickBooksBillsService
   extends NestJsQuickBooksBaseService<
-    QuickBooksBillsResponseModel,
+    QuickBooksBillsResponseDto,
     QuickBooksBillsQueryModel,
-    QuickBooksBillsQueryResponseModel
+    QuickBooksBillsQueryResponseDto
   >
   implements IUpdateableQuickBooksService
 {
@@ -26,11 +26,11 @@ export class NestJsQuickBooksBillsService
 
   public create(
     dto: CreateQuickBooksBillsDto,
-  ): Promise<QuickBooksBillsResponseModel> {
+  ): Promise<QuickBooksBillsResponseDto> {
     return this.post(dto);
   }
 
-  public readById(id: string): Promise<QuickBooksBillsResponseModel> {
+  public readById(id: string): Promise<QuickBooksBillsResponseDto> {
     return this.get(id);
   }
 
@@ -38,7 +38,7 @@ export class NestJsQuickBooksBillsService
     id: string,
     token: string,
     dto: FullUpdateQuickBooksBillsDto,
-  ): Promise<QuickBooksBillsResponseModel> {
+  ): Promise<QuickBooksBillsResponseDto> {
     return this.post({
       ...dto,
       Id: id,
@@ -49,7 +49,7 @@ export class NestJsQuickBooksBillsService
   public delete(
     id: string,
     token: string,
-  ): Promise<QuickBooksBillsDeleteResponseModel> {
+  ): Promise<QuickBooksBillsDeleteResponseDto> {
     return this.post(
       {
         Id: id,

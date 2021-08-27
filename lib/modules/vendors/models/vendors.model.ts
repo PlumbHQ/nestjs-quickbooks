@@ -1,7 +1,7 @@
 import {
   QuickBooksContactInfoModel,
   QuickBooksEmailModel,
-  QuickBooksModel,
+  QuickBooksEntity,
   QuickBooksPhoneNumberModel,
   QuickBooksPhysicalAddressModel,
   QuickBooksRefModel,
@@ -16,7 +16,7 @@ export interface QuickBooksVendorsPaymentBankDetailModel {
   StatementText: string;
 }
 
-export interface QuickBooksVendors extends QuickBooksModel {
+export interface QuickBooksVendors extends QuickBooksEntity {
   Title: string;
   GivenName: string;
   MiddleName: string;

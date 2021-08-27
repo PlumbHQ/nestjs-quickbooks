@@ -1,20 +1,19 @@
 import { QuickBooksAccounts } from './accounts.model';
 import {
-  QuickBooksDeleteResponseModel,
-  QuickBooksResponseModel,
+  QuickBooksDeleteResponseDto,
+  QuickBooksResponseDto,
 } from '../../common';
 
-export interface QuickBooksAccountsResponseModel
-  extends QuickBooksResponseModel {
+export interface QuickBooksAccountsResponseDto extends QuickBooksResponseDto {
   Account: QuickBooksAccounts;
 }
 
-export interface QuickBooksAccountsQueryResponseModel
-  extends QuickBooksResponseModel {
-  QueryResponse: QuickBooksResponseModel & { Account: QuickBooksAccounts[] };
+export interface QuickBooksAccountsQueryResponseDto
+  extends QuickBooksResponseDto {
+  QueryResponse: QuickBooksResponseDto & { Account: QuickBooksAccounts[] };
 }
 
-export interface QuickBooksAccountsDeleteResponseModel
-  extends QuickBooksResponseModel {
-  Account: QuickBooksDeleteResponseModel;
+export interface QuickBooksAccountsDeleteResponseDto
+  extends QuickBooksResponseDto {
+  Account: QuickBooksDeleteResponseDto;
 }

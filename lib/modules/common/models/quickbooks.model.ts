@@ -5,7 +5,7 @@ export interface QuickBooksMetadata {
   LastUpdatedTime: QuickBooksDateTimeModel;
 }
 
-export interface QuickBooksModel {
+export interface QuickBooksEntity {
   Id: string;
   SyncToken: string;
   MetaData?: QuickBooksMetadata;
