@@ -11,14 +11,17 @@ import {
   FullUpdateQuickBooksAccountsDto,
   SparseUpdateQuickBooksAccountsDto,
 } from '../dto/accounts.dto';
-import { QuickBooksAccounts } from '../models/accounts.model';
+import { IUpdateableQuickBooksService } from 'lib/modules/common/interfaces/quick-books-service.interface';
 
 @Injectable()
-export class NestJsQuickBooksAccountsService extends NestJsQuickBooksBaseService<
-  QuickBooksAccountsResponseModel,
-  QuickBooksAccountsQueryModel,
-  QuickBooksAccountsQueryResponseModel
-> {
+export class NestJsQuickBooksAccountsService
+  extends NestJsQuickBooksBaseService<
+    QuickBooksAccountsResponseModel,
+    QuickBooksAccountsQueryModel,
+    QuickBooksAccountsQueryResponseModel
+  >
+  implements IUpdateableQuickBooksService
+{
   public resource = 'account';
 
   public create(
@@ -35,19 +38,7 @@ export class NestJsQuickBooksAccountsService extends NestJsQuickBooksBaseService
     id: string,
     token: string,
     dto: FullUpdateQuickBooksAccountsDto,
-  ): Promise<QuickBooksAccountsResponseModel>;
-  public fullUpdate(
-    account: QuickBooksAccounts,
-    dto: FullUpdateQuickBooksAccountsDto,
-  ): Promise<QuickBooksAccountsResponseModel>;
-  public fullUpdate(
-    ...args: [
-      string | QuickBooksAccounts,
-      string | FullUpdateQuickBooksAccountsDto,
-      FullUpdateQuickBooksAccountsDto?,
-    ]
   ): Promise<QuickBooksAccountsResponseModel> {
-    const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,
       Id: id,
@@ -59,19 +50,7 @@ export class NestJsQuickBooksAccountsService extends NestJsQuickBooksBaseService
     id: string,
     token: string,
     dto: SparseUpdateQuickBooksAccountsDto,
-  ): Promise<QuickBooksAccountsResponseModel>;
-  public sparseUpdate(
-    account: QuickBooksAccounts,
-    dto: SparseUpdateQuickBooksAccountsDto,
-  ): Promise<QuickBooksAccountsResponseModel>;
-  public sparseUpdate(
-    ...args: [
-      string | QuickBooksAccounts,
-      string | SparseUpdateQuickBooksAccountsDto,
-      SparseUpdateQuickBooksAccountsDto?,
-    ]
   ): Promise<QuickBooksAccountsResponseModel> {
-    const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,
       Id: id,
@@ -83,14 +62,7 @@ export class NestJsQuickBooksAccountsService extends NestJsQuickBooksBaseService
   public delete(
     id: string,
     token: string,
-  ): Promise<QuickBooksAccountsDeleteResponseModel>;
-  public delete(
-    bill: QuickBooksAccounts,
-  ): Promise<QuickBooksAccountsDeleteResponseModel>;
-  public delete(
-    ...args: [string | QuickBooksAccounts, string?]
   ): Promise<QuickBooksAccountsDeleteResponseModel> {
-    const [id, token] = this.getOperationArguments(args);
     return this.post(
       {
         Id: id,
@@ -101,29 +73,5 @@ export class NestJsQuickBooksAccountsService extends NestJsQuickBooksBaseService
         operation: 'delete',
       },
     );
-  }
-
-  private getUpdateArguments<DTO>(
-    args: [string | QuickBooksAccounts, string | DTO, DTO?],
-  ): [string, string, DTO] {
-    const [idOrAccount, tokenOrDto, dto] = args;
-    if (dto) {
-      return [idOrAccount as string, tokenOrDto as string, dto];
-    }
-
-    const account = idOrAccount as QuickBooksAccounts;
-    return [account.Id, account.SyncToken, tokenOrDto as DTO];
-  }
-
-  private getOperationArguments(
-    args: [string | QuickBooksAccounts, string?],
-  ): [string, string] {
-    const [idOrAccount, token] = args;
-    if (token) {
-      return [idOrAccount as string, token];
-    }
-
-    const account = idOrAccount as QuickBooksAccounts;
-    return [account.Id, account.SyncToken];
   }
 }

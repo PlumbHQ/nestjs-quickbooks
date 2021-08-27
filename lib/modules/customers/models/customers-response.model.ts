@@ -9,7 +9,7 @@ export interface QuickBooksCustomerResponseModel
   Customer: QuickBooksCustomer;
 }
 
-export interface QuickBooksCustomerQueryDtoResponseModel
+export interface QuickBooksCustomerQueryResponseModel
   extends QuickBooksResponseModel {
   QueryResponse: QuickBooksQueryResponseModel & {
     Customer: QuickBooksCustomer[];

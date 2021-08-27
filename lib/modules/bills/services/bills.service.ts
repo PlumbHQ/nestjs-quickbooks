@@ -11,13 +11,17 @@ import {
   CreateQuickBooksBillsDto,
   FullUpdateQuickBooksBillsDto,
 } from '../dto/bills.dto';
+import { IUpdateableQuickBooksService } from 'lib/modules/common/interfaces/quick-books-service.interface';
 
 @Injectable()
-export class NestJsQuickBooksBillsService extends NestJsQuickBooksBaseService<
-  QuickBooksBillsResponseModel,
-  QuickBooksBillsQueryModel,
-  QuickBooksBillsQueryResponseModel
-> {
+export class NestJsQuickBooksBillsService
+  extends NestJsQuickBooksBaseService<
+    QuickBooksBillsResponseModel,
+    QuickBooksBillsQueryModel,
+    QuickBooksBillsQueryResponseModel
+  >
+  implements IUpdateableQuickBooksService
+{
   public resource = 'bill';
 
   public create(
@@ -34,19 +38,7 @@ export class NestJsQuickBooksBillsService extends NestJsQuickBooksBaseService<
     id: string,
     token: string,
     dto: FullUpdateQuickBooksBillsDto,
-  ): Promise<QuickBooksBillsResponseModel>;
-  public fullUpdate(
-    bill: QuickBooksBills,
-    dto: FullUpdateQuickBooksBillsDto,
-  ): Promise<QuickBooksBillsResponseModel>;
-  public fullUpdate(
-    ...args: [
-      string | QuickBooksBills,
-      string | FullUpdateQuickBooksBillsDto,
-      FullUpdateQuickBooksBillsDto?,
-    ]
   ): Promise<QuickBooksBillsResponseModel> {
-    const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,
       Id: id,
@@ -57,14 +49,7 @@ export class NestJsQuickBooksBillsService extends NestJsQuickBooksBaseService<
   public delete(
     id: string,
     token: string,
-  ): Promise<QuickBooksBillsDeleteResponseModel>;
-  public delete(
-    bill: QuickBooksBills,
-  ): Promise<QuickBooksBillsDeleteResponseModel>;
-  public delete(
-    ...args: [string | QuickBooksBills, string?]
   ): Promise<QuickBooksBillsDeleteResponseModel> {
-    const [id, token] = this.getOperationArguments(args);
     return this.post(
       {
         Id: id,
@@ -75,29 +60,5 @@ export class NestJsQuickBooksBillsService extends NestJsQuickBooksBaseService<
         operation: 'delete',
       },
     );
-  }
-
-  private getUpdateArguments<DTO>(
-    args: [string | QuickBooksBills, string | DTO, DTO?],
-  ): [string, string, DTO] {
-    const [idOrBill, tokenOrDto, dto] = args;
-    if (dto) {
-      return [idOrBill as string, tokenOrDto as string, dto];
-    }
-
-    const bill = idOrBill as QuickBooksBills;
-    return [bill.Id, bill.SyncToken, tokenOrDto as DTO];
-  }
-
-  private getOperationArguments(
-    args: [string | QuickBooksBills, string?],
-  ): [string, string] {
-    const [idOrBill, token] = args;
-    if (token) {
-      return [idOrBill as string, token];
-    }
-
-    const bill = idOrBill as QuickBooksBills;
-    return [bill.Id, bill.SyncToken];
   }
 }
