@@ -1,7 +1,13 @@
+import { QuickBooksCompanyInfoEntity } from 'lib';
 import { QuickBooksEntity } from './quickbooks.model';
 
 export interface QuickBooksResponseModel {
-  [key: string]: QuickBooksQueryResponseData | QuickBooksEntity | string;
+  [key: string]:
+    | QuickBooksCompanyInfoEntity
+    | QuickBooksDeleteResponseModel
+    | QuickBooksEntity
+    | QuickBooksQueryResponseData
+    | string;
   time: string;
 }
 

@@ -1,12 +1,12 @@
 import { QuickBooksResponseModel } from '../../common/models';
-import { QuickBooksCompanyInfoDto } from '../dto/company-info.dto';
+import { QuickBooksCompanyInfoEntity } from '../entities/company-info.entity';
 
 export interface QuickBooksCompanyInfoResponseModel
   extends QuickBooksResponseModel {
-  CompanyInfo: QuickBooksCompanyInfoDto;
+  CompanyInfo: QuickBooksCompanyInfoEntity;
 }
 
 export interface QuickBooksCompanyInfoQueryResponseModel
   extends QuickBooksResponseModel {
-  CompanyInfo: QuickBooksCompanyInfoDto;
+  CompanyInfo: QuickBooksCompanyInfoEntity;
 }
