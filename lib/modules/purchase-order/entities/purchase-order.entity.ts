@@ -1,24 +1,22 @@
 import {
   QuickBooksBaseEntity,
+  QuickBooksRefModel,
+  QuickBooksItemBasedExpenseLineDto,
+  QuickBooksAccountBasedExpenseLineDto,
   QuickBooksEmailModel,
   QuickBooksLinkedTxnModel,
-  QuickBooksPhysicalAddressModel,
-  QuickBooksRefModel,
-} from '../../common/models';
-import {
-  QuickBooksAccountBasedExpenseLine,
-  QuickBooksItemBasedExpenseLine,
-} from '../../common/dto';
-import {
-  QuickBooksPOStatusEnum,
   QuickBooksGlobalTaxCalculationsEnum,
+  QuickBooksPOStatusEnum,
+  QuickBooksPhysicalAddressModel,
   QuickBooksEmailStatusesEnum,
-} from '../../common/enums';
+} from 'lib';
 
 export interface QuickBooksPurchaseOrderEntity extends QuickBooksBaseEntity {
   APAccountRef: QuickBooksRefModel;
   VendorRef: QuickBooksRefModel;
-  Line: QuickBooksItemBasedExpenseLine[] | QuickBooksAccountBasedExpenseLine[];
+  Line:
+    | QuickBooksItemBasedExpenseLineDto[]
+    | QuickBooksAccountBasedExpenseLineDto[];
   CurrencyRef: QuickBooksRefModel;
   TxnDate: string;
   POEmail: QuickBooksEmailModel;

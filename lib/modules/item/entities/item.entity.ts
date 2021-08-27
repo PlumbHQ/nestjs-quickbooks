@@ -1,4 +1,4 @@
-import { QuickBooksBaseEntity, QuickBooksRefModel } from '../../common/models';
+import { QuickBooksBaseEntity, QuickBooksRefModel } from 'lib';
 
 export enum QuickBookItemTypes {
   Inventory = 'Inventory',

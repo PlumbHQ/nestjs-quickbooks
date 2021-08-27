@@ -2,7 +2,7 @@ import { QuickBooksRefDto } from '.';
 import { QuickBooksBillableStatusesEnum } from '../enums';
 import { QuickBooksMarkupInfoModel } from '../models';
 
-interface QuickBooksLine {
+interface QuickBooksLineDto {
   Id?: string;
   Amount?: number;
   DetailType: string;
@@ -10,7 +10,7 @@ interface QuickBooksLine {
   LineNum?: number;
 }
 
-export interface QuickBooksItemBasedExpenseLine extends QuickBooksLine {
+export interface QuickBooksItemBasedExpenseLineDto extends QuickBooksLineDto {
   DetailType: 'ItemBasedExpenseLineDetail';
   ItemBasedExpenseLineDetail: {
     TaxInclusiveAmt?: number;
@@ -26,7 +26,8 @@ export interface QuickBooksItemBasedExpenseLine extends QuickBooksLine {
   };
 }
 
-export interface QuickBooksAccountBasedExpenseLine extends QuickBooksLine {
+export interface QuickBooksAccountBasedExpenseLineDto
+  extends QuickBooksLineDto {
   DetailType: 'AccountBasedExpenseLineDetail';
   AccountBasedExpenseLineDetail: {
     AccountRef: QuickBooksRefDto;
@@ -40,7 +41,7 @@ export interface QuickBooksAccountBasedExpenseLine extends QuickBooksLine {
   };
 }
 
-export interface QuickBooksSalesItemLine extends QuickBooksLine {
+export interface QuickBooksSalesItemLineDto extends QuickBooksLineDto {
   DetailType: 'SalesItemLineDetail';
   LineNum: number;
   SalesItemLineDetail: {

@@ -1,17 +1,17 @@
 import {
-  QuickBooksEmailDto,
-  QuickBooksEmailStatusesEnum,
-  QuickBooksGlobalTaxCalculationsEnum,
   QuickBooksBaseEntity,
-  QuickBooksPhysicalAddressDto,
+  QuickBooksSalesItemLineDto,
   QuickBooksRefDto,
+  QuickBooksEmailDto,
+  QuickBooksPhysicalAddressDto,
+  QuickBooksPrintStatusEnum,
+  QuickBooksGlobalTaxCalculationsEnum,
+  QuickBooksEmailStatusesEnum,
   QuickBooksTxnTaxDetailDto,
-} from 'lib/modules/common';
-import { QuickBooksSalesItemLine } from 'lib/modules/common/dto/line-items.dto';
-import { QuickBooksPrintStatusEnum } from 'lib/modules/common/enums/print-status.enum';
+} from 'lib';
 
 export interface QuickBooksSalesReceiptEntity extends QuickBooksBaseEntity {
-  Line: QuickBooksSalesItemLine[];
+  Line: QuickBooksSalesItemLineDto[];
   CustomerRef: QuickBooksRefDto;
   CurrencyRef: QuickBooksRefDto;
   BillEmail: QuickBooksEmailDto;

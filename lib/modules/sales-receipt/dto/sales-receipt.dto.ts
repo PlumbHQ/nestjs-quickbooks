@@ -6,11 +6,11 @@ import {
   QuickBooksEmailStatusesEnum,
   QuickBooksTxnTaxDetailDto,
 } from 'lib/modules/common';
-import { QuickBooksSalesItemLine } from 'lib/modules/common/dto/line-items.dto';
+import { QuickBooksSalesItemLineDto } from 'lib/modules/common/dto/line-items.dto';
 import { QuickBooksPrintStatusEnum } from 'lib/modules/common/enums/print-status.enum';
 
 export interface QuickBooksSalesReceiptDto {
-  Line: QuickBooksSalesItemLine[];
+  Line: QuickBooksSalesItemLineDto[];
   CurrencyRef: QuickBooksRefDto;
   CustomerRef?: QuickBooksRefDto;
   BillEmail?: QuickBooksEmailDto;

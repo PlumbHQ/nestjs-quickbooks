@@ -4,13 +4,15 @@ import {
   QuickBooksGlobalTaxCalculationsEnum,
 } from 'lib/modules/common';
 import {
-  QuickBooksItemBasedExpenseLine,
-  QuickBooksAccountBasedExpenseLine,
+  QuickBooksItemBasedExpenseLineDto,
+  QuickBooksAccountBasedExpenseLineDto,
 } from 'lib/modules/common/dto/line-items.dto';
 
 export interface QuickBooksVendorCreditDto {
   VendorRef: QuickBooksRefDto;
-  Line: QuickBooksItemBasedExpenseLine[] | QuickBooksAccountBasedExpenseLine[];
+  Line:
+    | QuickBooksItemBasedExpenseLineDto[]
+    | QuickBooksAccountBasedExpenseLineDto[];
   CurrencyRef: QuickBooksRefDto;
   DocNumber?: string;
   PrivateNote?: string;

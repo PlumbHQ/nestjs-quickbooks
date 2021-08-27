@@ -1,18 +1,18 @@
 import {
-  QuickBooksLinkedTxnModel,
   QuickBooksBaseEntity,
   QuickBooksRefModel,
+  QuickBooksItemBasedExpenseLineDto,
+  QuickBooksAccountBasedExpenseLineDto,
+  QuickBooksLinkedTxnModel,
+  QuickBooksGlobalTaxCalculationsEnum,
   QuickBooksTxnTaxDetailModel,
-} from '../../common/models';
-import { QuickBooksGlobalTaxCalculationsEnum } from '../../common/enums';
-import {
-  QuickBooksAccountBasedExpenseLine,
-  QuickBooksItemBasedExpenseLine,
-} from 'lib/modules/common/dto/line-items.dto';
+} from 'lib';
 
 export interface QuickBooksBillEntity extends QuickBooksBaseEntity {
   VendorRef: QuickBooksRefModel;
-  Line: QuickBooksItemBasedExpenseLine[] | QuickBooksAccountBasedExpenseLine[];
+  Line:
+    | QuickBooksItemBasedExpenseLineDto[]
+    | QuickBooksAccountBasedExpenseLineDto[];
   CurrencyRef?: QuickBooksRefModel;
   TxnDate?: string;
   APAccountRef?: QuickBooksRefModel;

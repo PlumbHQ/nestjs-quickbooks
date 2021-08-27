@@ -1,13 +1,13 @@
 import {
-  QuickBooksContactInfoModel,
-  QuickBooksEmailModel,
   QuickBooksBaseEntity,
-  QuickBooksPhoneNumberModel,
-  QuickBooksPhysicalAddressModel,
+  QuickBooksEmailModel,
+  QuickBooksContactInfoModel,
   QuickBooksRefModel,
+  QuickBooksPhoneNumberModel,
+  QuickBooksTaxReportingBasesEnum,
   QuickBooksWebsiteModel,
-} from '../../common/models';
-import { QuickBooksTaxReportingBasesEnum } from '../../common/enums';
+  QuickBooksPhysicalAddressModel,
+} from 'lib';
 
 export interface QuickBooksVendorPaymentBankDetailModel {
   BankAccountName: string;

@@ -5,17 +5,17 @@ import {
   QuickBooksTxnTaxDetailDto,
 } from '../../common/dto';
 import {
-  QuickBooksAccountBasedExpenseLine,
-  QuickBooksItemBasedExpenseLine,
+  QuickBooksAccountBasedExpenseLineDto,
+  QuickBooksItemBasedExpenseLineDto,
 } from 'lib/modules/common/dto/line-items.dto';
 
 export type CreateQuickBooksBillLines =
-  | QuickBooksItemBasedExpenseLine
-  | QuickBooksAccountBasedExpenseLine;
+  | QuickBooksItemBasedExpenseLineDto
+  | QuickBooksAccountBasedExpenseLineDto;
 
 export type UpdateQuickBooksBillLines =
-  | QuickBooksItemBasedExpenseLine
-  | QuickBooksAccountBasedExpenseLine;
+  | QuickBooksItemBasedExpenseLineDto
+  | QuickBooksAccountBasedExpenseLineDto;
 
 export interface QuickBooksBillDto {
   CurrencyRef?: QuickBooksRefDto;

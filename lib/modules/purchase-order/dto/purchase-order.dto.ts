@@ -7,15 +7,17 @@ import {
   QuickBooksEmailStatusesEnum,
 } from 'lib/modules/common';
 import {
-  QuickBooksItemBasedExpenseLine,
-  QuickBooksAccountBasedExpenseLine,
+  QuickBooksItemBasedExpenseLineDto,
+  QuickBooksAccountBasedExpenseLineDto,
 } from 'lib/modules/common/dto/line-items.dto';
 import { QuickBooksPOStatusEnum } from 'lib/modules/common/enums/po-status.enum';
 
 export interface QuickBooksPurchaseOrderDto {
   APAccountRef: QuickBooksRefDto;
   VendorRef: QuickBooksRefDto;
-  Line: QuickBooksItemBasedExpenseLine[] | QuickBooksAccountBasedExpenseLine[];
+  Line:
+    | QuickBooksItemBasedExpenseLineDto[]
+    | QuickBooksAccountBasedExpenseLineDto[];
   CurrencyRef: QuickBooksRefDto;
   TxnDate?: string;
   POEmail?: QuickBooksEmailDto;

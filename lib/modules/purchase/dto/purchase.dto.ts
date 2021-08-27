@@ -5,12 +5,12 @@ import {
   QuickBooksRefDto,
   QuickBooksTaxRateDetailModel,
 } from 'lib/modules/common';
-import { QuickBooksItemBasedExpenseLine } from 'lib/modules/common/dto/line-items.dto';
+import { QuickBooksItemBasedExpenseLineDto } from 'lib/modules/common/dto/line-items.dto';
 import { QuickBooksPaymentTypesEnum } from 'lib/modules/common/enums/payment-types.enum';
 import { QuickBooksPrintStatusEnum } from 'lib/modules/common/enums/print-status.enum';
 
 export interface QuickBooksPurchaseDto {
-  Line: QuickBooksItemBasedExpenseLine[];
+  Line: QuickBooksItemBasedExpenseLineDto[];
   PaymentType: QuickBooksPaymentTypesEnum;
   AccountRef: QuickBooksRefDto;
   CurrencyRef: QuickBooksRefDto;
