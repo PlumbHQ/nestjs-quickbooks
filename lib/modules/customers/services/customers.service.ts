@@ -5,18 +5,41 @@ import {
   FullUpdateQuickBooksCustomerDto,
   QuickBooksCustomer,
   QuickBooksCustomerQueryDto,
-  QuickBooksCustomerQueryDtoResponseModel,
+  QuickBooksCustomerQueryResponseModel,
   QuickBooksCustomerResponseModel,
   SparseUpdateQuickBooksCustomerDto,
 } from '..';
+import {
+  ICreatableQuickBooksService,
+  IQuereableQuickBooksService,
+  IReadableQuickBooksService,
+  IUpdateableQuickBooksService,
+} from 'lib/modules/common/interfaces/quick-books-service.interface';
 
 @Injectable()
-export class NestJsQuickBooksCustomerService extends NestJsQuickBooksBaseService<
-  QuickBooksCustomer,
-  QuickBooksCustomerQueryDto,
-  QuickBooksCustomerQueryDtoResponseModel
-> {
+export class NestJsQuickBooksCustomerService
+  extends NestJsQuickBooksBaseService<
+    QuickBooksCustomer,
+    QuickBooksCustomerQueryDto,
+    QuickBooksCustomerQueryResponseModel
+  >
+  implements
+    IQuereableQuickBooksService<
+      QuickBooksCustomerQueryDto,
+      QuickBooksCustomerQueryResponseModel
+    >,
+    IReadableQuickBooksService<QuickBooksCustomerResponseModel>,
+    ICreatableQuickBooksService<
+      CreateQuickBooksCustomerDto,
+      QuickBooksCustomerResponseModel
+    >,
+    IUpdateableQuickBooksService
+{
   public resource = 'customer';
+
+  public readById(id: string): Promise<QuickBooksCustomerResponseModel> {
+    return this.get(id);
+  }
 
   public create(
     dto: CreateQuickBooksCustomerDto,
@@ -24,27 +47,11 @@ export class NestJsQuickBooksCustomerService extends NestJsQuickBooksBaseService
     return this.post(dto);
   }
 
-  public readById(id: string): Promise<QuickBooksCustomerResponseModel> {
-    return this.get(id);
-  }
-
   public fullUpdate(
     id: string,
     token: string,
     dto: FullUpdateQuickBooksCustomerDto,
-  ): Promise<QuickBooksCustomerResponseModel>;
-  public fullUpdate(
-    customer: QuickBooksCustomer,
-    dto: FullUpdateQuickBooksCustomerDto,
-  ): Promise<QuickBooksCustomerResponseModel>;
-  public fullUpdate(
-    ...args: [
-      string | QuickBooksCustomer,
-      string | FullUpdateQuickBooksCustomerDto,
-      FullUpdateQuickBooksCustomerDto?,
-    ]
   ): Promise<QuickBooksCustomerResponseModel> {
-    const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,
       Id: id,
@@ -56,36 +63,12 @@ export class NestJsQuickBooksCustomerService extends NestJsQuickBooksBaseService
     id: string,
     token: string,
     dto: SparseUpdateQuickBooksCustomerDto,
-  ): Promise<QuickBooksCustomerResponseModel>;
-  public sparseUpdate(
-    customer: QuickBooksCustomer,
-    dto: SparseUpdateQuickBooksCustomerDto,
-  ): Promise<QuickBooksCustomerResponseModel>;
-  public sparseUpdate(
-    ...args: [
-      string | QuickBooksCustomer,
-      string | SparseUpdateQuickBooksCustomerDto,
-      SparseUpdateQuickBooksCustomerDto?,
-    ]
   ): Promise<QuickBooksCustomerResponseModel> {
-    const [id, token, dto] = this.getUpdateArguments(args);
     return this.post({
       ...dto,
       Id: id,
       SyncToken: token,
       sparse: true,
     });
-  }
-
-  private getUpdateArguments<DTO>(
-    args: [string | QuickBooksCustomer, string | DTO, DTO?],
-  ): [string, string, DTO] {
-    const [idOrCustomer, tokenOrDto, dto] = args;
-    if (dto) {
-      return [idOrCustomer as string, tokenOrDto as string, dto];
-    }
-
-    const customer = idOrCustomer as QuickBooksCustomer;
-    return [customer.Id, customer.SyncToken, tokenOrDto as DTO];
   }
 }
