@@ -1,7 +1,7 @@
 import { QuickBookItemTypes } from '../entities/item.entity';
 import { QuickBooksRefDto } from '../../common/dto/ref.dto';
 
-export interface QuickBooksInventoryItem {
+export interface QuickBooksInventoryItemDto {
   Type: QuickBookItemTypes.Inventory;
   IncomeAccountRef: QuickBooksRefDto;
   AssetAccountRef: QuickBooksRefDto;
@@ -10,12 +10,12 @@ export interface QuickBooksInventoryItem {
   QtyOnHand: number;
 }
 
-export interface QuickBooksNonInventoryItem {
+export interface QuickBooksNonInventoryItemDto {
   Type: QuickBookItemTypes.NonInventory;
   ExpenseAccountRef: QuickBooksRefDto;
 }
 
-export interface QuickBooksServiceItem {
+export interface QuickBooksServiceItemDto {
   Type: QuickBookItemTypes.Service;
   IncomeAccountRef: QuickBooksRefDto;
   ExpenseAccountRef: QuickBooksRefDto;
