@@ -1,16 +1,17 @@
 import { QuickBooksCustomerEntity } from '../entities/customers.entity';
 import {
-  QuickBooksQueryResponseDto,
-  QuickBooksResponseDto,
+  QuickBooksQueryResponseModel,
+  QuickBooksResponseModel,
 } from '../../common/models';
 
-export interface QuickBooksCustomerResponseDto extends QuickBooksResponseDto {
+export interface QuickBooksCustomerResponseModel
+  extends QuickBooksResponseModel {
   Customer: QuickBooksCustomerEntity;
 }
 
-export interface QuickBooksCustomerQueryResponseDto
-  extends QuickBooksResponseDto {
-  QueryResponse: QuickBooksQueryResponseDto & {
+export interface QuickBooksCustomerQueryResponseModel
+  extends QuickBooksResponseModel {
+  QueryResponse: QuickBooksQueryResponseModel & {
     Customer: QuickBooksCustomerEntity[];
   };
 }

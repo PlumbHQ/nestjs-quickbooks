@@ -1,7 +1,7 @@
-import { QuickBooksQueryModel } from '../../common/models';
+import { QuickBooksQueryDto } from '../../common/models';
 
 export interface QuickBooksCustomerQueryDto
-  extends Partial<QuickBooksQueryModel> {
+  extends Partial<QuickBooksQueryDto> {
   DisplayName?: string;
   GivenName?: string;
   MiddleName?: string;

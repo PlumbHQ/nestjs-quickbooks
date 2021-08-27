@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { NestJsQuickBooksCustomerService } from 'lib/modules/customers';
+import { NestJsQuickBooksCustomerService } from 'lib';
 
 @Controller('customers')
 export class CustomersController {

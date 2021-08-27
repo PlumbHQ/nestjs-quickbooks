@@ -22,5 +22,5 @@ export interface QuickBooksCompanyInfoDto {
 }
 
 export type FullUpdateQuickBooksCompanyInfoDto = QuickBooksCompanyInfoDto;
-
-export type SparseUpdateQuickBooksCompanyInfoDto = QuickBooksCompanyInfoDto;
+export type SparseUpdateQuickBooksCompanyInfoDto =
+  Partial<QuickBooksCompanyInfoDto>;

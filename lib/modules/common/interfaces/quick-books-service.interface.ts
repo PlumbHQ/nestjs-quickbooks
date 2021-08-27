@@ -1,57 +1,25 @@
 import { WhereOptions } from '..';
 
-export interface IQuereableQuickBooksService<QueryDto, QueryResponse> {
+export interface CanQuery<QueryDto, QueryResponse> {
   query(condition: WhereOptions<QueryDto>): Promise<QueryResponse>;
 }
 
-export interface IReadableQuickBooksService<Response> {
-  /**
-   * ReadById Method
-   * @param {string} id
-   * @returns {Response}
-   */
-  readById(id: string): Promise<Response>;
+export interface CanRead<Response> {
+  read(id?: string): Promise<Response>;
 }
 
-export interface ICreatableQuickBooksService<Dto, CreateResponse> {
-  /**
-   * Create Method
-   * @param dto
-   */
-  create(dto: Dto): Promise<CreateResponse>;
+export interface CanCreate<Dto, EntityResponse> {
+  create(dto: Dto): Promise<EntityResponse>;
 }
 
-export interface IDeletableQuickBooksService<DeleteResponse> {
-  /**
-   * Delete Method
-   * @param {string} id
-   * @param {string} token
-   */
+export interface CanDelete<DeleteResponse> {
   delete(id: string, token: string): Promise<DeleteResponse>;
 }
 
-export interface IUpdateableQuickBooksService< {
-  /**
-   * Full Update Method
-   * @param {string} id
-   * @param {string} syncToken
-   * @param dto
-   */
-  fullUpdate(
-    id: string,
-    syncToken: string,
-    dto: FullUpdateQuickBooksCustomerDto,
-  ): Promise<QuickBooksCustomerResponseDto>;
+export interface CanFullUpdate<Dto, EntityResponse> {
+  fullUpdate(id: string, token: string, data: Dto): Promise<EntityResponse>;
+}
 
-  /**
-   * Sparse Update Method
-   * @param {string} id
-   * @param {string} syncToken
-   * @param dto
-   */
-  sparseUpdate?(
-    id: string,
-    token: string,
-    dto: SparseUpdateQuickBooksCustomerDto,
-  ): Promise<QuickBooksCustomerResponseDto>;
+export interface CanSparseUpdate<Dto, EntityResponse> {
+  sparseUpdate(id: string, token: string, data: Dto): Promise<EntityResponse>;
 }

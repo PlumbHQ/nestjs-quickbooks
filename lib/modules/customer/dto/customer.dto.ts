@@ -57,4 +57,5 @@ export interface QuickBooksCustomerDto {
 }
 
 export type CreateQuickBooksCustomerDto = QuickBooksCustomerDto;
-export type UpdateQuickBooksCustomerDto = QuickBooksCustomerDto;
+export type FullUpdateQuickBooksCustomerDto = QuickBooksCustomerDto;
+export type SparseUpdateQuickBooksCustomerDto = Partial<QuickBooksCustomerDto>;

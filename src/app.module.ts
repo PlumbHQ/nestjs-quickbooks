@@ -13,6 +13,11 @@ import { ItemsController } from './items/items.controller';
 import { CacheModule } from './cache/cache.module';
 import { QbStoreService } from './cache/qb-store/qb-store.service';
 import { NestJsQuickBooksStore } from 'lib/modules/store';
+import { BillsController } from './bills/bills.controller';
+import { PurchasesController } from './purchases/purchases.controller';
+import { SalesRecieptsController } from './sales-receipts/sales-receipts.controller';
+import { VendorsController } from './vendors/vendors.controller';
+import { VendorCreditsController } from './vendor-credits/vendor-credits.controller';
 
 @Module({
   imports: [
@@ -41,9 +46,14 @@ import { NestJsQuickBooksStore } from 'lib/modules/store';
   ],
   controllers: [
     AppController,
-    CustomersController,
     AuthController,
+    BillsController,
+    CustomersController,
     ItemsController,
+    PurchasesController,
+    SalesRecieptsController,
+    VendorsController,
+    VendorCreditsController,
   ],
   providers: [AppService],
 })

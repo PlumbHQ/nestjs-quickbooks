@@ -5,17 +5,16 @@ import { NestJsQuickBooksStore } from './store/store.service';
 import { LocalStore } from './store/local.store';
 import { NESTJS_QUICK_BOOKS_CONFIG } from '../constants';
 import { HttpModule } from '@nestjs/axios';
-import { NestJsQuickBooksAccountsModule } from './accounts';
 import { NestJsQuickBooksAuthModule } from './auth/auth.module';
 import { NestJsQuickBooksCompanyInfoModule } from './company-info';
-import { NestJsQuickBooksCustomerModule } from './customers';
-import { NestJsQuickBooksItemsModule } from './items';
-import { NestJsQuickBooksPurchasesModule } from './purchases/purchases.module';
-import { NestJsQuickBooksBillsModule } from './bills';
-import { NestJsQuickBooksPurchaseOrdersModule } from './purchase-orders';
-import { NestJsQuickBooksSalesReceiptsModule } from './sales-receipts';
-import { NestJsQuickBooksVendorCreditsModule } from './vendor-credits';
-import { NestJsQuickBooksVendorsModule } from './vendors';
+import { NestJsQuickBooksCustomerModule } from './customer';
+import { NestJsQuickBooksItemModule } from './item';
+import { NestJsQuickBooksPurchaseModule } from './purchase/purchase.module';
+import { NestJsQuickBooksBillModule } from './bill';
+import { NestJsQuickBooksPurchaseOrderModule } from './purchase-order';
+import { NestJsQuickBooksSalesReceiptModule } from './sales-receipt';
+import { NestJsQuickBooksVendorCreditModule } from './vendor-credit';
+import { NestJsQuickBooksVendorModule } from './vendor';
 
 export type NestJsQuickBooksOptions = Partial<NestJsQuickBooksConfigModel>;
 
@@ -86,18 +85,16 @@ export class NestJsQuickBooksModule {
 
   private static getSubModules() {
     return [
-      NestJsQuickBooksAccountsModule,
       NestJsQuickBooksAuthModule,
-      NestJsQuickBooksBillsModule,
-      NestJsQuickBooksCompanyInfoModule,
+      NestJsQuickBooksBillModule,
       NestJsQuickBooksCompanyInfoModule,
       NestJsQuickBooksCustomerModule,
-      NestJsQuickBooksItemsModule,
-      NestJsQuickBooksPurchaseOrdersModule,
-      NestJsQuickBooksPurchasesModule,
-      NestJsQuickBooksSalesReceiptsModule,
-      NestJsQuickBooksVendorCreditsModule,
-      NestJsQuickBooksVendorsModule,
+      NestJsQuickBooksItemModule,
+      NestJsQuickBooksPurchaseOrderModule,
+      NestJsQuickBooksPurchaseModule,
+      NestJsQuickBooksSalesReceiptModule,
+      NestJsQuickBooksVendorCreditModule,
+      NestJsQuickBooksVendorModule,
     ];
   }
 }

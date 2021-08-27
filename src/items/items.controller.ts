@@ -1,10 +1,10 @@
 import { Controller, Get } from '@nestjs/common';
-import { NestJsNestJsQuickBooksItemsService } from 'lib/modules/items';
+import { NestJsQuickBooksItemService } from 'lib/modules/item';
 
 @Controller('items')
 export class ItemsController {
   constructor(
-    private readonly itemsService: NestJsNestJsQuickBooksItemsService,
+    private readonly itemsService: NestJsQuickBooksItemService,
   ) {}
 
   @Get()
