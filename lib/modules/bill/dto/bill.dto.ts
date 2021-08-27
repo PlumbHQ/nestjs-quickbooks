@@ -17,7 +17,7 @@ export type UpdateQuickBooksBillLines =
   | QuickBooksItemBasedExpenseLine
   | QuickBooksAccountBasedExpenseLine;
 
-export interface QuickBooksBillsDto {
+export interface QuickBooksBillDto {
   CurrencyRef?: QuickBooksRefDto;
   TxnDate?: string;
   APAccountRef?: QuickBooksRefDto;
@@ -34,12 +34,12 @@ export interface QuickBooksBillsDto {
   IncludeInAnnualTPAR?: boolean;
 }
 
-export interface CreateQuickBooksBillsDto extends QuickBooksBillsDto {
+export interface CreateQuickBooksBillDto extends QuickBooksBillDto {
   VendorRef: QuickBooksRefDto;
   Line: CreateQuickBooksBillLines[];
 }
 
-export interface FullUpdateQuickBooksBillsDto extends QuickBooksBillsDto {
+export interface FullUpdateQuickBooksBillDto extends QuickBooksBillDto {
   VendorRef: QuickBooksRefDto;
   Line: UpdateQuickBooksBillLines[];
 }

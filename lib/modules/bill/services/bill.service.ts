@@ -7,8 +7,8 @@ import {
 } from '../models/bill-response.model';
 import { QuickBooksBillQueryDto } from '../dto/bill-query.dto';
 import {
-  CreateQuickBooksBillsDto,
-  FullUpdateQuickBooksBillsDto,
+  CreateQuickBooksBillDto,
+  FullUpdateQuickBooksBillDto,
 } from '../dto/bill.dto';
 import {
   CanCreate,
@@ -26,8 +26,8 @@ export class NestJsQuickBooksBillService
   >
   implements
     CanRead<QuickBooksBillResponseModel>,
-    CanCreate<CreateQuickBooksBillsDto, QuickBooksBillResponseModel>,
-    CanFullUpdate<FullUpdateQuickBooksBillsDto, QuickBooksBillResponseModel>,
+    CanCreate<CreateQuickBooksBillDto, QuickBooksBillResponseModel>,
+    CanFullUpdate<FullUpdateQuickBooksBillDto, QuickBooksBillResponseModel>,
     CanDelete<QuickBooksBillDeleteResponseModel>
 {
   public resource = 'bill';
@@ -37,7 +37,7 @@ export class NestJsQuickBooksBillService
   }
 
   public create(
-    dto: CreateQuickBooksBillsDto,
+    dto: CreateQuickBooksBillDto,
   ): Promise<QuickBooksBillResponseModel> {
     return this.post(dto);
   }
@@ -45,7 +45,7 @@ export class NestJsQuickBooksBillService
   public fullUpdate(
     id: string,
     token: string,
-    dto: FullUpdateQuickBooksBillsDto,
+    dto: FullUpdateQuickBooksBillDto,
   ): Promise<QuickBooksBillResponseModel> {
     return this.post({
       ...dto,
