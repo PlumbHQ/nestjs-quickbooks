@@ -49,23 +49,23 @@ export interface QuickBooksItemDto {
 }
 
 export type CreateQuickBooksItemDto = (
-  | QuickBooksInventoryItem
-  | QuickBooksNonInventoryItem
-  | QuickBooksServiceItem
+  | QuickBooksInventoryItemDto
+  | QuickBooksNonInventoryItemDto
+  | QuickBooksServiceItemDto
 ) &
   QuickBooksItemDto;
 
 export type FullUpdateQuickBooksItemDto = (
-  | QuickBooksInventoryItem
-  | QuickBooksNonInventoryItem
-  | QuickBooksServiceItem
+  | QuickBooksInventoryItemDto
+  | QuickBooksNonInventoryItemDto
+  | QuickBooksServiceItemDto
 ) &
   QuickBooksItemDto;
 
 export type SparseUpdateQuickBooksItemDto =
   | (
-      | QuickBooksInventoryItem
-      | QuickBooksNonInventoryItem
-      | QuickBooksServiceItem
+      | QuickBooksInventoryItemDto
+      | QuickBooksNonInventoryItemDto
+      | QuickBooksServiceItemDto
     )
   | QuickBooksItemDto;
