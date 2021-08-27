@@ -5,7 +5,7 @@ import {
   QuickBooksBillQueryResponseModel,
   QuickBooksBillResponseModel,
 } from '../models/bill-response.model';
-import { QuickBooksBillsQueryDto } from '../dto/bill-query.dto';
+import { QuickBooksBillQueryDto } from '../dto/bill-query.dto';
 import {
   CreateQuickBooksBillsDto,
   FullUpdateQuickBooksBillsDto,
@@ -21,7 +21,7 @@ import {
 export class NestJsQuickBooksBillService
   extends NestJsQuickBooksBaseService<
     QuickBooksBillResponseModel,
-    QuickBooksBillsQueryDto,
+    QuickBooksBillQueryDto,
     QuickBooksBillQueryResponseModel
   >
   implements

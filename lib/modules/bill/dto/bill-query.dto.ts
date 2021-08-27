@@ -1,6 +1,6 @@
 import { QuickBooksQueryDto, QuickBooksRefModel } from '../../common/models';
 
-export interface QuickBooksBillsQueryDto extends QuickBooksQueryDto {
+export interface QuickBooksBillQueryDto extends QuickBooksQueryDto {
   VendorRef: QuickBooksRefModel;
   TxnDate: string;
   APAccountRef: QuickBooksRefModel;
