@@ -1,5 +1,5 @@
 export enum QuickBooksPrintStatusEnum {
-  NotSetCash = 'NotSet',
+  NotSet = 'NotSet',
   NeedToPrint = 'NeedToPrint',
   PrintComplete = 'PrintComplete',
 }
