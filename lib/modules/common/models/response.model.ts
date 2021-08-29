@@ -4,14 +4,14 @@ import { QuickBooksBaseEntity } from './quickbooks.model';
 export interface QuickBooksResponseModel {
   [key: string]:
     | QuickBooksCompanyInfoEntity
-    | QuickBooksDeleteResponseModel
     | QuickBooksBaseEntity
+    | QuickBooksDeleteResponseData
     | QuickBooksQueryResponseData
     | string;
   time: string;
 }
 
-export interface QuickBooksDeleteResponseModel {
+export interface QuickBooksDeleteResponseData {
   status: string;
   domain: string;
   Id: string;

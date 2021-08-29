@@ -1,5 +1,5 @@
 import {
-  QuickBooksDeleteResponseModel,
+  QuickBooksDeleteResponseData,
   QuickBooksQueryResponseData,
   QuickBooksResponseModel,
 } from '../../common/models';
@@ -18,5 +18,5 @@ export interface QuickBooksBillQueryResponseModel
 
 export interface QuickBooksBillDeleteResponseModel
   extends QuickBooksResponseModel {
-  Bill: QuickBooksDeleteResponseModel;
+  Bill: QuickBooksDeleteResponseData;
 }

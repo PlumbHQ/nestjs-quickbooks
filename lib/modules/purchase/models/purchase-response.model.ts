@@ -1,6 +1,6 @@
 import { QuickBooksPurchaseEntity } from '../entities/purchase.entity';
 import {
-  QuickBooksDeleteResponseModel,
+  QuickBooksDeleteResponseData,
   QuickBooksQueryResponseData,
   QuickBooksResponseModel,
 } from '../../common/models';
@@ -19,5 +19,5 @@ export interface QuickBooksPurchaseQueryResponseModel
 
 export interface QuickBooksPurchaseDeleteResponseModel
   extends QuickBooksResponseModel {
-  Purchase: QuickBooksDeleteResponseModel;
+  Purchase: QuickBooksDeleteResponseData;
 }

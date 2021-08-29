@@ -1,5 +1,5 @@
 import {
-  QuickBooksDeleteResponseModel,
+  QuickBooksDeleteResponseData,
   QuickBooksQueryResponseData,
   QuickBooksResponseModel,
 } from '../../common/models';
@@ -19,5 +19,5 @@ export interface QuickBooksPurchaseOrderQueryResponseModel
 
 export interface QuickBooksPurchaseOrderDeleteResponseModel
   extends QuickBooksResponseModel {
-  PurchaseOrder: QuickBooksDeleteResponseModel;
+  PurchaseOrder: QuickBooksDeleteResponseData;
 }
