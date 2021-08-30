@@ -29,6 +29,8 @@ export class OperatorsUtils {
         return `${attribute} is not null`;
       case Op.like:
         return `${attribute} like ${value}`;
+      case Op.in:
+        return `${attribute} in ('${value.join(',')}')`;
       case Op.notLike:
         return `${attribute} not like ${value}`;
       case Op.beginsWith:

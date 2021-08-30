@@ -17,6 +17,8 @@ export interface Op {
   readonly like: unique symbol;
   readonly notLike: unique symbol;
 
+  readonly in: unique symbol;
+
   readonly and: unique symbol;
   readonly or: unique symbol;
 }
@@ -40,6 +42,8 @@ export const Op: Op = {
   like: Symbol.for('Like') as any,
   notLike: Symbol.for('NotLike') as any,
 
+  in: Symbol.for('In') as any,
+
   and: Symbol.for('And') as any,
   or: Symbol.for('Or') as any,
 };
@@ -59,6 +63,8 @@ export interface WhereOperators {
 
   [Op.like]?: string;
   [Op.notLike]?: string;
+
+  [Op.in]?: Array<string>;
 }
 
 export interface OrOperator<T> {

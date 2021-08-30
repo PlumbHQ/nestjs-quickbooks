@@ -28,9 +28,10 @@ export class QueryUtils {
 
     const rules: string[] = [];
     const keys = Object.getOwnPropertySymbols(condition);
+
     if (keys.length) {
       for (const key of keys) {
-        if (condition[key] instanceof Array) {
+        if (key !== Symbol.for('In') && condition[key] instanceof Array) {
           rules.push(this.generateGroupCondition(key, condition[key]));
         } else {
           rules.push(OperatorsUtils.transform(parent, key, condition[key]));
@@ -66,6 +67,7 @@ export class QueryUtils {
         ),
       );
     }
+
     return rules.join(' and ');
   }
 

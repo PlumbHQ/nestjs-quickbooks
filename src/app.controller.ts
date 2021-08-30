@@ -21,8 +21,6 @@ export class AppController {
           return res.redirect('/auth');
         }
 
-        console.log(err);
-
         throw err;
       });
 

@@ -24,7 +24,6 @@ export class AuthController {
   ): Promise<any> {
     try {
       await this.qbAuthService.authorizeCode(req.url);
-      console.log('callback');
       return res.redirect('/');
     } catch (e) {
       console.error(e);
