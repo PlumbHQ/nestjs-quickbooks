@@ -26,3 +26,7 @@ export interface QuickBooksQueryResponseData {
 export interface QuickBooksQueryResponseModel extends QuickBooksResponseModel {
   QueryResponse: QuickBooksQueryResponseData;
 }
+
+export interface QuickBooksDeleteResponseModel extends QuickBooksResponseModel {
+  [key: string]: QuickBooksDeleteResponseData | string;
+}
