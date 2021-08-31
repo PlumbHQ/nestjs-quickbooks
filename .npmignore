@@ -48,6 +48,7 @@ nest-cli.json
 
 # ts
 tsconfig.*
+*.tsbuildinfo
 
 # env
 .env
