@@ -1,5 +1,4 @@
 # compiled output
-/dist
 /node_modules
 
 # Logs
@@ -34,8 +33,23 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
+# app files
+/src
+/test
+
+# linting
+.eslintrc.js
+.prettierrc
+
+# nest
+nest-cli.json
+
+# ts
+tsconfig.*
+
 # env
 .env
 
 # Docker
+docker-compose.*
 /.data
