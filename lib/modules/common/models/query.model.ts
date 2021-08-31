@@ -75,6 +75,10 @@ export interface AndOperator<T> {
   [Op.and]: WhereOptions<T>[];
 }
 
+export interface InOperator {
+  [Op.in]: Array<any>;
+}
+
 export type WhereValue =
   | string
   | number
@@ -92,4 +96,5 @@ export type WhereAttributeHash<T> = {
 export type WhereOptions<T> =
   | WhereAttributeHash<T>
   | AndOperator<T>
-  | OrOperator<T>;
+  | OrOperator<T>
+  | InOperator;
