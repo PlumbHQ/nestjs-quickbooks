@@ -5,9 +5,9 @@ import {
   QuickBooksGlobalTaxCalculationsEnum,
   QuickBooksEmailStatusesEnum,
   QuickBooksTxnTaxDetailDto,
-} from 'lib/modules/common';
-import { QuickBooksSalesItemLineDto } from 'lib/modules/common/dto/line-items.dto';
-import { QuickBooksPrintStatusEnum } from 'lib/modules/common/enums/print-status.enum';
+  QuickBooksSalesItemLineDto,
+  QuickBooksPrintStatusEnum,
+} from '../../common';
 
 export interface QuickBooksSalesReceiptDto {
   Line: QuickBooksSalesItemLineDto[];

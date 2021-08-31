@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { NestJsQuickBooksBaseService } from '../../common/base.service';
 import {
   CreateQuickBooksItemDto,
   FullUpdateQuickBooksItemDto,
@@ -9,10 +8,11 @@ import {
   SparseUpdateQuickBooksItemDto,
 } from '..';
 import {
+  NestJsQuickBooksBaseService,
   CanCreate,
   CanRead,
   CanSparseUpdate,
-} from 'lib/modules/common/interfaces/quick-books-service.interface';
+} from '../../common';
 
 @Injectable()
 export class NestJsQuickBooksItemService

@@ -1,4 +1,4 @@
-import { QuickBooksCompanyInfoEntity } from 'lib';
+import { QuickBooksCompanyInfoEntity } from '../../company-info';
 import { QuickBooksBaseEntity } from './quickbooks.model';
 
 export interface QuickBooksResponseModel {

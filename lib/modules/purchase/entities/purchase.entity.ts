@@ -1,4 +1,5 @@
 import {
+  QuickBooksBaseEntity,
   QuickBooksItemBasedExpenseLineDto,
   QuickBooksRefDto,
   QuickBooksPrintStatusEnum,
@@ -7,8 +8,7 @@ import {
   QuickBooksGlobalTaxCalculationsEnum,
   QuickBooksTaxRateDetailModel,
   QuickBooksPaymentTypesEnum,
-} from 'lib';
-import { QuickBooksBaseEntity } from '../../common/models';
+} from '../../common';
 
 export interface QuickBooksPurchaseEntity extends QuickBooksBaseEntity {
   Line: QuickBooksItemBasedExpenseLineDto[];

@@ -1,13 +1,11 @@
-import { QuickBooksGlobalTaxCalculationsEnum } from '../../common/enums';
 import {
+  QuickBooksGlobalTaxCalculationsEnum,
+  QuickBooksAccountBasedExpenseLineDto,
+  QuickBooksItemBasedExpenseLineDto,
   QuickBooksLinkedTxnDto,
   QuickBooksRefDto,
   QuickBooksTxnTaxDetailDto,
-} from '../../common/dto';
-import {
-  QuickBooksAccountBasedExpenseLineDto,
-  QuickBooksItemBasedExpenseLineDto,
-} from 'lib/modules/common/dto/line-items.dto';
+} from '../../common';
 
 export type CreateQuickBooksBillLines =
   | QuickBooksItemBasedExpenseLineDto

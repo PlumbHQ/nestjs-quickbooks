@@ -12,7 +12,7 @@ import {
   CanRead,
   CanCreate,
   CanFullUpdate,
-} from 'lib/modules/common/interfaces/quick-books-service.interface';
+} from '../../common/interfaces/quick-books-service.interface';
 
 @Injectable()
 export class NestJsQuickBooksVendorService

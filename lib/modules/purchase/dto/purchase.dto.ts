@@ -1,13 +1,13 @@
 import {
+  QuickBooksItemBasedExpenseLineDto,
+  QuickBooksPaymentTypesEnum,
+  QuickBooksPrintStatusEnum,
   QuickBooksGlobalTaxCalculationsEnum,
   QuickBooksLinkedTxnDto,
   QuickBooksPhysicalAddressDto,
   QuickBooksRefDto,
   QuickBooksTaxRateDetailModel,
-} from 'lib/modules/common';
-import { QuickBooksItemBasedExpenseLineDto } from 'lib/modules/common/dto/line-items.dto';
-import { QuickBooksPaymentTypesEnum } from 'lib/modules/common/enums/payment-types.enum';
-import { QuickBooksPrintStatusEnum } from 'lib/modules/common/enums/print-status.enum';
+} from '../../common';
 
 export interface QuickBooksPurchaseDto {
   Line: QuickBooksItemBasedExpenseLineDto[];

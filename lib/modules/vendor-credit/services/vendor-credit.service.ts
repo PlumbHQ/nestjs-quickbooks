@@ -1,21 +1,19 @@
 import { Injectable } from '@nestjs/common';
-import { NestJsQuickBooksBaseService } from 'lib/modules/common/base.service';
 import {
-  QuickBooksVendorCreditDeleteResponseModel,
-  QuickBooksVendorCreditQueryResponseModel,
-  QuickBooksVendorCreditResponseModel,
-} from '../models/vendor-credit-response.model';
-import {
-  QuickBooksVendorCreditEntity,
-  QuickBooksVendorCreditQueryDto,
-  QuickBooksVendorCreditDto,
-} from '..';
-import {
+  NestJsQuickBooksBaseService,
   CanRead,
   CanCreate,
   CanFullUpdate,
   CanDelete,
-} from 'lib/modules/common/interfaces/quick-books-service.interface';
+} from '../../common';
+import {
+  QuickBooksVendorCreditDeleteResponseModel,
+  QuickBooksVendorCreditQueryResponseModel,
+  QuickBooksVendorCreditResponseModel,
+  QuickBooksVendorCreditEntity,
+  QuickBooksVendorCreditQueryDto,
+  QuickBooksVendorCreditDto,
+} from '..';
 
 @Injectable()
 export class NestJsQuickBooksVendorCreditService

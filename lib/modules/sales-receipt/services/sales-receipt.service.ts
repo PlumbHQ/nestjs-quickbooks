@@ -1,20 +1,20 @@
 import { Injectable } from '@nestjs/common';
-import { NestJsQuickBooksBaseService } from 'lib/modules/common/base.service';
-import { QuickBooksSalesReceiptQueryDto } from '../dto/sales-receipt-query.dto';
-import { QuickBooksSalesReceiptQueryResponseModel } from '../models/sales-receipt-response.model';
-import { QuickBooksSalesReceiptEntity } from '../entities/sales-receipt.entity';
 import {
   QuickBooksSalesReceiptResponseModel,
   QuickBooksSalesReceiptDto,
   QuickBooksSalesReceiptDeleteResponseModel,
-} from 'lib';
+  QuickBooksSalesReceiptEntity,
+  QuickBooksSalesReceiptQueryResponseModel,
+  QuickBooksSalesReceiptQueryDto,
+} from '..';
 import {
+  NestJsQuickBooksBaseService,
   CanRead,
   CanCreate,
   CanFullUpdate,
   CanDelete,
   CanSparseUpdate,
-} from 'lib/modules/common/interfaces/quick-books-service.interface';
+} from '../../common';
 
 @Injectable()
 export class NestJsQuickBooksSalesReceiptService

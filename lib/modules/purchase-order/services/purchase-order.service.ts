@@ -3,19 +3,17 @@ import {
   QuickBooksPurchaseOrderEntity,
   QuickBooksPurchaseOrderQueryDto,
   QuickBooksPurchaseOrderDto,
-} from 'lib';
-import { NestJsQuickBooksBaseService } from 'lib/modules/common/base.service';
-import {
   QuickBooksPurchaseOrderDeleteResponseModel,
   QuickBooksPurchaseOrderQueryResponseModel,
   QuickBooksPurchaseOrderResponseModel,
-} from '../models/purchase-order-response.model';
+} from '..';
 import {
+  NestJsQuickBooksBaseService,
   CanRead,
   CanCreate,
   CanFullUpdate,
   CanDelete,
-} from 'lib/modules/common/interfaces/quick-books-service.interface';
+} from '../../common';
 
 @Injectable()
 export class NestJsQuickBooksPurchaseOrderService

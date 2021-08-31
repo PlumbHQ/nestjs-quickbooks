@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { firstValueFrom, mergeMap } from 'rxjs';
-import { NestJsQuickBooksBaseService } from '../../common/base.service';
 import {
   FullUpdateQuickBooksCompanyInfoDto,
   QuickBooksCompanyInfoQueryDto,
@@ -9,10 +8,11 @@ import {
   SparseUpdateQuickBooksCompanyInfoDto,
 } from '..';
 import {
+  NestJsQuickBooksBaseService,
   CanFullUpdate,
   CanRead,
   CanSparseUpdate,
-} from 'lib/modules/common/interfaces/quick-books-service.interface';
+} from '../../common';
 
 @Injectable()
 export class NestJsQuickBooksCompanyInfoService

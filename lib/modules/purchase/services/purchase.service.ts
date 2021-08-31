@@ -1,19 +1,19 @@
 import { Injectable } from '@nestjs/common';
-import { NestJsQuickBooksBaseService } from 'lib/modules/common/base.service';
-import { QuickBooksPurchaseDto } from '../dto/purchase.dto';
-import { QuickBooksPurchaseQueryDto } from '../dto/purchase-query.dto';
 import {
+  QuickBooksPurchaseQueryDto,
+  QuickBooksPurchaseDto,
   QuickBooksPurchaseDeleteResponseModel,
   QuickBooksPurchaseQueryResponseModel,
   QuickBooksPurchaseResponseModel,
-} from '../models/purchase-response.model';
-import { QuickBooksPurchaseEntity } from '../entities/purchase.entity';
+  QuickBooksPurchaseEntity,
+} from '..';
 import {
+  NestJsQuickBooksBaseService,
   CanCreate,
   CanDelete,
   CanFullUpdate,
   CanRead,
-} from 'lib/modules/common/interfaces/quick-books-service.interface';
+} from '../../common';
 
 @Injectable()
 export class NestJsQuickBooksPurchaseService

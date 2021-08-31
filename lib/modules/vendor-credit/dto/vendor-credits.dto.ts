@@ -2,11 +2,9 @@ import {
   QuickBooksRefDto,
   QuickBooksLinkedTxnDto,
   QuickBooksGlobalTaxCalculationsEnum,
-} from 'lib/modules/common';
-import {
   QuickBooksItemBasedExpenseLineDto,
   QuickBooksAccountBasedExpenseLineDto,
-} from 'lib/modules/common/dto/line-items.dto';
+} from '../../common';
 
 export interface QuickBooksVendorCreditDto {
   VendorRef: QuickBooksRefDto;

@@ -5,12 +5,10 @@ import {
   QuickBooksGlobalTaxCalculationsEnum,
   QuickBooksPhysicalAddressDto,
   QuickBooksEmailStatusesEnum,
-} from 'lib/modules/common';
-import {
   QuickBooksItemBasedExpenseLineDto,
   QuickBooksAccountBasedExpenseLineDto,
-} from 'lib/modules/common/dto/line-items.dto';
-import { QuickBooksPOStatusEnum } from 'lib/modules/common/enums/po-status.enum';
+  QuickBooksPOStatusEnum,
+} from '../../common';
 
 export interface QuickBooksPurchaseOrderDto {
   APAccountRef: QuickBooksRefDto;

@@ -1,4 +1,5 @@
 import {
+  QuickBooksBaseEntity,
   QuickBooksRefModel,
   QuickBooksItemBasedExpenseLineDto,
   QuickBooksAccountBasedExpenseLineDto,
@@ -8,8 +9,7 @@ import {
   QuickBooksPOStatusEnum,
   QuickBooksPhysicalAddressModel,
   QuickBooksEmailStatusesEnum,
-} from 'lib';
-import { QuickBooksBaseEntity } from '../../common/models';
+} from '../../common';
 
 export interface QuickBooksPurchaseOrderEntity extends QuickBooksBaseEntity {
   APAccountRef: QuickBooksRefModel;

@@ -1,4 +1,5 @@
 import {
+  QuickBooksBaseEntity,
   QuickBooksEmailModel,
   QuickBooksContactInfoModel,
   QuickBooksRefModel,
@@ -6,8 +7,7 @@ import {
   QuickBooksTaxReportingBasesEnum,
   QuickBooksWebsiteModel,
   QuickBooksPhysicalAddressModel,
-} from 'lib';
-import { QuickBooksBaseEntity } from '../../common/models';
+} from '../../common';
 
 export interface QuickBooksVendorPaymentBankDetailModel {
   BankAccountName: string;

@@ -1,21 +1,19 @@
 import { Injectable } from '@nestjs/common';
-import { NestJsQuickBooksBaseService } from '../../common/base.service';
 import {
+  QuickBooksBillQueryDto,
+  CreateQuickBooksBillDto,
+  FullUpdateQuickBooksBillDto,
   QuickBooksBillDeleteResponseModel,
   QuickBooksBillQueryResponseModel,
   QuickBooksBillResponseModel,
-} from '../models/bill-response.model';
-import { QuickBooksBillQueryDto } from '../dto/bill-query.dto';
+} from '..';
 import {
-  CreateQuickBooksBillDto,
-  FullUpdateQuickBooksBillDto,
-} from '../dto/bill.dto';
-import {
+  NestJsQuickBooksBaseService,
   CanCreate,
   CanDelete,
   CanFullUpdate,
   CanRead,
-} from 'lib/modules/common/interfaces/quick-books-service.interface';
+} from '../../common';
 
 @Injectable()
 export class NestJsQuickBooksBillService
