@@ -1,6 +1,6 @@
 import { Controller, Get, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { NestJsQuickBooksAuthService } from 'lib/modules/auth/services/auth.service';
+import { NestJsQuickBooksAuthService } from 'lib';
 
 @Controller('auth')
 export class AuthController {

@@ -1,7 +1,6 @@
 import { CACHE_MANAGER, Inject, Injectable } from '@nestjs/common';
 import { Cache } from 'cache-manager';
-import { TokensModel } from 'lib';
-import { NestJsQuickBooksStore } from 'lib/modules/store';
+import { TokensModel, NestJsQuickBooksStore } from 'lib';
 
 @Injectable()
 export class QbStoreService implements NestJsQuickBooksStore {

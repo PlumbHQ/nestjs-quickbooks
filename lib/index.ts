@@ -9,5 +9,8 @@ export * from './modules/item';
 export * from './modules/purchase-order';
 export * from './modules/purchase';
 export * from './modules/sales-receipt';
+export * from './modules/store';
 export * from './modules/vendor';
 export * from './modules/vendor-credit';
+
+export * from './utils';

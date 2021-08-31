@@ -4,6 +4,7 @@ import {
   NestJsQuickBooksModule,
   NestJsQuickBooksOptions,
   NestJsQuickBooksScopes,
+  NestJsQuickBooksStore,
 } from 'lib';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -12,7 +13,6 @@ import { AuthController } from './auth/auth.controller';
 import { ItemsController } from './items/items.controller';
 import { CacheModule } from './cache/cache.module';
 import { QbStoreService } from './cache/qb-store/qb-store.service';
-import { NestJsQuickBooksStore } from 'lib/modules/store';
 import { BillsController } from './bills/bills.controller';
 import { PurchasesController } from './purchases/purchases.controller';
 import { SalesRecieptsController } from './sales-receipts/sales-receipts.controller';

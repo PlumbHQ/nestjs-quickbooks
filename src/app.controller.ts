@@ -1,7 +1,9 @@
 import { Controller, Get, Res } from '@nestjs/common';
-import { NestJsQuickBooksCompanyInfoService } from 'lib/modules/company-info';
-import { NestJsQuickBooksAuthorisationError } from 'lib/utils/errors/quick-books-authorisation.error';
 import { Response } from 'express';
+import {
+  NestJsQuickBooksCompanyInfoService,
+  NestJsQuickBooksAuthorisationError,
+} from 'lib';
 
 @Controller()
 export class AppController {
