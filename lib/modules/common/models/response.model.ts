@@ -3,11 +3,12 @@ import { QuickBooksBaseEntity } from './quickbooks.model';
 
 export interface QuickBooksResponseModel {
   [key: string]:
-    | QuickBooksCompanyInfoEntity
     | QuickBooksBaseEntity
+    | QuickBooksCompanyInfoEntity
     | QuickBooksDeleteResponseData
     | QuickBooksQueryResponseData
-    | string;
+    | string
+    | any;
   time: string;
 }
 
