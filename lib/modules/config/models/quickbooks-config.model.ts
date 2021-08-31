@@ -13,6 +13,10 @@ export enum NestJsQuickBooksScopes {
 }
 
 export type NestJsQuickbooksModes = 'production' | 'sandbox';
+export enum NestJsQuickbooksModesEnum {
+  Production = 'production',
+  Sandbox = 'sandbox',
+}
 
 export interface NestJsQuickBooksConfigModel {
   clientId: string;
