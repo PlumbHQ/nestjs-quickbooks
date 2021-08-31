@@ -1,8 +1,6 @@
 import { ModuleMetadata, Type } from '@nestjs/common/interfaces';
 import { NestJsQuickBooksConfigModel } from './config/models/quickbooks-config.model';
 import { DynamicModule, Global, Module, Provider } from '@nestjs/common';
-import { NestJsQuickBooksStore } from './store/store.service';
-import { LocalStore } from './store/local.store';
 import { NESTJS_QUICK_BOOKS_CONFIG } from '../constants';
 import { HttpModule } from '@nestjs/axios';
 import { NestJsQuickBooksAuthModule } from './auth/auth.module';
@@ -38,15 +36,7 @@ export interface NestJsQuickBooksAsyncOptions
 export class NestJsQuickBooksModule {
   public static forRootAsync(
     options: NestJsQuickBooksAsyncOptions,
-    store?: Provider,
   ): DynamicModule {
-    if (!store) {
-      store = {
-        provide: NestJsQuickBooksStore,
-        useClass: LocalStore,
-      };
-    }
-
     return {
       module: NestJsQuickBooksModule,
       imports: [
@@ -54,12 +44,8 @@ export class NestJsQuickBooksModule {
         ...this.getSubModules(),
         ...(options.imports ?? []),
       ],
-      providers: [this.createAsyncProviders(options), store],
-      exports: [
-        NESTJS_QUICK_BOOKS_CONFIG,
-        NestJsQuickBooksStore,
-        ...this.getSubModules(),
-      ],
+      providers: [this.createAsyncProviders(options)],
+      exports: [NESTJS_QUICK_BOOKS_CONFIG, ...this.getSubModules()],
     };
   }
 

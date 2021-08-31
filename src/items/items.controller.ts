@@ -7,7 +7,10 @@ export class ItemsController {
 
   @Get()
   public async getAll() {
-    return this.itemsService.query({}).then((x) => x.QueryResponse.Item);
+    return this.itemsService
+      .query({})
+      .then((x) => x.QueryResponse.Item)
+      .catch((err) => console.log(JSON.stringify(err, null, 2)));
   }
 
   @Get('condition')

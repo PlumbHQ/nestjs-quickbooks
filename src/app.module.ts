@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import {
+  NestJsQuickbooksModesEnum,
   NestJsQuickBooksModule,
   NestJsQuickBooksOptions,
   NestJsQuickBooksScopes,
-  NestJsQuickBooksStore,
+  TokensModel,
 } from 'lib';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -23,26 +24,26 @@ import { VendorCreditsController } from './vendor-credits/vendor-credits.control
   imports: [
     CacheModule,
     ConfigModule.forRoot(),
-    NestJsQuickBooksModule.forRootAsync(
-      {
-        imports: [CacheModule, ConfigModule],
-        inject: [ConfigService],
-        useFactory: (
-          configService: ConfigService,
-        ): NestJsQuickBooksOptions => ({
-          authRedirectUrl: 'http://localhost:3000/auth/callback',
-          clientId: configService.get<string>('QB_CLIENT_ID'),
-          clientSecret: configService.get<string>('QB_CLIENT_SECRET'),
-          mode: 'sandbox',
-          serverUrl: 'http://localhost:3000',
-          scopes: [NestJsQuickBooksScopes.Accounting],
-        }),
-      },
-      {
-        provide: NestJsQuickBooksStore,
-        useClass: QbStoreService,
-      },
-    ),
+    NestJsQuickBooksModule.forRootAsync({
+      imports: [CacheModule, ConfigModule],
+      inject: [ConfigService, QbStoreService],
+      useFactory: (
+        configService: ConfigService,
+        tokenStore: QbStoreService,
+      ): NestJsQuickBooksOptions => ({
+        authRedirectUrl: 'http://localhost:3000/auth/callback',
+        clientId: configService.get<string>('QB_CLIENT_ID'),
+        clientSecret: configService.get<string>('QB_CLIENT_SECRET'),
+        mode: NestJsQuickbooksModesEnum.Sandbox,
+        serverUrl: 'http://localhost:3000',
+        scopes: [NestJsQuickBooksScopes.Accounting],
+        store: {
+          getToken: () => tokenStore.getToken(),
+          setToken: (token: TokensModel) => tokenStore.setToken(token),
+          unsetToken: () => tokenStore.unsetToken(),
+        },
+      }),
+    }),
   ],
   controllers: [
     AppController,

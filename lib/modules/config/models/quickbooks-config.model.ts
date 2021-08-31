@@ -1,3 +1,5 @@
+import { TokensModel } from 'lib/modules/auth';
+
 export enum NestJsQuickBooksScopes {
   Accounting = 'com.intuit.quickbooks.accounting',
   Payment = 'com.intuit.quickbooks.payment',
@@ -25,6 +27,11 @@ export interface NestJsQuickBooksConfigModel {
   mode: NestJsQuickbooksModes;
   serverUrl: string;
   authRedirectUrl: string;
+  store: {
+    getToken: () => Promise<TokensModel>;
+    setToken: (tokenData: TokensModel) => Promise<void>;
+    unsetToken: () => Promise<void>;
+  };
 }
 
 export class NestJsQuickBooksConfigModel {
@@ -34,6 +41,11 @@ export class NestJsQuickBooksConfigModel {
   public mode: NestJsQuickbooksModes;
   public serverUrl: string;
   public authRedirectUrl: string;
+  public store: {
+    getToken: () => Promise<TokensModel>;
+    setToken: (tokenData: TokensModel) => Promise<void>;
+    unsetToken: () => Promise<void>;
+  };
 
   constructor(config: Partial<NestJsQuickBooksConfigModel>) {
     Object.assign(this, config);

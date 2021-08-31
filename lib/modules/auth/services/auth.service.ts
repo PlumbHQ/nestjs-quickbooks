@@ -3,19 +3,15 @@ import { from, Observable, of } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 import { TokensModel } from '..';
 import { NestJsQuickBooksConfigService } from '../../config/services/quickbooks-config.service';
-import { NestJsQuickBooksStore } from '../../store';
 import { NestJsQuickbooksModes } from '../../config';
 import { NestJsQuickBooksAuthorisationError } from 'lib/utils/errors/quick-books-authorisation.error';
 import * as OAuthClient from 'intuit-oauth';
 
 @Injectable()
 export class NestJsQuickBooksAuthService {
-  private readonly client;
+  private readonly client: OAuthClient;
 
-  constructor(
-    private readonly configService: NestJsQuickBooksConfigService,
-    private readonly tokenStore: NestJsQuickBooksStore,
-  ) {
+  constructor(private readonly configService: NestJsQuickBooksConfigService) {
     this.client = new OAuthClient({
       clientId: this.configService.global.clientId,
       clientSecret: this.configService.global.clientSecret,
@@ -30,7 +26,8 @@ export class NestJsQuickBooksAuthService {
 
   public async disconnect(): Promise<void> {
     return this.client.revoke().then(async (authResponse) => {
-      await this.tokenStore.unsetToken();
+      await this.configService.global.store.unsetToken();
+      // await this.tokenStore.unsetToken();
     });
   }
 
@@ -44,11 +41,12 @@ export class NestJsQuickBooksAuthService {
   public async authorizeCode(url: string): Promise<void> {
     await this.client.createToken(url);
     const token = this.client.getToken().getToken();
-    await this.tokenStore.setToken(token);
+    await this.configService.global.store.setToken(token);
+    // await this.tokenStore.setToken(token);
   }
 
   public getToken(): Observable<string> {
-    return from(this.tokenStore.getToken())
+    return from(this.configService.global.store.getToken())
       .pipe(
         mergeMap((token) => {
           if (!token) {
@@ -86,7 +84,8 @@ export class NestJsQuickBooksAuthService {
     return from(this.client.refreshUsingToken(token.refresh_token)).pipe(
       map(() => {
         const newToken = this.client.getToken().getToken();
-        this.tokenStore.setToken(newToken);
+        from(this.configService.global.store.setToken(newToken));
+        // this.tokenStore.setToken(newToken);
         return newToken.access_token;
       }),
     );

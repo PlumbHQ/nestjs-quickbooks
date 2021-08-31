@@ -5,8 +5,8 @@ import { map, mergeMap } from 'rxjs/operators';
 import { WhereOptions } from './models';
 import { QueryUtils } from '../../utils/query.utils';
 import { HttpService } from '@nestjs/axios';
-import { NestJsQuickBooksStore } from '../store';
 import * as querystring from 'querystring';
+import { NestJsQuickBooksConfigService } from '../config/services/quickbooks-config.service';
 
 @Injectable()
 export abstract class NestJsQuickBooksBaseService<
@@ -21,12 +21,16 @@ export abstract class NestJsQuickBooksBaseService<
 
   constructor(
     private readonly authService: NestJsQuickBooksAuthService,
-    private readonly tokenStore: NestJsQuickBooksStore,
+    private readonly configService: NestJsQuickBooksConfigService,
     private readonly http: HttpService,
   ) {}
 
   protected getRealm(): Observable<string> {
-    return from(this.tokenStore.getToken().then((token) => token?.realmId));
+    return from(
+      this.configService.global.store
+        .getToken()
+        .then((token) => token?.realmId),
+    );
   }
 
   protected get apiUrl(): string {
