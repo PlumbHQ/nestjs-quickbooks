@@ -1,4 +1,4 @@
-import { TokensModel } from 'lib/modules/auth';
+import { TokensModel } from '../../auth';
 
 export enum NestJsQuickBooksScopes {
   Accounting = 'com.intuit.quickbooks.accounting',
