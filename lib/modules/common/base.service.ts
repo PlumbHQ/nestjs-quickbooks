@@ -128,6 +128,7 @@ export abstract class NestJsQuickBooksBaseService<
   handleHttpError(error): Observable<any> {
     if (error.response) {
       console.log('handleHttpError.response');
+      console.log(JSON.stringify(error, null, 2));
       console.log(JSON.stringify(error.response, null, 2));
 
       throw new NestJsQuickBooksHttpError(
