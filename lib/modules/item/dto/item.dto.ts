@@ -1,4 +1,4 @@
-\import { QuickBookItemTypes } from '../entities/item.entity';
+import { QuickBookItemTypes } from '../entities/item.entity';
 import { QuickBooksRefDto } from '../../common/dto/ref.dto';
 
 export interface QuickBooksInventoryItemDto {
