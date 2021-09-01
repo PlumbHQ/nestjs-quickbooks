@@ -26,9 +26,21 @@ export class NestJsQuickBooksHttpError extends NestJsQuickBooksError {
   constructor(data: NestJSQuickBooksHttpError, status: number) {
     super();
 
+    const fixed = this.convertKeysToLower(data) as any;
+
     this.status = status;
-    this.message = data.Fault.type;
-    this.errors = data.Fault.Error;
-    this.time = data.time;
+    this.message = fixed.fault.type;
+    this.errors = fixed.fault.Error;
+    this.time = fixed.time;
+  }
+
+  convertKeysToLower(object) {
+    return Object.keys(object).reduce((newObj, key) => {
+      const val = object[key];
+      const newVal =
+        typeof val === 'object' ? this.convertKeysToLower(val) : val;
+      newObj[key.toLowerCase()] = newVal;
+      return newObj;
+    }, {});
   }
 }
