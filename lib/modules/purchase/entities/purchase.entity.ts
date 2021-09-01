@@ -8,10 +8,13 @@ import {
   QuickBooksGlobalTaxCalculationsEnum,
   QuickBooksTaxRateDetailModel,
   QuickBooksPaymentTypesEnum,
+  QuickBooksAccountBasedExpenseLineDto,
 } from '../../common';
 
 export interface QuickBooksPurchaseEntity extends QuickBooksBaseEntity {
-  Line: QuickBooksItemBasedExpenseLineDto[];
+  Line:
+    | QuickBooksItemBasedExpenseLineDto[]
+    | QuickBooksAccountBasedExpenseLineDto[];
   PaymentType: QuickBooksPaymentTypesEnum;
   AccountRef: QuickBooksRefDto;
   CurrencyRef: QuickBooksRefDto;

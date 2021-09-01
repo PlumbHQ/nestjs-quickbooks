@@ -7,10 +7,13 @@ import {
   QuickBooksPhysicalAddressDto,
   QuickBooksRefDto,
   QuickBooksTaxRateDetailModel,
+  QuickBooksAccountBasedExpenseLineDto,
 } from '../../common';
 
 export interface QuickBooksPurchaseDto {
-  Line: QuickBooksItemBasedExpenseLineDto[];
+  Line:
+    | QuickBooksItemBasedExpenseLineDto[]
+    | QuickBooksAccountBasedExpenseLineDto[];
   PaymentType: QuickBooksPaymentTypesEnum;
   AccountRef: QuickBooksRefDto;
   CurrencyRef: QuickBooksRefDto;
