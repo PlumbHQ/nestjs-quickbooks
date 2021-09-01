@@ -149,7 +149,7 @@ export abstract class NestJsQuickBooksBaseService<
     return this.getRealm().pipe(
       map(
         (realm) =>
-          `${
+          `{
             this.apiUrl
           }/v3/company/${realm}/query?minorversion=62&${QueryUtils.generateQuery(
             this.resource,
@@ -161,7 +161,7 @@ export abstract class NestJsQuickBooksBaseService<
 
   protected url(
     path: string,
-    queryParams?: Record<string, any>,
+    queryParams: Record<string, any> = {},
   ): Observable<string> {
     queryParams['minorversion'] = 62;
 
