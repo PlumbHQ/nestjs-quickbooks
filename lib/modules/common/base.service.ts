@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { NestJsQuickBooksAuthService } from '../auth/services/auth.service';
-import { firstValueFrom, from, Observable } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
+import { firstValueFrom, from, Observable, of } from 'rxjs';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 import { WhereOptions } from './models';
 import { QueryUtils } from '../../utils/query.utils';
 import { HttpService } from '@nestjs/axios';
 import * as querystring from 'querystring';
 import { NestJsQuickBooksConfigService } from '../config/services/quickbooks-config.service';
+import { NestJsQuickBooksHttpError } from 'lib/utils/errors/quick-books-http.error';
 
 @Injectable()
 export abstract class NestJsQuickBooksBaseService<
@@ -55,7 +56,10 @@ export abstract class NestJsQuickBooksBaseService<
             ),
           ),
         )
-        .pipe(map((x) => x.data)),
+        .pipe(
+          map((x) => x.data),
+          catchError(this.handleHttpError),
+        ),
     );
   }
 
@@ -80,7 +84,10 @@ export abstract class NestJsQuickBooksBaseService<
             ),
           ),
         )
-        .pipe(map((x) => x.data)),
+        .pipe(
+          map((x) => x.data),
+          catchError(this.handleHttpError),
+        ),
     );
   }
 
@@ -106,8 +113,36 @@ export abstract class NestJsQuickBooksBaseService<
             ),
           ),
         )
-        .pipe(map((x) => x.data)),
+        .pipe(
+          map((x) => x.data),
+          catchError(this.handleHttpError),
+        ),
     );
+  }
+
+  /**
+   * Handle any Http Error
+   * @param error
+   * @returns
+   */
+  handleHttpError(error): Observable<any> {
+    if (error.response) {
+      throw new NestJsQuickBooksHttpError(
+        error.response.body,
+        error.response.status,
+      );
+    }
+    // else if (error.request) {
+    //   // The request was made but no response was received
+    //   // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+    //   // http.ClientRequest in node.js
+    //   console.log(error.request);
+    // } else {
+    //   // Something happened in setting up the request that triggered an Error
+    //   console.log('Error', error.message);
+    // }
+
+    return of(error);
   }
 
   protected queryUrl(condition: WhereOptions<any>): Observable<string> {
@@ -126,6 +161,8 @@ export abstract class NestJsQuickBooksBaseService<
     path: string,
     queryParams?: Record<string, any>,
   ): Observable<string> {
+    queryParams['minorversion'] = 4;
+
     const query = queryParams
       ? `?${querystring.stringify(
           queryParams as querystring.ParsedUrlQueryInput,
