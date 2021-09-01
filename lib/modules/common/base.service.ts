@@ -131,16 +131,15 @@ export abstract class NestJsQuickBooksBaseService<
         error.response.body,
         error.response.status,
       );
+    } else if (error.request) {
+      // The request was made but no response was received
+      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+      // http.ClientRequest in node.js
+      console.log('request error', error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error', error.message);
     }
-    // else if (error.request) {
-    //   // The request was made but no response was received
-    //   // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-    //   // http.ClientRequest in node.js
-    //   console.log(error.request);
-    // } else {
-    //   // Something happened in setting up the request that triggered an Error
-    //   console.log('Error', error.message);
-    // }
 
     return of(error);
   }
@@ -149,7 +148,7 @@ export abstract class NestJsQuickBooksBaseService<
     return this.getRealm().pipe(
       map(
         (realm) =>
-          `{
+          `${
             this.apiUrl
           }/v3/company/${realm}/query?minorversion=62&${QueryUtils.generateQuery(
             this.resource,
