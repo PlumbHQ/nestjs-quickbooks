@@ -127,6 +127,9 @@ export abstract class NestJsQuickBooksBaseService<
    */
   handleHttpError(error): Observable<any> {
     if (error.response) {
+      console.log('handleHttpError.response');
+      console.log(JSON.stringify(error.response, null, 2));
+
       throw new NestJsQuickBooksHttpError(
         error.response.body,
         error.response.status,
@@ -135,10 +138,12 @@ export abstract class NestJsQuickBooksBaseService<
       // The request was made but no response was received
       // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
       // http.ClientRequest in node.js
-      console.log('request error', error.request);
+      console.log('handleHttpError.request');
+      console.log(JSON.stringify(error.request, null, 2));
     } else {
       // Something happened in setting up the request that triggered an Error
-      console.log('Error', error.message);
+      console.log('handleHttpError.other');
+      console.log(JSON.stringify(error.message, null, 2));
     }
 
     return of(error);
