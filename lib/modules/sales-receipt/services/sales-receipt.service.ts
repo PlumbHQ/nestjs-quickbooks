@@ -36,7 +36,7 @@ export class NestJsQuickBooksSalesReceiptService
     >,
     CanDelete<QuickBooksSalesReceiptDeleteResponseModel>
 {
-  public resource = 'salesReceipt';
+  public resource = 'salesreceipt';
 
   public read(id: string): Promise<QuickBooksSalesReceiptResponseModel> {
     return this.get(id);

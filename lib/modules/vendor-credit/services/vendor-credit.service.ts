@@ -31,7 +31,7 @@ export class NestJsQuickBooksVendorCreditService
     >,
     CanDelete<QuickBooksVendorCreditDeleteResponseModel>
 {
-  public resource = 'vendorCredit';
+  public resource = 'vendorcredit';
 
   public read(id: string): Promise<QuickBooksVendorCreditResponseModel> {
     return this.get(id);

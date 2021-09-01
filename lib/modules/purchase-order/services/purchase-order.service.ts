@@ -31,7 +31,7 @@ export class NestJsQuickBooksPurchaseOrderService
     >,
     CanDelete<QuickBooksPurchaseOrderDeleteResponseModel>
 {
-  public resource = 'purchaseOrder';
+  public resource = 'purchaseorder';
 
   public read(id: string): Promise<QuickBooksPurchaseOrderResponseModel> {
     return this.get(id);
