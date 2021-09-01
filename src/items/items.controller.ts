@@ -17,8 +17,8 @@ export class ItemsController {
   public async condition() {
     return this.itemsService
       .query({
-        Name: {
-          [Op.in]: ['Soil'],
+        Sku: {
+          [Op.in]: ['PHQ100116', 'PHQ100073', 'PHQ100059'],
         },
       })
       .then((x) => x.QueryResponse.Item);

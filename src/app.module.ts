@@ -31,11 +31,11 @@ import { VendorCreditsController } from './vendor-credits/vendor-credits.control
         configService: ConfigService,
         tokenStore: QbStoreService,
       ): NestJsQuickBooksOptions => ({
-        authRedirectUrl: 'http://localhost:3000/auth/callback',
+        authRedirectUrl: 'http://localhost:3001/auth/callback',
         clientId: configService.get<string>('QB_CLIENT_ID'),
         clientSecret: configService.get<string>('QB_CLIENT_SECRET'),
         mode: NestJsQuickbooksModesEnum.Sandbox,
-        serverUrl: 'http://localhost:3000',
+        serverUrl: 'http://localhost:3001',
         scopes: [NestJsQuickBooksScopes.Accounting],
         store: {
           getToken: () => tokenStore.getToken(),

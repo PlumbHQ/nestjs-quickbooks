@@ -30,7 +30,7 @@ export class OperatorsUtils {
       case Op.like:
         return `${attribute} like ${value}`;
       case Op.in:
-        return `${attribute} in ('${value.join(',')}')`;
+        return `${attribute} in ('${value.join("','")}')`;
       case Op.notLike:
         return `${attribute} not like ${value}`;
       case Op.beginsWith:
