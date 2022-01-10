@@ -129,7 +129,13 @@ export abstract class NestJsQuickBooksBaseService<
     if (error.response) {
       console.log('handleHttpError.response');
       console.log(JSON.stringify(error, null, 2));
-      console.log(JSON.stringify(error.response, null, 2));
+      console.log(
+        JSON.stringify(
+          { status: error.response.status, body: error.response.body },
+          null,
+          2,
+        ),
+      );
 
       throw new NestJsQuickBooksHttpError(
         error.response.body,
