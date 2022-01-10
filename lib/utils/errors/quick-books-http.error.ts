@@ -13,7 +13,7 @@ export interface IQuickBooksErrorResponse {
   status: number;
 }
 
-export interface NestJSQuickBooksHttpError {
+export interface IQuickBooksHttpError {
   Fault: {
     Error: {
       Message: string;
@@ -26,29 +26,32 @@ export interface NestJSQuickBooksHttpError {
   time: string;
 }
 
-export class NestJsQuickBooksHttpError extends NestJsQuickBooksError {
-  public errors: IQuickBooksError[];
-  public time: string;
-  public status: number;
+export interface INestJSQuickBooksHttpError {
+  message: string;
+  detail: string;
+  code: string;
+}
 
-  constructor(data: IQuickBooksErrorResponse) {
+export class NestJsQuickBooksHttpError extends NestJsQuickBooksError {
+  public time: string;
+  public type: string;
+  public status: number;
+  public errors: INestJSQuickBooksHttpError[];
+
+  constructor(errorData: IQuickBooksHttpError, status: number) {
     super();
 
-    const fixed = this.convertKeysToLower(data) as any;
+    this.message = errorData.Fault.type;
+    this.status = status;
+    this.type = errorData.Fault.type;
+    this.time = errorData.time;
 
-    this.status = data.status;
-    this.message = fixed.fault.type;
-    this.errors = fixed.fault.Error;
-    this.time = fixed.time;
-  }
-
-  convertKeysToLower(object) {
-    return Object.keys(object).reduce((newObj, key) => {
-      const val = object[key];
-      const newVal =
-        typeof val === 'object' ? this.convertKeysToLower(val) : val;
-      newObj[key.toLowerCase()] = newVal;
-      return newObj;
-    }, {});
+    this.errors = errorData.Fault.Error.map(
+      (Error): INestJSQuickBooksHttpError => ({
+        message: Error.Message,
+        detail: Error.Detail,
+        code: Error.code,
+      }),
+    );
   }
 }

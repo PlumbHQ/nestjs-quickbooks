@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post } from '@nestjs/common';
 import { NestJsQuickBooksCustomerService } from 'lib';
 
 @Controller('customers')
@@ -12,5 +12,13 @@ export class CustomersController {
     return this.customersService
       .query({})
       .then((x) => x.QueryResponse.Customer);
+  }
+
+  @Post()
+  public async create(data: any) {
+    return this.customersService
+      .create(data)
+      .then((x) => x.QueryResponse.Customer)
+      .catch((e) => console.log(e));
   }
 }
