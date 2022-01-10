@@ -1,5 +1,18 @@
 import { NestJsQuickBooksError } from './quick-books.error';
 
+export interface IQuickBooksError {
+  Message: string;
+  Detail: string;
+  code: string;
+  element: string;
+}
+
+export interface IQuickBooksErrorResponse {
+  errors: IQuickBooksError[];
+  time: string;
+  status: number;
+}
+
 export interface NestJSQuickBooksHttpError {
   Fault: {
     Error: {
@@ -14,21 +27,16 @@ export interface NestJSQuickBooksHttpError {
 }
 
 export class NestJsQuickBooksHttpError extends NestJsQuickBooksError {
-  public errors: {
-    Message: string;
-    Detail: string;
-    code: string;
-    element: string;
-  }[];
+  public errors: IQuickBooksError[];
   public time: string;
   public status: number;
 
-  constructor(data: NestJSQuickBooksHttpError, status: number) {
+  constructor(data: IQuickBooksErrorResponse) {
     super();
 
     const fixed = this.convertKeysToLower(data) as any;
 
-    this.status = status;
+    this.status = data.status;
     this.message = fixed.fault.type;
     this.errors = fixed.fault.Error;
     this.time = fixed.time;

@@ -7,7 +7,11 @@ import { QueryUtils } from '../../utils/query.utils';
 import { HttpService } from '@nestjs/axios';
 import * as querystring from 'querystring';
 import { NestJsQuickBooksConfigService } from '../config/services/quickbooks-config.service';
-import { NestJsQuickBooksHttpError } from 'lib/utils/errors/quick-books-http.error';
+import {
+  IQuickBooksErrorResponse,
+  NestJsQuickBooksHttpError,
+} from 'lib/utils/errors/quick-books-http.error';
+import { Request } from 'express';
 
 @Injectable()
 export abstract class NestJsQuickBooksBaseService<
@@ -125,22 +129,22 @@ export abstract class NestJsQuickBooksBaseService<
    * @param error
    * @returns
    */
-  handleHttpError(error): Observable<any> {
+  handleHttpError(error: {
+    request: Request;
+    response: IQuickBooksErrorResponse;
+  }): Observable<any> {
     if (error.response) {
       console.log('handleHttpError.response');
       console.log(JSON.stringify(error, null, 2));
       console.log(
         JSON.stringify(
-          { status: error.response.status, body: error.response.body },
+          { status: error.response.status, body: error.response.errors },
           null,
           2,
         ),
       );
 
-      throw new NestJsQuickBooksHttpError(
-        error.response.body,
-        error.response.status,
-      );
+      throw new NestJsQuickBooksHttpError(error.response);
     } else if (error.request) {
       // The request was made but no response was received
       // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
@@ -150,7 +154,7 @@ export abstract class NestJsQuickBooksBaseService<
     } else {
       // Something happened in setting up the request that triggered an Error
       console.log('handleHttpError.other');
-      console.log(JSON.stringify(error.message, null, 2));
+      console.log(JSON.stringify(error.response.errors, null, 2));
     }
 
     return of(error);
