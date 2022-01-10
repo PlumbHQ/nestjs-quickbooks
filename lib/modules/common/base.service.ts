@@ -10,7 +10,7 @@ import { NestJsQuickBooksConfigService } from '../config/services/quickbooks-con
 import {
   IQuickBooksErrorResponse,
   NestJsQuickBooksHttpError,
-} from 'lib/utils/errors/quick-books-http.error';
+} from '../../utils/errors/quick-books-http.error';
 import { Request } from 'express';
 
 @Injectable()
