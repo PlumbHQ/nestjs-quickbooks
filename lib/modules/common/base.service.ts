@@ -131,10 +131,14 @@ export abstract class NestJsQuickBooksBaseService<
    */
   handleHttpError(error: any): Observable<any> {
     if (error.response) {
-      throw new NestJsQuickBooksHttpError(
+      const err = new NestJsQuickBooksHttpError(
         error.response.data,
         error.response.status,
       );
+
+      console.log('QB ERROR: ' + err.message);
+      console.log(JSON.stringify(err, null, 2));
+      throw err;
     } else if (error.request) {
       // The request was made but no response was received
       // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
