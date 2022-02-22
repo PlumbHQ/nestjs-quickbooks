@@ -13,6 +13,7 @@ import { NestJsQuickBooksPurchaseOrderModule } from './purchase-order';
 import { NestJsQuickBooksSalesReceiptModule } from './sales-receipt';
 import { NestJsQuickBooksVendorCreditModule } from './vendor-credit';
 import { NestJsQuickBooksVendorModule } from './vendor';
+import { NestJsQuickBooksTaxRateModule } from './tax-rate';
 
 export type NestJsQuickBooksOptions = Partial<NestJsQuickBooksConfigModel>;
 
@@ -79,6 +80,7 @@ export class NestJsQuickBooksModule {
       NestJsQuickBooksPurchaseOrderModule,
       NestJsQuickBooksPurchaseModule,
       NestJsQuickBooksSalesReceiptModule,
+      NestJsQuickBooksTaxRateModule,
       NestJsQuickBooksVendorCreditModule,
       NestJsQuickBooksVendorModule,
     ];
