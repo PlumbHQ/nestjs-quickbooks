@@ -9,6 +9,7 @@ import {
   QuickBooksPOStatusEnum,
   QuickBooksPhysicalAddressModel,
   QuickBooksEmailStatusesEnum,
+  QuickBooksCustomFieldDto,
 } from '../../common';
 
 export interface QuickBooksPurchaseOrderEntity extends QuickBooksBaseEntity {
@@ -18,6 +19,7 @@ export interface QuickBooksPurchaseOrderEntity extends QuickBooksBaseEntity {
     | QuickBooksItemBasedExpenseLineDto[]
     | QuickBooksAccountBasedExpenseLineDto[];
   CurrencyRef: QuickBooksRefModel;
+  CustomField: QuickBooksCustomFieldDto[];
   TxnDate: string;
   POEmail: QuickBooksEmailModel;
   ClassRef: QuickBooksRefModel;

@@ -8,12 +8,14 @@ import {
   QuickBooksGlobalTaxCalculationsEnum,
   QuickBooksEmailStatusesEnum,
   QuickBooksTxnTaxDetailDto,
+  QuickBooksCustomFieldDto,
 } from '../../common';
 
 export interface QuickBooksSalesReceiptEntity extends QuickBooksBaseEntity {
   Line: QuickBooksSalesItemLineDto[];
   CustomerRef: QuickBooksRefDto;
   CurrencyRef: QuickBooksRefDto;
+  CustomField: QuickBooksCustomFieldDto[];
   BillEmail: QuickBooksEmailDto;
   TxnDate: string; // yyyy/MM/dd
   ShipFromAddr: QuickBooksPhysicalAddressDto;
