@@ -8,6 +8,7 @@ import {
   QuickBooksItemBasedExpenseLineDto,
   QuickBooksAccountBasedExpenseLineDto,
   QuickBooksPOStatusEnum,
+  QuickBooksCustomFieldDto,
 } from '../../common';
 
 export interface QuickBooksPurchaseOrderDto {
@@ -17,6 +18,7 @@ export interface QuickBooksPurchaseOrderDto {
     | QuickBooksItemBasedExpenseLineDto[]
     | QuickBooksAccountBasedExpenseLineDto[];
   CurrencyRef: QuickBooksRefDto;
+  CustomField: QuickBooksCustomFieldDto[];
   TxnDate?: string;
   POEmail?: QuickBooksEmailDto;
   ClassRef?: QuickBooksRefDto;

@@ -7,12 +7,14 @@ import {
   QuickBooksTxnTaxDetailDto,
   QuickBooksSalesItemLineDto,
   QuickBooksPrintStatusEnum,
+  QuickBooksCustomFieldDto,
 } from '../../common';
 
 export interface QuickBooksSalesReceiptDto {
   Line: QuickBooksSalesItemLineDto[];
   CurrencyRef: QuickBooksRefDto;
   CustomerRef?: QuickBooksRefDto;
+  CustomField: QuickBooksCustomFieldDto[];
   BillEmail?: QuickBooksEmailDto;
   TxnDate?: string; // yyyy/MM/dd
   ShipFromAddr?: QuickBooksPhysicalAddressDto;
